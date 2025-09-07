@@ -208,6 +208,15 @@
                             {!! session('success') !!}
                         </div>
                     @endif
+                    @if ($errors->any())
+                        <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
+                            <ul class="list-none ps-1">
+                                @foreach ($errors->all() as $error)
+                                    <li>{!! nl2br(e($error)) !!}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{ route('absensi.store') }}" method="POST" class="space-y-3">
                         @csrf
                         <div>
@@ -218,7 +227,6 @@
                                     </option>
                                 @endforeach
                             </select>
-                            @error('warga_ids') <p class="text-red-500 pt-1">{{ $message }}</p> @enderror
                         </div>
                         <textarea name="keterangan" rows="2" placeholder="Keterangan (opsional)" class="w-full rounded-sm border border-gray-300 dark:border-[#444] bg-white dark:bg-[#2A2A2A] text-black dark:text-white p-2">{{ old('keterangan') }}</textarea>
                         @error('keterangan')

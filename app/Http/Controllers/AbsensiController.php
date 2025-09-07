@@ -59,14 +59,43 @@ class AbsensiController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            // 'warga' => 'required|array|min:1',
-            // 'warga.*' => 'string|max:100',
-            // 'tgl_absensi' => 'required|date',
-            // 'hari' => 'required|string',
-            'warga_ids' => 'required|array|min:1',
-            'keterangan' => 'nullable|string',
-        ]);
+        $request->validate(
+            // [
+            //     // 'warga' => 'required|array|min:1',
+            //     // 'warga.*' => 'string|max:100',
+            //     // 'tgl_absensi' => 'required|date',
+            //     // 'hari' => 'required|string',
+            //     'warga_ids' => 'required|array|min:1',
+            //     'keterangan' => 'nullable|string',
+            // ]
+            [
+                'warga_ids'   => 'required|array|min:1',
+                'keterangan'  => 'nullable|string',
+            ],
+            [
+                'warga_ids.required' => 'Wajib mengisi minimal satu warga untuk absensi.',
+                'warga_ids.array'    => 'Format data warga tidak valid.',
+                'warga_ids.min'      => 'Minimal pilih satu warga untuk absensi.',
+                'keterangan.string'  => 'Keterangan harus berupa teks.',
+            ]
+        );
+
+        // Ambil waktu sekarang di zona Asia/Jakarta
+        $now = Carbon::now('Asia/Jakarta');
+        // dd($now->between(
+        //     $now->copy()->setTime(22, 0, 0), // 22:00:00
+        //     $now->copy()->setTime(23, 0, 0) // 23:59:59
+        // ));
+
+        // Validasi jam antara 22.00 - 23.00 WIB
+        if (! $now->between(
+            $now->copy()->setTime(22, 0, 0), // 22:00:00
+            $now->copy()->setTime(23, 0, 0) // 23:59:59
+        )) {
+            return redirect()->back()->withErrors([
+                'waktu' => '⏰ PERHATIAN !! Absensi ronda setiap harinya hanya dapat dilakukan antara pukul 22.00 - 23.00 WIB'
+            ]);
+        }
 
         $today = now()->toDateString();
 
