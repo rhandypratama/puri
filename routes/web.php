@@ -1,0 +1,12 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AbsensiController;
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [AbsensiController::class, 'index'])->name('absensi.index');
+Route::get('/absensi', [AbsensiController::class, 'create'])->name('absensi.create');
+Route::get('/jadwal-ronda', [AbsensiController::class, 'jadwalRonda'])->name('absensi.jadwal-ronda');
+Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.store');
