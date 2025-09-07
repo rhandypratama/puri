@@ -19,8 +19,8 @@
     <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-0 lg:p-0 items-center lg:justify-center min-h-screen flex-col">
         <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
             <main class="flex max-w-full w-full flex-col-reverse lg:max-w-full lg:flex-row">
-                <div class="text-[13px] leading-[20px] flex-1 p-6 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_1px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_-1px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-bl-none rounded-br-none lg:rounded-tl-none lg:rounded-br-none">
-                    <h1 class="mb-1 font-bold">Informasi Kas dan Iuran Bulanan Warga</h1>
+                <div class="text-[16px] leading-[20px] flex-1 p-6 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_1px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_-1px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-bl-none rounded-br-none lg:rounded-tl-none lg:rounded-br-none">
+                    <h1 class="mb-1 font-bold text-lg">Informasi Kas dan Iuran Bulanan Warga</h1>
                     <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">🌱 Mari jaga kas kita bersama! Iuran ini dipakai untuk kebersihan lingkungan, penerangan jalan, kegiatan bersama, dll.</p>
                     <ul class="flex flex-col mb-4 lg:mb-6">
                         <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:top-1/2 before:bottom-0 before:left-[0.4rem] before:absolute">
@@ -79,8 +79,8 @@
                         </li>
                     </ul>
                 </div>
-                <div class="text-[13px] leading-[20px] flex-1 p-6 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_1px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_-1px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
-                    <h1 class="mb-1 font-bold">Informasi Ronda Warga</h1>
+                <div class="text-[16px] leading-[20px] flex-1 p-6 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_1px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_-1px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
+                    <h1 class="mb-1 font-bold text-lg">Informasi Ronda Warga</h1>
                     <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">🌙✨ Saatnya ronda! Yuk, kita jaga lingkungan tetap aman dan nyaman bersama-sama. 💪 Kita kuat karena kita kompak!</p>
                     <ul class="flex flex-col lg:mb-6">
                         <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:top-1/2 before:bottom-0 before:left-[0.4rem] before:absolute">
@@ -165,20 +165,29 @@
                         </li>
                     </ul>
                 </div>
-                <div class="text-[13px] leading-[20px] flex-1 p-6 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
-                    <div class="flex mb-2">
-                        <h1 class="font-bold">
-                            Riwayat Absensi Ronda
-                        </h1>
+                <div class="text-[16px] leading-[20px] flex-1 p-6 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
+                    @php
+                        // Mapping English -> Indonesia
+                        $days = [
+                            'sunday'    => 'Minggu',
+                            'monday'    => 'Senin',
+                            'tuesday'   => 'Selasa',
+                            'wednesday' => 'Rabu',
+                            'thursday'  => 'Kamis',
+                            'friday'    => 'Jumat',
+                            'saturday'  => 'Sabtu',
+                        ];
+                    @endphp
+                    <div class="flex mb-2 items-center justify-between">
+                        <h1 class="font-bold text-lg">Riwayat Absensi Ronda</h1>
+                        @if($absensi->isEmpty())
+                            <p class="text-[14px] text-[#706f6c] dark:text-[#A1A09A]">{{ now()->locale('id')->isoFormat('dddd, DD/MM/YYYY') }}</p>
+                        @else
+                            <p class="text-[14px] text-[#706f6c] dark:text-[#A1A09A]">{{ $days[strtolower($absensi[0]->hari)] ?? '-' }}, {{ date('d/m/Y', strtotime($absensi[0]->tgl_absensi)) }}</p>
+                        @endif
                     </div>
 
                     <div class="border border-[#68cddc] dark:border-[#3E3E3A] rounded-lg py-2 px-4 my-4 bg-[#96fbff1a]">
-                        @if($absensi->isEmpty())
-                            <p class="text-[#706f6c] dark:text-[#A1A09A]">{{ now()->locale('id')->isoFormat('dddd, DD/MM/YYYY') }}</p>
-                        @else
-                            <p class="text-[#706f6c] dark:text-[#A1A09A]">{{ $absensi[0]->hari }}, {{ date('d/m/Y', strtotime($absensi[0]->tgl_absensi)) }}</p>
-                        @endif
-                        
                         <ul class="flex flex-col">
                             @forelse($absensi as $row)
                                 <li class="list-disc px-1 ms-6 text-[#706f6c] dark:text-[#A1A09A]">({{ $row->blok }}) {{ $row->nama }}</li>
