@@ -192,7 +192,7 @@
                             @forelse($absensi as $row)
                                 <li class="list-disc px-1 ms-6 text-[#706f6c] dark:text-[#A1A09A]">({{ $row->blok }}) {{ $row->nama }}</li>
                             @empty
-                                <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:top-1/2 before:bottom-0 before:left-[0.4rem] before:absolute">
+                                <li class="flex items-center gap-4 py-2 relative before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:top-1/2 before:bottom-0 before:left-[0.4rem] before:absolute">
                                     <span>
                                         Belum ada absensi ronda hari ini. Jangan lupa absen ya! demi keamanan kita bersama.
                                     </span>
