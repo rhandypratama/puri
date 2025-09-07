@@ -31,7 +31,7 @@
                             </span>
                             <span>
                                 Lihat
-                                <a href="https://laravel.com/docs" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
+                                <a href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
                                     <span>Buku Kas</span>
                                     <svg
                                         width="10"
@@ -58,7 +58,7 @@
                             </span>
                             <span>
                                 Lihat
-                                <a href="https://laracasts.com" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
+                                <a href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
                                     <span>Iuran Bulanan Warga</span>
                                     <svg
                                         width="10"
@@ -118,7 +118,7 @@
                             </span>
                             <span>
                                 Lihat
-                                <a href="https://laracasts.com" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
+                                <a href="{{ route('absensi.rekap-absensi') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
                                     <span>Rekap dan Denda Ronda</span>
                                     <svg
                                         width="10"
@@ -144,7 +144,7 @@
                                 </span>
                             </span>
                             <span>
-                                Baca <a href="https://laracasts.com" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
+                                Baca <a href="#" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
                                     <span>Syarat dan Ketentuan Ronda</span>
                                     <svg
                                         width="10"
@@ -193,13 +193,8 @@
                                 <li class="list-disc px-1 ms-6 text-[#706f6c] dark:text-[#A1A09A]">({{ $row->blok }}) {{ $row->nama }}</li>
                             @empty
                                 <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:top-1/2 before:bottom-0 before:left-[0.4rem] before:absolute">
-                                    <span class="relative py-1 bg-white dark:bg-[#161615]">
-                                        <span class="flex items-center justify-center rounded-full bg-[#FDFDFC] dark:bg-[#161615] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] w-2.5 h-2.5 border dark:border-[#3E3E3A] border-[#e3e3e0]">
-                                            <span class="rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A] w-1 h-1"></span>
-                                        </span>
-                                    </span>
                                     <span>
-                                        Tidak ada data absensi ronda hari ini.
+                                        Belum ada absensi ronda hari ini. Jangan lupa absen ya! demi keamanan kita bersama.
                                     </span>
                                 </li>
                             @endforelse

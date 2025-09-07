@@ -9,4 +9,5 @@ use App\Http\Controllers\AbsensiController;
 Route::get('/', [AbsensiController::class, 'index'])->name('absensi.index');
 Route::get('/absensi', [AbsensiController::class, 'create'])->name('absensi.create');
 Route::get('/jadwal-ronda', [AbsensiController::class, 'jadwalRonda'])->name('absensi.jadwal-ronda');
+Route::get('/rekap-absensi', [AbsensiController::class, 'rekapAbsensi'])->name('absensi.rekap-absensi');
 Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.store');

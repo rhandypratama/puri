@@ -52,48 +52,47 @@
                 <div class="text-[13px] leading-[20px] flex-1 p-4 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
                     <div class="flex items-center mb-4 md:w-full">
                         <span class="font-normal pe-4" onclick="window.location='{{ url('/') }}'"><i data-lucide="arrow-left"></i></span>
-                        <h1 class="font-bold text-lg">Jadwal Ronda Warga</h1>
-                        <!-- <span id="realtime-clock1" class="font-normal ps-2">23d3</span> -->
+                        <h1 class="font-bold text-lg">Rekap Ronda Tahun {{ $year }}</h1>
                     </div>
 
-                    @php
-                        // Mapping English -> Indonesia
-                        $days = [
-                            'sunday'    => 'Minggu',
-                            'monday'    => 'Senin',
-                            'tuesday'   => 'Selasa',
-                            'wednesday' => 'Rabu',
-                            'thursday'  => 'Kamis',
-                            'friday'    => 'Jumat',
-                            'saturday'  => 'Sabtu',
-                        ];
-                    @endphp
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full rounded-md overflow-hidden border border-gray-300">
+                    <div class="overflow-x-auto relative">
+                        <table class="min-w-full table-auto rounded-md overflow-hidden border border-gray-300">
                             <thead class="bg-black text-white">
                                 <tr>
-                                    @foreach ($days as $hari)
-                                        <th class="px-2 py-1 border border-gray-300 whitespace-nowrap">{{ $hari }}</th>
-                                    @endforeach
+                                    <th class="sticky left-0 z-30 bg-black px-2 py-1 border border-gray-300 whitespace-nowrap">Blok</th>
+                                    <th class="px-2 py-1 border border-gray-300 text-start whitespace-nowrap">Nama Warga</th>
+                                    <th class="px-2 py-1 border border-gray-300 text-start">Jadwal</th>
+                                    @for ($month = 1; $month <= 12; $month++)
+                                        <th class="px-2 py-1 border border-gray-300 whitespace-nowrap">{{ \Carbon\Carbon::create()->month($month)->translatedFormat('M') }}</th>
+                                    @endfor
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    @foreach ($days as $eng => $indo)
-                                        <td class="px-4 py-2 border border-gray-300 bg-gray-50 align-top whitespace-nowrap">
-                                            @if(isset($wargas[$eng]))
-                                                @foreach($wargas[$eng] as $warga)
-                                                    <div>({{ $warga->blok }}) {{ $warga->nama }}</div>
-                                                @endforeach
-                                            @else
-                                                <span class="text-muted">-</span>
-                                            @endif
-                                        </td>
-                                    @endforeach
-                                </tr>
+                                @php
+                                    // Mapping English -> Indonesia
+                                    $days = [
+                                        '' => '',
+                                        'sunday'    => 'Minggu',
+                                        'monday'    => 'Senin',
+                                        'tuesday'   => 'Selasa',
+                                        'wednesday' => 'Rabu',
+                                        'thursday'  => 'Kamis',
+                                        'friday'    => 'Jumat',
+                                        'saturday'  => 'Sabtu',
+                                    ];
+                                @endphp
+                                @foreach ($rekap as $row)
+                                    <tr>
+                                        <td class="sticky left-0 z-20 text-center items-center py-1 border border-gray-300 bg-gray-50 align-top whitespace-nowrap">{{ $row['blok'] }}</td>
+                                        <td class="px-2 py-1 border border-gray-300 bg-gray-50 align-top whitespace-nowrap">{{ $row['nama'] }}</td>
+                                        <td class="px-2 py-1 border border-gray-300 bg-gray-50 align-top whitespace-nowrap">{{  $days[$row['jadwal']] }}</td>
+                                        @foreach ($row['bulan'] as $data)
+                                            <td class="text-center py-1 border border-gray-300 {{ $data['S'] < 0 ? 'bg-red-100' : 'bg-gray-50' }} align-top whitespace-nowrap">W: {{ $data['W'] }}<br> H: {{ $data['H'] }}<br> S: {{ $data['S'] }}</td>
+                                        @endforeach
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                        
                     </div>
                 </div>
             </main>
