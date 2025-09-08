@@ -198,7 +198,7 @@
                 <div class="text-[14px] leading-[20px] flex-1 p-4 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
                     <div class="flex justify-between items-center mb-6 md:w-full">
                         <div class="flex items-center">
-                            <span class="font-normal pe-4" onclick="window.location='{{ url('/') }}'"><i data-lucide="arrow-left"></i></span>
+                            <span class="font-normal pe-4" onclick="window.location='{{ route('absensi.index') }}'"><i data-lucide="arrow-left"></i></span>
                             <h1 class="font-bold text-lg">Absensi Ronda</h1>
                         </div>
                         <span id="realtime-clock" class="font-normal text-[13px]"></span>

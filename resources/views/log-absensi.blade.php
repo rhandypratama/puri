@@ -59,12 +59,18 @@
                 <div class="text-[13px] leading-[20px] flex-1 p-4 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
                     <div class="flex items-center mb-4 md:w-full">
                         <span class="font-normal pe-4" onclick="window.location='{{ route('absensi.index') }}'"><i data-lucide="arrow-left"></i></span>
-                        <h1 class="font-bold text-lg">Riwayat Absensi Ronda</h1>
+                        <h1 class="font-bold text-lg">Daftar Hadir Ronda</h1>
                     </div>
 
                     <div class="max-w-6xl mx-auto p-0">
                         <!-- Calendar -->
                         <div id="calendar"></div>
+
+                        <!-- Spinner -->
+                        <div id="loading" class="hidden flex items-center justify-center my-4">
+                            <div class="w-6 h-6 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
+                            <span class="ml-2 text-gray-600 text-sm">Sedang memuat data ...</span>
+                        </div>
 
                         <!-- Detail Absensi -->
                         <div id="absensiDetail" class="mt-6">
@@ -145,10 +151,17 @@
                     selectedCell = info.dayEl;
                     selectedCell.classList.add('selected-date');
                     const date = info.dateStr;
+                    
+                    const loading = document.getElementById('loading');
+                    // tampilkan spinner
+                    loading.classList.remove('hidden');
 
                     fetch(`/absensi/by-date/${date}`)
                         .then(response => response.json())
                         .then(data => {
+                            // sembunyikan spinner
+                            loading.classList.add('hidden');
+
                             const options = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
                             const formattedDate = new Intl.DateTimeFormat('id-ID', options).format(new Date(date));
 
