@@ -215,4 +215,44 @@ class AbsensiController extends Controller
 
         return view('rekap-absensi', compact('rekap', 'year'));
     }
+
+    public function getByDate($date)
+    {
+        // Ambil absensi + relasi warga
+        $absensis = Absensi::with('wargas')
+            ->whereDate('tgl_absensi', $date)
+            ->get();
+
+        // Format response JSON
+        // $data = $absensis->map(function ($absensi) {
+        //     return [
+        //         'id' => $absensi->id,
+        //         // 'warga' => $absensi->wargas->pluck('nama')->toArray(),
+        //         'warga' => $absensi->wargas->map(function ($warga) {
+        //             return "({$warga->blok}) {$warga->nama}";
+        //         })->toArray(),
+        //         'keterangan' => $absensi->keterangan,
+        //     ];
+        // });
+
+        $data = $absensis->map(function ($absensi) {
+            return [
+                'id' => $absensi->id,
+                'warga' => $absensi->wargas->map(function ($warga) {
+                    return [
+                        'blok' => $warga->blok,
+                        'nama' => $warga->nama,
+                    ];
+                }),
+                'keterangan' => $absensi->keterangan,
+            ];
+        });
+
+        return response()->json($data);
+    }
+
+    public function logAbsensi(Request $request)
+    {
+        return view('log-absensi');
+    }
 }

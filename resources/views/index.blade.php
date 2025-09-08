@@ -178,15 +178,16 @@
                             'saturday'  => 'Sabtu',
                         ];
                     @endphp
-                    <div class="flex mb-2 items-center justify-between">
+                    <div class="flex mb-6 items-center justify-between">
                         <h1 class="font-bold text-lg">Riwayat Absensi Ronda</h1>
-                        @if($absensi->isEmpty())
-                            <p class="text-[14px] text-[#706f6c] dark:text-[#A1A09A]">{{ now()->locale('id')->isoFormat('dddd, DD/MM/YYYY') }}</p>
-                        @else
-                            <p class="text-[14px] text-[#706f6c] dark:text-[#A1A09A]">{{ $days[strtolower($absensi[0]->hari)] ?? '-' }}, {{ date('d/m/Y', strtotime($absensi[0]->tgl_absensi)) }}</p>
-                        @endif
+                        <a href="{{ route('absensi.log') }}" class="text-[#00a9c3] dark:text-[#FF4433] underline underline-offset-4">Lihat Semua</a>
                     </div>
-
+                    
+                    @if($absensi->isEmpty())
+                        <p class="text-[16px] text-[#706f6c] dark:text-[#A1A09A]">{{ now()->locale('id')->isoFormat('dddd, DD/MM/YYYY') }}</p>
+                    @else
+                        <p class="text-[16px] text-[#706f6c] dark:text-[#A1A09A]">{{ $days[strtolower($absensi[0]->hari)] ?? '-' }}, {{ date('d/m/Y', strtotime($absensi[0]->tgl_absensi)) }}</p>
+                    @endif
                     <div class="border border-[#68cddc] dark:border-[#3E3E3A] rounded-lg py-2 px-4 my-4 bg-[#96fbff1a]">
                         <ul class="flex flex-col">
                             @forelse($absensi as $row)
