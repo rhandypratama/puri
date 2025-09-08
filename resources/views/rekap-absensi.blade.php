@@ -55,15 +55,15 @@
                         <h1 class="font-bold text-lg">Rekap Ronda Tahun {{ $year }}</h1>
                     </div>
 
-                    <div class="overflow-x-auto relative">
-                        <table class="min-w-full table-auto rounded-md overflow-hidden border border-gray-300">
-                            <thead class="bg-black text-white">
+                    <div class="overflow-x-auto max-h-200">
+                        <table class="table-auto rounded-md border-gray-400">
+                            <thead class="text-white">
                                 <tr>
-                                    <th class="sticky left-0 z-30 bg-black px-2 py-1 border border-gray-300 whitespace-nowrap">Blok</th>
-                                    <th class="px-2 py-1 border border-gray-300 text-start whitespace-nowrap">Nama Warga</th>
-                                    <th class="px-2 py-1 border border-gray-300 text-start">Jadwal</th>
+                                    <th class="sticky top-0 left-[-1px] z-40 bg-black px-2 py-1 border border-gray-300 whitespace-nowrap">Blok</th>
+                                    <th class="sticky top-0 z-30 px-2 py-1 bg-[#393939] border border-gray-300 text-start whitespace-nowrap">Nama Warga</th>
+                                    <th class="sticky top-0 z-30 px-2 py-1 bg-[#393939] border border-gray-300 text-start">Jadwal</th>
                                     @for ($month = 1; $month <= 12; $month++)
-                                        <th class="px-2 py-1 border border-gray-300 whitespace-nowrap">{{ \Carbon\Carbon::create()->month($month)->translatedFormat('M') }}</th>
+                                        <th class="sticky top-0 z-30 px-2 py-1 bg-[#393939] border border-gray-300 whitespace-nowrap">{{ \Carbon\Carbon::create()->month($month)->translatedFormat('M') }}</th>
                                     @endfor
                                 </tr>
                             </thead>
@@ -83,9 +83,9 @@
                                 @endphp
                                 @foreach ($rekap as $row)
                                     <tr>
-                                        <td class="sticky left-0 z-20 text-center items-center py-1 border border-gray-400 bg-gray-50 align-top whitespace-nowrap">{{ $row['blok'] }}</td>
-                                        <td class="px-2 py-1 border border-gray-400 bg-gray-50 align-top whitespace-nowrap">{{ $row['nama'] }}</td>
-                                        <td class="px-2 py-1 border border-gray-400 bg-gray-50 align-top whitespace-nowrap">{{  $days[$row['jadwal']] }}</td>
+                                        <td class="sticky left-[-1px] top-0 z-20 text-center items-center py-1 border border-gray-400 bg-[#393939] text-white align-center whitespace-nowrap">{{ $row['blok'] }}</td>
+                                        <td class="px-2 py-1 border border-gray-400 bg-gray-50 align-center whitespace-nowrap">{{ $row['nama'] }}</td>
+                                        <td class="px-2 py-1 border border-gray-400 bg-gray-50 align-center whitespace-nowrap">{{  $days[$row['jadwal']] }}</td>
                                         @foreach ($row['bulan'] as $data)
                                             <td class="text-center py-1 border border-gray-400 {{ $data['S'] < 0 ? 'bg-red-100 text-red-700' : 'bg-gray-50' }} align-top whitespace-nowrap">W: {{ $data['W'] }}<br> H: {{ $data['H'] }}<br> S: {{ $data['S'] }}</td>
                                         @endforeach
