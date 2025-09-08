@@ -12,4 +12,5 @@ Route::get('/jadwal-ronda', [AbsensiController::class, 'jadwalRonda'])->name('ab
 Route::get('/rekap-absensi', [AbsensiController::class, 'rekapAbsensi'])->name('absensi.rekap-absensi');
 Route::get('/log-absensi', [AbsensiController::class, 'logAbsensi'])->name('absensi.log');
 Route::get('/absensi/by-date/{date}', [AbsensiController::class, 'getByDate']);
+Route::get('/syarat-ketentuan', [AbsensiController::class, 'syaratKetentuan'])->name('syarat-ketentuan');
 Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.store');

@@ -255,4 +255,9 @@ class AbsensiController extends Controller
     {
         return view('log-absensi');
     }
+
+    public function syaratKetentuan(Request $request)
+    {
+        return view('syarat-ketentuan');
+    }
 }

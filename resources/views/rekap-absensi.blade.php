@@ -55,6 +55,15 @@
                         <h1 class="font-bold text-lg">Rekap Ronda Tahun {{ $year }}</h1>
                     </div>
 
+                    <div class="border border-[#68cddc] dark:border-[#3E3E3A] rounded-lg py-1 px-4 my-3 bg-[#96fbff1a]">
+                        Keterangan :
+                        <ul class="flex flex-col">
+                            <li class="list-none text-[12px] ms-0 text-[#706f6c] dark:text-[#A1A09A]">W = Wajib Hadir (Jumlah hari ronda dalam 1 bulan tersebut)</li>
+                            <li class="list-none text-[12px] ms-0 text-[#706f6c] dark:text-[#A1A09A]">H = Hadir (Berdasarkan absensi ronda)</li>
+                            <li class="list-none text-[12px] ms-0 text-[#706f6c] dark:text-[#A1A09A]">S = Selisih (H-W)</li>
+                        </ul>
+                    </div>
+
                     <div class="overflow-x-auto max-h-200">
                         <table class="table-auto rounded-md border-gray-400">
                             <thead class="text-white">
