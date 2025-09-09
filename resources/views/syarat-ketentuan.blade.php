@@ -91,7 +91,7 @@
                                 <ul class="list-disc pl-6 text-gray-700 space-y-1">
                                     <li>Setiap yang hadir <strong>wajib absen</strong> lewat sistem, jadi tidak dicatat manual lagi.</li>
                                     <li>Untuk melakukan absensi ronda, bisa diwakilkan ke 1 orang saja</li>
-                                    <li>Cek kembali apakah namamu sudah ada di daftar hadir ronda</li>
+                                    <li><strong>Penting !!</strong> Cek kembali apakah namamu sudah ada di daftar hadir ronda. <a href="{{ route('absensi.log') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Lihat disini</a></li>
                                     <li>Tidak hadir = dianggap <span class="text-red-500 font-medium">tidak ronda 🚫</span></li>
                                 </ul>
                             </div>
@@ -116,7 +116,7 @@
                             <!-- 6 -->
                             <div class="p-5 bg-white rounded-lg shadow border border-gray-200">
                                 <h2 class="font-semibold text-lg mb-2">🤝 4. Etika & Kebersamaan</h2>
-                                <p class="text-gray-700">Hormati sesama ronda, jangan baper kalau diingatkan.  
+                                <p class="text-gray-700">Hormati sesama warga ronda, jangan baper kalau diingatkan.  
                                 Ronda juga ajang kumpul + silaturahmi ✨</p>
                             </div>
 
@@ -128,7 +128,7 @@
                                     <!-- <li><strong>Keliling lingkungan</strong> sesuai rute yang ditentukan.</li> -->
                                     <li>Kekurangan absensi ronda bisa diganti maksimal di bulan berikutnya.</li>
                                     <li>Penagihan denda dilakukan 2 bulan sekali, yaitu (Februari, April, Juni, Agustus, Oktober, Desember).</li>
-                                    <li>Warga bisa cek sendiri laporannya di menu <a href="{{ route('absensi.rekap-absensi') }}" class="text-blue-600 hover:underline">Rekap & Denda Ronda.</a></li>
+                                    <li>Masing - masing warga bisa cek sendiri rekap & laporannya di menu <a href="{{ route('absensi.rekap-absensi') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Rekap & Denda Ronda.</a></li>
                                 </ul>
                             </div>
                         </div>

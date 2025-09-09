@@ -220,7 +220,7 @@
                     <form action="{{ route('absensi.store') }}" method="POST" class="space-y-3">
                         @csrf
                         <div>
-                            <select id="warga" name="warga_ids[]" multiple placeholder="Cari blok / warga ..." class="w-full dark:border-[#444] bg-white dark:bg-[#2A2A2A] text-black dark:text-white p-0 @error('warga_ids') border-red-500 @enderror">
+                            <select id="warga" name="warga_ids[]" multiple placeholder="Ketik blok atau nama warga ..." class="w-full dark:border-[#444] bg-white dark:bg-[#2A2A2A] text-black dark:text-white p-0 @error('warga_ids') border-red-500 @enderror">
                                 @foreach($wargas as $w)
                                     <option value="{{ $w->id }}" {{ (collect(old('warga_ids'))->contains($w->id)) ? 'selected' : '' }}>
                                         ({{ $w->blok }}) {{ $w->nama }}
