@@ -60,7 +60,7 @@
                         <h1 class="text-xl font-bold text-center mb-6">🛡️ Syarat & Ketentuan Ronda</h1>
 
                         <!-- Deskripsi pembuka -->
-                        <p class="text-gray-600 text-center mb-4">
+                        <p class="text-gray-600 dark:text-[#b3b2ab] text-center mb-4">
                             Selamat datang di lingkungan kita yang guyub dan aman!  
                             Sebelum ikut serta dalam ronda, yuk pahami dulu syarat & ketentuannya biar semua nyaman:
                         </p>
@@ -77,18 +77,18 @@
                             </div> -->
 
                             <!-- 2 -->
-                            <div class="p-5 bg-white rounded-lg shadow border border-gray-200">
+                            <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
                                 <h2 class="font-semibold text-lg mb-2">⏰ 1. Jadwal & Waktu Ronda</h2>
-                                <ul class="list-disc pl-6 text-gray-700 space-y-1">
+                                <ul class="list-disc pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
                                     <li>Setiap warga <strong>wajib ikut ronda sesuai jadwal</strong> yang sudah dibagi.</li>
                                     <li>Ronda berlangsung mulai pukul <strong>22.00 – 01.00 WIB</strong>. Datang tepat waktu ya, jangan sampai warga yang lain nungguin 😊</li>
                                 </ul>
                             </div>
 
                             <!-- 3 -->
-                            <div class="p-5 bg-white rounded-lg shadow border border-gray-200">
+                            <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
                                 <h2 class="font-semibold text-lg mb-2">👥 2. Kehadiran & Absensi</h2>
-                                <ul class="list-disc pl-6 text-gray-700 space-y-1">
+                                <ul class="list-disc pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
                                     <li>Setiap yang hadir <strong>wajib absen</strong> lewat sistem, jadi tidak dicatat manual lagi.</li>
                                     <li>Untuk melakukan absensi ronda, bisa diwakilkan ke 1 orang saja</li>
                                     <li><strong>Penting !!</strong> Cek kembali apakah namamu sudah ada di daftar hadir ronda. <a href="{{ route('absensi.log') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Lihat disini</a></li>
@@ -97,9 +97,9 @@
                             </div>
 
                             <!-- 4 -->
-                            <div class="p-5 bg-white rounded-lg shadow border border-gray-200">
+                            <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
                                 <h2 class="font-semibold text-lg mb-2">🔔 3. Tugas Saat Ronda</h2>
-                                <ul class="list-disc pl-6 text-gray-700 space-y-1">
+                                <ul class="list-disc pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
                                     <!-- <li><strong>Keliling lingkungan</strong> sesuai rute yang ditentukan.</li> -->
                                     <li>Laporkan bila ada hal mencurigakan, jangan bertindak sendiri.</li>
                                     <li>Jagalah sikap, <em>ngobrol boleh, ketawa boleh, berisik jangan</em> 😄</li>
@@ -114,17 +114,17 @@
                             </div> -->
 
                             <!-- 6 -->
-                            <div class="p-5 bg-white rounded-lg shadow border border-gray-200">
+                            <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
                                 <h2 class="font-semibold text-lg mb-2">🤝 4. Etika & Kebersamaan</h2>
-                                <p class="text-gray-700">Hormati sesama warga ronda, jangan baper kalau diingatkan.  
+                                <p class="text-gray-700 dark:text-[#b3b2ab]">Hormati sesama warga ronda, jangan baper kalau diingatkan.  
                                 Ronda juga ajang kumpul + silaturahmi ✨</p>
                             </div>
 
                             <!-- 7 -->
-                            <div class="p-5 bg-white rounded-lg shadow border border-gray-200">
+                            <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
                                 <h2 class="font-semibold text-lg mb-2">⚖️ 5. Denda</h2>
-                                <p class="text-gray-700">Warga yang tidak hadir akan kena sanksi sesuai keputusan bersama, misalnya <strong>denda atau konsumsi</strong>.</p>
-                                <ul class="list-disc pl-6 text-gray-700 space-y-1">
+                                <p class="text-gray-700 dark:text-[#b3b2ab]">Warga yang tidak hadir akan kena sanksi sesuai keputusan bersama, misalnya <strong>denda atau konsumsi</strong>.</p>
+                                <ul class="list-disc pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
                                     <!-- <li><strong>Keliling lingkungan</strong> sesuai rute yang ditentukan.</li> -->
                                     <li>Kekurangan absensi ronda bisa diganti maksimal di bulan berikutnya.</li>
                                     <li>Penagihan denda dilakukan 2 bulan sekali, yaitu (Februari, April, Juni, Agustus, Oktober, Desember).</li>
@@ -135,7 +135,7 @@
 
                         <!-- Penutup -->
                         <div class="mt-4 p-5 bg-yellow-50 border-l-4 border-yellow-400 rounded">
-                            <h3 class="font-semibold text-lg mb-2">🚀 Penutup</h3>
+                            <h3 class="font-semibold text-lg text-gray-700 mb-2">🚀 Penutup</h3>
                             <p class="text-gray-700">Ronda bukan sekadar kewajiban, tapi bentuk <strong>kebersamaan kita menjaga lingkungan</strong>.  
                             Dengan ikut ronda, kita menciptakan suasana aman, nyaman, dan penuh kekeluargaan.</p>
                             <blockquote class="mt-3 italic text-yellow-800 font-medium">

@@ -209,7 +209,7 @@
                         </div>
                     @endif
                     @if ($errors->any())
-                        <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
+                        <div class="mb-4 p-3 bg-red-100 dark:bg-red-400 text-red-700 dark:text-white rounded">
                             <ul class="list-none ps-1">
                                 @foreach ($errors->all() as $error)
                                     <li>{!! nl2br(e($error)) !!}</li>
@@ -217,7 +217,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ route('absensi.store') }}" method="POST" class="space-y-3">
+                    <form action="{{ route('absensi.store') }}" method="POST" class="space-y-3 mt-10">
                         @csrf
                         <div>
                             <select id="warga" name="warga_ids[]" multiple placeholder="Ketik blok atau nama warga ..." class="w-full dark:border-[#444] bg-white dark:bg-[#2A2A2A] text-black dark:text-white p-0 @error('warga_ids') border-red-500 @enderror">
@@ -234,7 +234,7 @@
                                 {{ $message }}
                             </div>
                         @enderror
-                        <div class="flex justify-end items-center mt-4">
+                        <div class="flex justify-end items-center my-6">
                             <!-- <a href="{{ url('/') }}" class="inline-block dark:bg-[#eeeeec] dark:border-[#eeeeec] dark:text-[#1C1C1A] dark:hover:bg-white dark:hover:border-white px-5 py-1.5 bg-[#ffffff] rounded-sm border border-[#8b8b8b] text-sm leading-normal me-2">
                                 Back
                             </a> -->

@@ -73,7 +73,7 @@ class AbsensiController extends Controller
                 'keterangan'  => 'nullable|string',
             ],
             [
-                'warga_ids.required' => 'Wajib mengisi minimal satu warga untuk absensi.',
+                'warga_ids.required' => '👇 Wajib mengisi minimal satu warga untuk absensi.',
                 'warga_ids.array'    => 'Format data warga tidak valid.',
                 'warga_ids.min'      => 'Minimal pilih satu warga untuk absensi.',
                 'keterangan.string'  => 'Keterangan harus berupa teks.',

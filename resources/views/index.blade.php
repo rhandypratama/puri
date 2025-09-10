@@ -30,7 +30,7 @@
                                 </span>
                             </span>
                             <span>
-                                <a href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
+                                <a href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">
                                     <span>Buku Kas & Iuran Bulanan Warga</span>
                                     <svg
                                         width="10"
@@ -90,7 +90,7 @@
                             </span>
                             <span>
                                 Lihat
-                                <a href="{{ route('absensi.jadwal-ronda') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
+                                <a href="{{ route('absensi.jadwal-ronda') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] ml-1">
                                     <span>Jadwal Ronda</span>
                                     <svg
                                         width="10"
@@ -117,7 +117,7 @@
                             </span>
                             <span>
                                 Lihat
-                                <a href="{{ route('absensi.log') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
+                                <a href="{{ route('absensi.log') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] ml-1">
                                     <span>Daftar Hadir Ronda</span>
                                     <svg
                                         width="10"
@@ -144,7 +144,7 @@
                             </span>
                             <span>
                                 Lihat
-                                <a href="{{ route('absensi.rekap-absensi') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
+                                <a href="{{ route('absensi.rekap-absensi') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] ml-1">
                                     <span>Rekap dan Denda Ronda</span>
                                     <svg
                                         width="10"
@@ -170,7 +170,7 @@
                                 </span>
                             </span>
                             <span>
-                                Baca <a href="{{ route('syarat-ketentuan') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
+                                Baca <a href="{{ route('syarat-ketentuan') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] ml-1">
                                     <span>Syarat dan Ketentuan Ronda</span>
                                     <svg
                                         width="10"
@@ -214,7 +214,7 @@
                     @else
                         <p class="text-[16px] text-[#706f6c] dark:text-[#A1A09A]">{{ $days[strtolower($absensi[0]->hari)] ?? '-' }}, {{ date('d/m/Y', strtotime($absensi[0]->tgl_absensi)) }}</p>
                     @endif
-                    <div class="border border-[#68cddc] dark:border-[#3E3E3A] rounded-lg py-2 px-4 my-4 bg-[#96fbff1a]">
+                    <div class="border border-[#68cddc] dark:border-[#3E3E3A] rounded-lg py-2 px-4 my-4 bg-[#96fbff1a] dark:bg-[#96fbff6b]">
                         <ul class="flex flex-col">
                             @forelse($absensi as $row)
                                 <li class="list-disc px-1 ms-6 text-[#706f6c] dark:text-[#A1A09A]">({{ $row->blok }}) {{ $row->nama }}</li>

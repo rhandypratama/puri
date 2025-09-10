@@ -55,12 +55,12 @@
                         <h1 class="font-bold text-lg">Rekap Ronda Tahun {{ $year }}</h1>
                     </div>
 
-                    <div class="border border-[#68cddc] dark:border-[#3E3E3A] rounded-lg py-1 px-4 my-3 bg-[#96fbff1a]">
+                    <div class="border border-[#68cddc] dark:border-[#3E3E3A] rounded-lg py-1 px-4 my-3 bg-[#96fbff1a] dark:bg-[#96fbff6b]">
                         Keterangan :
                         <ul class="flex flex-col">
-                            <li class="list-none text-[12px] ms-0  dark:text-[#A1A09A]">W = Wajib Hadir (Jumlah hari ronda dalam 1 bulan tersebut)</li>
-                            <li class="list-none text-[12px] ms-0  dark:text-[#A1A09A]">H = Hadir (Berdasarkan absensi ronda)</li>
-                            <li class="list-none text-[12px] ms-0  dark:text-[#A1A09A]">S = Selisih (H-W)</li>
+                            <li class="list-none text-[12px] ms-0  dark:text-[#d9d9d9]">W = Wajib Hadir (Jumlah hari ronda dalam 1 bulan tersebut)</li>
+                            <li class="list-none text-[12px] ms-0  dark:text-[#d9d9d9]">H = Hadir (Berdasarkan absensi ronda)</li>
+                            <li class="list-none text-[12px] ms-0  dark:text-[#d9d9d9]">S = Selisih (H-W)</li>
                         </ul>
                     </div>
 
@@ -93,10 +93,10 @@
                                 @foreach ($rekap as $row)
                                     <tr>
                                         <td class="sticky left-[-1px] top-0 z-20 text-center items-center py-1 border border-gray-400 bg-[#393939] text-white align-center whitespace-nowrap">{{ $row['blok'] }}</td>
-                                        <td class="px-2 py-1 border border-gray-400 bg-gray-50 align-center whitespace-nowrap">{{ $row['nama'] }}</td>
-                                        <td class="px-2 py-1 border border-gray-400 bg-gray-50 align-center whitespace-nowrap">{{  $days[$row['jadwal']] }}</td>
+                                        <td class="px-2 py-1 border border-gray-400 bg-gray-50 dark:bg-transparent align-center whitespace-nowrap">{{ $row['nama'] }}</td>
+                                        <td class="px-2 py-1 border border-gray-400 bg-gray-50 dark:bg-transparent align-center whitespace-nowrap">{{  $days[$row['jadwal']] }}</td>
                                         @foreach ($row['bulan'] as $data)
-                                            <td class="text-center py-1 border border-gray-400 {{ $data['S'] < 0 ? 'bg-red-100 text-red-700' : 'bg-gray-50' }} align-top whitespace-nowrap">W: {{ $data['W'] }}<br> H: {{ $data['H'] }}<br> S: {{ $data['S'] }}</td>
+                                            <td class="text-center py-1 border border-gray-400 {{ $data['S'] < 0 ? 'bg-red-100 text-red-700' : 'bg-gray-50 dark:bg-transparent' }} align-top whitespace-nowrap">W: {{ $data['W'] }}<br> H: {{ $data['H'] }}<br> S: {{ $data['S'] }}</td>
                                         @endforeach
                                     </tr>
                                 @endforeach

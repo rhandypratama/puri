@@ -70,7 +70,7 @@
                     @endphp
                     <div class="overflow-x-auto">
                         <table class="min-w-full rounded-md overflow-hidden border border-gray-300">
-                            <thead class="bg-black text-white">
+                            <thead class="bg-black dark:bg-[#303738] text-white">
                                 <tr>
                                     @foreach ($days as $hari)
                                         <th class="px-2 py-1 border border-gray-300 whitespace-nowrap">{{ $hari }}</th>
@@ -80,7 +80,7 @@
                             <tbody>
                                 <tr>
                                     @foreach ($days as $eng => $indo)
-                                        <td class="px-4 py-2 border border-gray-300 bg-gray-50 align-top whitespace-nowrap">
+                                        <td class="px-4 py-2 border border-gray-300 bg-gray-50 dark:text-black align-top whitespace-nowrap">
                                             @if(isset($wargas[$eng]))
                                                 @foreach($wargas[$eng] as $warga)
                                                     <div>({{ $warga->blok }}) {{ $warga->nama }}</div>

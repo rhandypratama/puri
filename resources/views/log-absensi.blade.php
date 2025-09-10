@@ -74,20 +74,20 @@
 
                         <!-- Detail Absensi -->
                         <div id="absensiDetail" class="mt-6">
-                            <h2 class="mb-2 font-medium"><span id="selectedDate"></span></h2>
+                            <h2 class="mb-2 font-semibold text-[16px]"><span id="selectedDate"></span></h2>
                             <!-- <ul id="absensiList" class="list-disc list-inside text-gray-700"></ul> -->
                             <div class="overflow-x-auto">
-                                <table class="min-w-full text-left border border-gray-300 rounded-md">
-                                    <thead class="bg-gray-100">
+                                <table class="min-w-full rounded-lg text-left border-gray-300 overflow-hidden">
+                                    <thead class="bg-gray-100 dark:bg-gray-700">
                                         <tr>
-                                            <th class="px-2 py-1 border border-gray-300">Blok</th>
-                                            <th class="px-2 py-1 border border-gray-300">Nama</th>
-                                            <th class="px-2 py-1 border border-gray-300">Keterangan</th>
+                                            <th class="px-2 py-1 border-gray-300">Blok</th>
+                                            <th class="px-2 py-1 border-gray-300">Nama</th>
+                                            <th class="px-2 py-1 border-gray-300">Keterangan</th>
                                         </tr>
                                     </thead>
                                     <tbody id="absensiList">
                                         <tr>
-                                            <td colspan="3" class="px-2 py-2 text-center border border-gray-300">
+                                            <td colspan="3" class="px-2 py-2 text-center border-gray-300">
                                                 Pilih tanggal pada kalender untuk melihat detail absensi
                                             </td>
                                         </tr>
@@ -178,9 +178,9 @@
                                     absensi.warga.forEach(warga => {
                                         const tr = document.createElement('tr');
                                         tr.innerHTML = `
-                                            <td class="px-2 py-1 border border-gray-300">${warga.blok}</td>
-                                            <td class="px-2 py-1 border border-gray-300">${warga.nama}</td>
-                                            <td class="px-2 py-1 border border-gray-300">${absensi.keterangan ?? '-'}</td>
+                                            <td class="px-2 py-1 border-gray-300">${warga.blok}</td>
+                                            <td class="px-2 py-1 border-gray-300">${warga.nama}</td>
+                                            <td class="px-2 py-1 border-gray-300">${absensi.keterangan ?? '-'}</td>
                                         `;
                                         tbody.appendChild(tr);
                                     });
@@ -188,7 +188,7 @@
                             } else {
                                 tbody.innerHTML = `
                                     <tr>
-                                        <td colspan="3" class="px-3 py-2 text-center border border-gray-300 text-red-500">
+                                        <td colspan="3" class="px-3 py-2 text-center border-gray-300 text-red-500 dark:text-red-400">
                                             Tidak ada absensi ronda di tanggal ini
                                         </td>
                                     </tr>
