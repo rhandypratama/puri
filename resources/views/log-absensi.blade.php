@@ -69,7 +69,7 @@
                         <!-- Spinner -->
                         <div id="loading" class="hidden flex items-center justify-center my-4">
                             <div class="w-6 h-6 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
-                            <span class="ml-2 text-gray-600 text-sm">Sedang memuat data ...</span>
+                            <span class="ml-2 text-gray-600 dark:text-gray-400 text-sm">Sedang memuat data ...</span>
                         </div>
 
                         <!-- Detail Absensi -->
@@ -77,7 +77,7 @@
                             <h2 class="mb-2 font-semibold text-[16px]"><span id="selectedDate"></span></h2>
                             <!-- <ul id="absensiList" class="list-disc list-inside text-gray-700"></ul> -->
                             <div class="overflow-x-auto">
-                                <table class="min-w-full rounded-lg text-left border-gray-300 overflow-hidden">
+                                <table class="min-w-full rounded-lg text-sm text-left border-gray-300 overflow-hidden">
                                     <thead class="bg-gray-100 dark:bg-gray-700">
                                         <tr>
                                             <th class="px-2 py-1 border-gray-300">Blok</th>
@@ -178,9 +178,9 @@
                                     absensi.warga.forEach(warga => {
                                         const tr = document.createElement('tr');
                                         tr.innerHTML = `
-                                            <td class="px-2 py-1 border-gray-300">${warga.blok}</td>
-                                            <td class="px-2 py-1 border-gray-300">${warga.nama}</td>
-                                            <td class="px-2 py-1 border-gray-300">${absensi.keterangan ?? '-'}</td>
+                                            <td class="px-2 py-0 border-gray-300">${warga.blok}</td>
+                                            <td class="px-2 py-0 border-gray-300">${warga.nama}</td>
+                                            <td class="px-2 py-0 border-gray-300">${absensi.keterangan ?? '-'}</td>
                                         `;
                                         tbody.appendChild(tr);
                                     });
@@ -188,7 +188,7 @@
                             } else {
                                 tbody.innerHTML = `
                                     <tr>
-                                        <td colspan="3" class="px-3 py-2 text-center border-gray-300 text-red-500 dark:text-red-400">
+                                        <td colspan="3" class="px-3 py-3 text-center border-gray-300 text-red-500 dark:text-red-400">
                                             Tidak ada absensi ronda di tanggal ini
                                         </td>
                                     </tr>
