@@ -100,7 +100,7 @@
                             <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
                                 <h2 class="font-semibold text-lg mb-2">🔔 3. Tugas Saat Ronda</h2>
                                 <ul class="list-disc pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
-                                    <li>Pukul 23.00 WIB, setiap warga yang ronda <strong>wajib mengunci pagar</strong>.</li>
+                                    <li>Pukul 23.00 WIB, setiap warga yang ronda <strong>wajib mengunci gerbang</strong>.</li>
                                     <li>Laporkan bila ada hal mencurigakan, jangan bertindak sendiri.</li>
                                     <li>Jagalah sikap, <em>ngobrol boleh, ketawa boleh, berisik jangan</em> 😄</li>
                                 </ul>
