@@ -89,7 +89,7 @@
                             <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
                                 <h2 class="font-semibold text-lg mb-2">👥 2. Kehadiran & Absensi</h2>
                                 <ul class="list-disc pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
-                                    <li>Setiap yang hadir <strong>wajib absen</strong> lewat sistem, jadi tidak dicatat manual lagi.</li>
+                                    <li>Setiap yang hadir <strong>wajib absen</strong> lewat sistem, jadi tidak dicatat manual atau tidak perlu di kirim ke WA group lagi. Cukup lakukan absensi disini saja!</li>
                                     <li>Buat warga yang <strong>datang telat namun bisa dipastikan hadir</strong>, konfirmasi aja ke tim ronda sebelum jam 23.00 WIB, jadi absennya tetap aman.</li>
                                     <li>Untuk melakukan absensi ronda, bisa diwakilkan ke 1 orang saja</li>
                                     <li><strong>Penting !!</strong> Cek kembali apakah namamu sudah ada di daftar hadir ronda. <a href="{{ route('absensi.log') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Lihat disini</a></li>

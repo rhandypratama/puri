@@ -206,83 +206,26 @@
                     @endphp
                     <div class="flex mb-6 items-center justify-between">
                         <h1 class="font-bold text-lg">Riwayat Absensi Ronda</h1>
-                        <!-- <a href="{{ route('absensi.log') }}" class="text-[#00a9c3] dark:text-[#FF4433] underline underline-offset-4">Lihat Semua</a> -->
-                    </div>
-                    
-                    @if($absensi->isEmpty())
-                        <p class="text-[16px] text-[#706f6c] dark:text-[#A1A09A]">{{ now()->locale('id')->isoFormat('dddd, DD/MM/YYYY') }}</p>
-                    @else
-                        <p class="text-[16px] text-[#706f6c] dark:text-[#A1A09A]">{{ $days[strtolower($absensi[0]->hari)] ?? '-' }}, {{ date('d/m/Y', strtotime($absensi[0]->tgl_absensi)) }}</p>
-                    @endif
-                    <div class="border border-[#68cddc] dark:border-[#3E3E3A] rounded-lg py-2 px-4 my-4 bg-[#96fbff1a] dark:bg-[#96fbff6b]">
-                        <ul class="flex flex-col">
-                            @forelse($absensi as $row)
-                                <li class="list-disc px-1 ms-6 text-[#706f6c] dark:text-[#A1A09A]">({{ $row->blok }}) {{ $row->nama }}</li>
-                            @empty
-                                <li class="flex items-center gap-4 py-2 relative before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:top-1/2 before:bottom-0 before:left-[0.4rem] before:absolute">
-                                    <span>
-                                        🙈 Belum ada absensi ronda hari ini. Jangan lupa absen ya! demi keamanan kita bersama.
-                                    </span>
-                                </li>
-                            @endforelse
-
-                            <!-- <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:bottom-1/2 before:top-0 before:left-[0.4rem] before:absolute">
-                                <span class="relative py-1 bg-white dark:bg-[#161615]">
-                                    <span class="flex items-center justify-center rounded-full bg-[#FDFDFC] dark:bg-[#161615] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] w-3.5 h-3.5 border dark:border-[#3E3E3A] border-[#e3e3e0]">
-                                        <span class="rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A] w-1.5 h-1.5"></span>
-                                    </span>
-                                </span>
-                                <span>
-                                    Lihat
-                                    <a href="https://laracasts.com" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
-                                        <span>Rekap dan Denda Ronda</span>
-                                        <svg
-                                            width="10"
-                                            height="11"
-                                            viewBox="0 0 10 11"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            class="w-2.5 h-2.5"
-                                        >
-                                            <path
-                                                d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001"
-                                                stroke="currentColor"
-                                                stroke-linecap="square"
-                                            />
-                                        </svg>
-                                    </a>
-                                </span>
-                            </li>
-                            <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:bottom-1/2 before:top-0 before:left-[0.4rem] before:absolute">
-                                <span class="relative py-1 bg-white dark:bg-[#161615]">
-                                    <span class="flex items-center justify-center rounded-full bg-[#FDFDFC] dark:bg-[#161615] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] w-3.5 h-3.5 border dark:border-[#3E3E3A] border-[#e3e3e0]">
-                                        <span class="rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A] w-1.5 h-1.5"></span>
-                                    </span>
-                                </span>
-                                <span>
-                                    Lihat <a href="https://laracasts.com" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
-                                        <span>Syarat dan Ketentuan Denda</span>
-                                        <svg
-                                            width="10"
-                                            height="11"
-                                            viewBox="0 0 10 11"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            class="w-2.5 h-2.5"
-                                        >
-                                            <path
-                                                d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001"
-                                                stroke="currentColor"
-                                                stroke-linecap="square"
-                                            />
-                                        </svg>
-                                    </a>
-                                </span>
-                            </li> -->
-                        </ul>
                     </div>
 
-                    <a href="{{ url('/absensi') }}" class="dark:bg-[#eeeeec] dark:border-[#eeeeec] dark:text-[#1C1C1A] dark:hover:bg-white dark:hover:border-white hover:bg-black hover:border-black px-5 py-1.5 bg-[#1b1b18] rounded-sm border border-black text-white text-sm leading-normal mt-2 inline-block">
+                    @foreach ($absensi as $tanggal => $items)
+                        <p class="text-[15px] font-semibold dark:text-[#A1A09A] mt-4">
+                            📅 {{ $days[strtolower(\Carbon\Carbon::parse($tanggal)->translatedFormat('l'))] ?? '-' }}, {{ \Carbon\Carbon::parse($tanggal)->translatedFormat('d/m/Y') }}
+                        </p>
+                        <div class="border border-[#68cddc] dark:border-[#3E3E3A] rounded-md py-2 px-4 my-2 bg-[#96fbff1a] dark:bg-[#96fbff6b]">
+                            @if ($items->isEmpty())
+                                <p class="text-[15px] px-2 py-1">🙈 Belum ada absensi ronda di tanggal ini. Jangan lupa absen ya! demi keamanan kita bersama.</p>
+                            @else
+                                <ul class="flex flex-col">
+                                    @foreach ($items as $row)
+                                        <li class="list-disc px-1 ms-6 text-[14px] dark:text-[#d7d7d4]">({{ $row->blok }}) {{ $row->nama }}</li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </div>
+                    @endforeach
+
+                    <a href="{{ route('absensi.create') }}" class="dark:bg-[#eeeeec] dark:border-[#eeeeec] dark:text-[#1C1C1A] dark:hover:bg-white dark:hover:border-white hover:bg-black hover:border-black px-5 py-1.5 bg-[#1b1b18] rounded-sm border border-black text-white text-sm leading-normal mt-2 inline-block">
                         Isi Absensi Ronda
                     </a>
                 </div>
@@ -290,34 +233,5 @@
         </div>
     </body>
     <script>
-        // new TomSelect("#warga",{
-        //     plugins: ['remove_button'],
-        //     create: false,
-        //     maxItems: null
-        // });
-        // function updateClock() {
-        //     const now = new Date();
-
-        //     // Format hari (Indonesia)
-        //     const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-        //     const dayName = days[now.getDay()];
-
-        //     // Format tanggal dd-mm-yyyy
-        //     const dd = String(now.getDate()).padStart(2, '0');
-        //     const mm = String(now.getMonth() + 1).padStart(2, '0');
-        //     const yyyy = now.getFullYear();
-
-        //     // Format jam hh:ii:ss
-        //     const hh = String(now.getHours()).padStart(2, '0');
-        //     const ii = String(now.getMinutes()).padStart(2, '0');
-        //     const ss = String(now.getSeconds()).padStart(2, '0');
-
-        //     const formatted = `${dayName}, ${dd}/${mm}/${yyyy} ${hh}:${ii}:${ss}`;
-
-        //     document.getElementById('realtime-clock').textContent = formatted;
-        // }
-
-        // setInterval(updateClock, 1000);
-        // updateClock();
     </script>
 </html>

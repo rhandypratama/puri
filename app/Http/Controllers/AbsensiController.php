@@ -12,25 +12,11 @@ class AbsensiController extends Controller
 {
     public function index()
     {
-        // $absensi = Absensi::with('wargas')
-        //     ->orderBy('tgl_absensi', 'desc')
-        //     ->limit(1)
-        //     ->get();
-            // ->paginate(10); // biar ada pagination
-        // $absensi = DB::table('absensis')
-        //     ->join('absensi_warga', 'absensis.id', '=', 'absensi_warga.absensi_id')
-        //     ->join('wargas', 'absensi_warga.warga_id', '=', 'wargas.id')
-        //     ->select(
-        //         'absensis.id as absensi_id',
-        //         'absensis.tgl_absensi',
-        //         'absensis.hari',
-        //         'absensis.keterangan',
-        //         'wargas.id as warga_id',
-        //         'wargas.nama',
-        //         'wargas.blok',
-        //     )
-        //     ->orderBy('absensis.tgl_absensi', 'desc')
-        //     ->simplePaginate(20);
+        // ambil range kemarin & hari ini
+        $dates = collect([
+            Carbon::yesterday()->format('Y-m-d'),
+            Carbon::today()->format('Y-m-d'),
+        ]);
 
         $absensi = DB::table('absensis')
             ->join('absensi_warga', 'absensis.id', '=', 'absensi_warga.absensi_id')
@@ -44,9 +30,24 @@ class AbsensiController extends Controller
                 'wargas.nama',
                 'wargas.blok',
             )
-            ->whereDate('absensis.tgl_absensi', now()->toDateString())
+            // ->whereDate('absensis.tgl_absensi', now()->toDateString())
+            ->whereDate('absensis.tgl_absensi', '>=', now()->subDay()->toDateString())
+            ->whereDate('absensis.tgl_absensi', '<=', now()->toDateString())
             ->orderBy('absensis.tgl_absensi', 'desc')
-            ->get();
+            ->get()
+            ->groupBy(function ($item) {
+                return \Carbon\Carbon::parse($item->tgl_absensi)->format('Y-m-d');
+            });
+        // dd(now()->toDateString());
+        // dd($absensi);
+
+        // merge dengan tanggal default supaya tetap ada meski kosong
+        $rekap = $dates->mapWithKeys(function ($date) use ($absensi) {
+            return [$date => $absensi->get($date, collect())];
+        });
+
+        // dd($rekap);
+        $absensi = $rekap;
 
         return view('index', compact('absensi'));
     }
@@ -73,7 +74,7 @@ class AbsensiController extends Controller
                 'keterangan'  => 'nullable|string',
             ],
             [
-                'warga_ids.required' => '👇 Wajib mengisi minimal satu warga untuk absensi.',
+                'warga_ids.required' => '🚨 Wajib mengisi minimal satu warga untuk absensi.',
                 'warga_ids.array'    => 'Format data warga tidak valid.',
                 'warga_ids.min'      => 'Minimal pilih satu warga untuk absensi.',
                 'keterangan.string'  => 'Keterangan harus berupa teks.',
@@ -82,10 +83,6 @@ class AbsensiController extends Controller
 
         // Ambil waktu sekarang di zona Asia/Jakarta
         $now = Carbon::now('Asia/Jakarta');
-        // dd($now->between(
-        //     $now->copy()->setTime(22, 0, 0), // 22:00:00
-        //     $now->copy()->setTime(23, 0, 0) // 23:59:59
-        // ));
 
         // Validasi jam antara 22.00 - 23.00 WIB
         if (! $now->between(
@@ -116,9 +113,14 @@ class AbsensiController extends Controller
                 })
                 ->unique()
                 ->join(', ');
-
+                // ->values()
+                // ->all();
+            // $names = implode("\n", $names);
+            // dd($names);
+            
             return redirect()->back()->withErrors([
-                'warga_ids' => "Warga berikut sudah melakukan absensi ronda hari ini :\n {$names}"
+                'warga_ids' => "🚨 Warga berikut sudah melakukan absensi ronda hari ini :\n {$names}"
+                // 'warga_ids' => $names
             ]);
         }
 
@@ -132,7 +134,7 @@ class AbsensiController extends Controller
         // return redirect()->back()->with('success', 'Absensi berhasil disimpan.');
         return redirect()->back()->with(
             'success',
-            '✅ Absensi berhasil disimpan.<br><a href="' . route('absensi.index') . '" class="underline">Lihat siapa saja yang absen hari ini</a>'
+            '✅ Absensi berhasil disimpan. <a href="' . route('absensi.index') . '" class="underline">Lihat siapa saja yang absen hari ini</a>'
         );
     }
 

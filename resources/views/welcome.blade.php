@@ -204,12 +204,12 @@
                         <span id="realtime-clock" class="font-normal text-[13px]"></span>
                     </div>
                     @if(session('success'))
-                        <div class="p-2 bg-green-200 text-green-800 rounded mb-3">
+                        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg border border-green-300">
                             {!! session('success') !!}
                         </div>
                     @endif
                     @if ($errors->any())
-                        <div class="mb-4 p-3 bg-red-100 dark:bg-red-400 text-red-700 dark:text-white rounded">
+                        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg border border-red-300">
                             <ul class="list-none ps-1">
                                 @foreach ($errors->all() as $error)
                                     <li>{!! nl2br(e($error)) !!}</li>
