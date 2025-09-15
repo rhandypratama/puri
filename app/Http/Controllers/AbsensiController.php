@@ -262,4 +262,9 @@ class AbsensiController extends Controller
     {
         return view('syarat-ketentuan');
     }
+
+    public function peraturanKos()
+    {
+        return view('peraturan-kos');
+    }
 }
