@@ -89,9 +89,10 @@
                             <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
                                 <h2 class="font-semibold text-lg mb-2">👥 2. Kehadiran & Absensi</h2>
                                 <ul class="list-disc pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
-                                    <li>Setiap yang hadir <strong>wajib absen</strong> lewat sistem, jadi tidak dicatat manual atau tidak perlu di kirim ke WA group lagi. Cukup lakukan absensi disini saja!</li>
-                                    <li>Buat warga yang <strong>datang telat namun bisa dipastikan hadir</strong>, konfirmasi aja ke tim ronda sebelum jam 23.00 WIB, jadi absennya tetap aman.</li>
-                                    <li>Untuk melakukan absensi ronda, bisa diwakilkan ke 1 orang saja</li>
+                                    <li>Setiap yang hadir <strong>wajib absen lewat sistem</strong>, jadi tidak perlu dicatat / diketik manual dan di kirim ke WA group lagi. 
+                                    Inget ya! <strong>Ngisi absen hanya bisa di jam 22.00 - 23.00 WIB</strong>.</li>
+                                    <li>Buat warga yang <strong>datang telat namun bisa dipastikan hadir</strong>, konfirmasi aja ke tim rondanya <strong>sebelum jam 23.00 WIB</strong>, jadi absennya tetap aman.</li>
+                                    <li>Untuk melakukan absensi ronda, bisa diwakilkan ke 1 orang saja, biar gak ribet.</li>
                                     <li><strong>Penting !!</strong> Cek kembali apakah namamu sudah ada di daftar hadir ronda. <a href="{{ route('absensi.log') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Lihat disini</a></li>
                                     <li>Tidak hadir = dianggap <span class="text-red-500 font-medium">tidak ronda 🚫</span></li>
                                 </ul>
@@ -101,9 +102,10 @@
                             <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
                                 <h2 class="font-semibold text-lg mb-2">🔔 3. Tugas Saat Ronda</h2>
                                 <ul class="list-disc pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
-                                    <li>Pukul 23.00 WIB, setiap warga yang ronda <strong>wajib mengunci gerbang</strong>.</li>
+                                    <li>Pukul 23.00 WIB, setiap warga yang ronda <strong>wajib mengunci gerbang 🔒</strong>.</li>
+                                    <li><strong>Selalu jaga kebersihan</strong> pos rondanya ya! terutama saat pulang nge-ronda 🧹.</li>
                                     <li>Laporkan bila ada hal mencurigakan, jangan bertindak sendiri.</li>
-                                    <li>Jagalah sikap, <em>ngobrol boleh, ketawa boleh, berisik jangan</em> 😄</li>
+                                    <li>Jagalah sikap, <em>ngobrol boleh, ketawa boleh, berisik jangan</em> 😄 🤫</li>
                                 </ul>
                             </div>
 
@@ -124,13 +126,15 @@
                             <!-- 7 -->
                             <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
                                 <h2 class="font-semibold text-lg mb-2">⚖️ 5. Denda</h2>
-                                <p class="text-gray-700 dark:text-[#b3b2ab]">Warga yang tidak hadir akan kena sanksi sesuai keputusan bersama, misalnya <strong>denda atau konsumsi</strong>.</p>
+                                <p class="text-gray-700 dark:text-[#b3b2ab] mb-4">Warga yang tidak hadir akan kena sanksi sesuai keputusan bersama, misalnya <strong>denda atau konsumsi</strong>.</p>
                                 <ul class="list-disc pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
                                     <!-- <li><strong>Keliling lingkungan</strong> sesuai rute yang ditentukan.</li> -->
                                     <li>Kekurangan absensi ronda bisa diganti maksimal di bulan berikutnya.</li>
-                                    <li>Penagihan denda dilakukan 2 bulan sekali, yaitu (Februari, April, Juni, Agustus, Oktober, Desember).</li>
+                                    <li>Rekap absensi & denda dilakukan setiap 2 bulan sekali, yaitu <strong>(Februari, April, Juni, Agustus, Oktober, Desember)</strong>. 
+                                        Apabila sampai dengan akhir bulan yang disebutkan masih terdapat kekurangan absensi, maka tidak bisa diganti di bulan berikutnya dan akan dianggap <span class="text-red-500 font-medium">tidak ronda 🚫</span>.</li>
                                     <li>Masing - masing warga bisa cek sendiri rekap & laporannya di menu <a href="{{ route('absensi.rekap-absensi') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Rekap & Denda Ronda.</a></li>
                                 </ul>
+                                <p class="text-gray-700 dark:text-[#b3b2ab] mt-4">Masih bingung? kita ngobrol bareng sambil ngopi ☕ di pos ronda aja yuk!.</p>
                             </div>
                         </div>
 
