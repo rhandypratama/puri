@@ -59,7 +59,7 @@
                             </span>
                             <span>
                                 Baca
-                                <a href="{{ route('peraturan-kos') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] dark:text-[#FF4433] ml-1">
+                                <a href="{{ route('peraturan-kos') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">
                                     <span>Peraturan Kos dan Kontrakan</span>
                                     <svg
                                         width="10"
