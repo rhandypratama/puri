@@ -96,7 +96,12 @@
                                         <td class="px-2 py-1 border border-gray-400 bg-gray-50 dark:bg-transparent align-center whitespace-nowrap">{{ $row['nama'] }}</td>
                                         <td class="px-2 py-1 border border-gray-400 bg-gray-50 dark:bg-transparent align-center whitespace-nowrap">{{  $days[$row['jadwal']] }}</td>
                                         @foreach ($row['bulan'] as $data)
-                                            <td class="text-center py-1 border border-gray-400 {{ $data['S'] < 0 ? 'bg-red-100 text-red-700' : 'bg-gray-50 dark:bg-transparent' }} align-top whitespace-nowrap">W: {{ $data['W'] }}<br> H: {{ $data['H'] }}<br> S: {{ $data['S'] }}</td>
+                                            <td @class([
+                                                'text-center py-1 border border-gray-400 align-top whitespace-nowrap',
+                                                'bg-red-100 text-red-700' => $data['S'] < 0,
+                                                'bg-green-100 text-green-700' => $data['S'] > 0 && $data['W'] > 0,
+                                                'bg-gray-50 dark:bg-transparent' => $data['S'] == 0,
+                                            ])>W: {{ $data['W'] }}<br> H: {{ $data['H'] }}<br> S: {{ $data['S'] }}</td>
                                         @endforeach
                                     </tr>
                                 @endforeach

@@ -67,9 +67,9 @@
                         <div id="calendar"></div>
 
                         <!-- Spinner -->
-                        <div id="loading" class="hidden flex items-center justify-center my-4">
-                            <div class="w-6 h-6 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
-                            <span class="ml-2 text-gray-600 dark:text-gray-400 text-sm">Sedang memuat data ...</span>
+                        <div id="loading" class="flex items-center justify-center my-6 hidden">
+                            <div class="w-6 h-6 border-4 border-black dark:border-white border-t-transparent dark:border-t-transparent rounded-full animate-spin"></div>
+                            <!-- <span class="ml-2 text-gray-600 dark:text-gray-400 text-sm">Sedang memuat data ...</span> -->
                         </div>
 
                         <!-- Detail Absensi -->
