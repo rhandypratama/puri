@@ -264,6 +264,11 @@
             </main>
         </div>
     </body>
+    <style type="text/css">
+        .chat-footer {
+            display: none;
+        }
+    </style>
     <script>
         window.ChatWidgetConfig = {
             webhook: { 
@@ -272,13 +277,13 @@
             },
             branding: { 
                 logo: 'https://cdn-icons-png.freepik.com/512/2530/2530178.png', 
-                name: '', 
-                welcomeText: 'Halo 👋 ada yang bisa dibantu hari ini?', 
+                name: 'Kartika', 
+                welcomeText: 'Halo warga puri 👋 ada yang bisa dibantu hari ini?', 
                 responseTimeText: ''
             },
             style: { 
-                primaryColor: '#68c8d7',
-                secondaryColor: '#b18aaf',
+                primaryColor: '#80d3e0',
+                secondaryColor: '#545354',
                 backgroundColor: '#FDFDFC',
                 fontColor: '#1b1b18', 
                 position: 'right'
