@@ -265,5 +265,27 @@
         </div>
     </body>
     <script>
+        window.ChatWidgetConfig = {
+            webhook: { 
+                url: 'https://n8n.srv526869.hstgr.cloud/webhook/2d7378df-71cd-4c58-ad12-8643b5674fbf/chat', 
+                route: 'general'
+            },
+            branding: { 
+                logo: 'https://cdn-icons-png.freepik.com/512/2530/2530178.png', 
+                name: '', 
+                welcomeText: 'Halo 👋 ada yang bisa dibantu hari ini?', 
+                responseTimeText: ''
+            },
+            style: { 
+                primaryColor: '#68c8d7',
+                secondaryColor: '#b18aaf',
+                backgroundColor: '#FDFDFC',
+                fontColor: '#1b1b18', 
+                position: 'right'
+            },
+        };
+        const script = document.createElement('script');
+        script.src = "https://cdn.jsdelivr.net/gh/WayneSimpson/n8n-chatbot-template@ba944c3/chat-widget.js";
+        document.head.appendChild(script);
     </script>
 </html>
