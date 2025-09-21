@@ -64,6 +64,21 @@
                         </ul>
                     </div>
 
+                    <div class="my-4 flex flex-col space-x-6 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 bg-yellow-600 border border-gray-400"></div>
+                            <span>Rekap & penagihan denda</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 bg-red-200 border border-gray-400"></div>
+                            <span>Masih ada kekurangan absensi</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 bg-green-200 border border-gray-400"></div>
+                            <span>Nominasi sang penjaga malam</span>
+                        </div>
+                    </div>
+
                     <div class="overflow-x-auto max-h-200">
                         <table class="table-auto rounded-md border-gray-400">
                             <thead class="text-white">
@@ -72,7 +87,14 @@
                                     <th class="sticky top-0 z-30 px-2 py-1 bg-[#393939] border border-gray-300 text-start whitespace-nowrap">Nama Warga</th>
                                     <th class="sticky top-0 z-30 px-2 py-1 bg-[#393939] border border-gray-300 text-start">Jadwal</th>
                                     @for ($month = 1; $month <= 12; $month++)
-                                        <th class="sticky top-0 z-30 px-2 py-1 bg-[#393939] border border-gray-300 whitespace-nowrap">{{ \Carbon\Carbon::create()->month($month)->translatedFormat('M') }}</th>
+                                        <th @class([
+                                            'sticky top-0 z-30 px-2 py-1 border border-gray-300 whitespace-nowrap',
+                                            'bg-yellow-600' => in_array($month, [2, 4, 6, 8, 10, 12]),
+                                            'bg-[#393939]' => !in_array($month, [2, 4, 6, 8, 10, 12]),
+                                        ])>
+                                            {{ \Carbon\Carbon::create()->month($month)->translatedFormat('M') }}
+                                        </th>
+                                        <!-- <th class="sticky top-0 z-30 px-2 py-1 bg-[#393939] border border-gray-300 whitespace-nowrap">{{ \Carbon\Carbon::create()->month($month)->translatedFormat('M') }}</th> -->
                                     @endfor
                                 </tr>
                             </thead>
