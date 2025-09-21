@@ -276,7 +276,7 @@
                 route: 'general'
             },
             branding: { 
-                logo: 'https://cdn-icons-png.freepik.com/512/2530/2530178.png', 
+                logo: 'https://icon0.com/free/static2/preview2/stock-photo-teen-girl-woman-avatar-people-icon-character-cartoon-33284.jpg', 
                 name: 'Kartika', 
                 welcomeText: 'Halo warga puri 👋 ada yang bisa dibantu hari ini?', 
                 responseTimeText: ''
