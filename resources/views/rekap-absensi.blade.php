@@ -67,7 +67,7 @@
                     <div class="my-4 flex flex-col space-x-6 text-sm">
                         <div class="flex items-center space-x-2">
                             <div class="w-4 h-4 bg-yellow-600 border border-gray-400"></div>
-                            <span>Rekap & penagihan denda</span>
+                            <span>Bulan penagihan denda</span>
                         </div>
                         <div class="flex items-center space-x-2">
                             <div class="w-4 h-4 bg-red-200 border border-gray-400"></div>

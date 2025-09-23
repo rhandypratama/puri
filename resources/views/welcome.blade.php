@@ -48,7 +48,7 @@
             @endif
         </header>
         <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-            <main class="flex max-w-full w-full flex-col-reverse lg:max-w-full lg:flex-row">
+            <main class="flex max-w-full w-full flex-col-reverse lg:max-w-3xl lg:flex-row">
                 <!-- <div class="text-[13px] leading-[20px] flex-1 p-6 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_1px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_-1px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-bl-none rounded-br-none lg:rounded-tl-none lg:rounded-br-none">
                     <h1 class="mb-1 font-bold">Informasi Kas dan Iuran Bulanan Warga</h1>
                     <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">Laravel has an incredibly rich ecosystem. We suggest starting with the following.</p>
