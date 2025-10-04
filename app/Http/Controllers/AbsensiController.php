@@ -58,6 +58,12 @@ class AbsensiController extends Controller
         return view('welcome', compact('wargas'));
     }
 
+    public function createManual()
+    {
+        $wargas = Warga::orderBy('blok')->get();
+        return view('absensi-manual', compact('wargas'));
+    }
+
     public function store(Request $request)
     {
         $request->validate(
@@ -132,6 +138,59 @@ class AbsensiController extends Controller
 
         $absensi->wargas()->attach($request->warga_ids);
         // return redirect()->back()->with('success', 'Absensi berhasil disimpan.');
+        return redirect()->back()->with(
+            'success',
+            '✅ Absensi berhasil disimpan. <a href="' . route('absensi.index') . '" class="underline">Lihat siapa saja yang absen hari ini</a>'
+        );
+    }
+
+    public function storeManual(Request $request)
+    {
+        $request->validate(
+            [
+                'warga_ids'   => 'required|array|min:1',
+                'keterangan'  => 'nullable|string',
+            ],
+            [
+                'warga_ids.required' => '🚨 Wajib mengisi minimal satu warga untuk absensi.',
+                'warga_ids.array'    => 'Format data warga tidak valid.',
+                'warga_ids.min'      => 'Minimal pilih satu warga untuk absensi.',
+                'keterangan.string'  => 'Keterangan harus berupa teks.',
+            ]
+        );
+
+        // Cek apakah ada warga yang sudah absen di tanggal yang dipilih
+        $alreadyAbsent = Absensi::whereDate('tgl_absensi', $request->tgl_absensi)
+            ->whereHas('wargas', function ($q) use ($request) {
+                $q->whereIn('warga_id', $request->warga_ids);
+            })
+            ->with('wargas:id,blok,nama') // opsional untuk ambil nama warga
+            ->get();
+
+        if ($alreadyAbsent->isNotEmpty()) {
+            $names = $alreadyAbsent
+                ->pluck('wargas')
+                ->flatten()
+                ->map(function ($warga) {
+                    return "({$warga->blok}) {$warga->nama}";
+                })
+                ->unique()
+                ->join(', ');
+            
+            return redirect()->back()->withErrors([
+                'warga_ids' => "🚨 Warga berikut sudah melakukan absensi ronda di tanggal ini :\n {$names}"
+                // 'warga_ids' => $names
+            ]);
+        }
+
+        $tglAbsensi = Carbon::parse($request->tgl_absensi . ' 22:15:00');
+        $absensi = Absensi::create([
+            'tgl_absensi' => $tglAbsensi,
+            'hari' => $tglAbsensi->format('l'),
+            'keterangan' => $request->keterangan,
+        ]);
+
+        $absensi->wargas()->attach($request->warga_ids);
         return redirect()->back()->with(
             'success',
             '✅ Absensi berhasil disimpan. <a href="' . route('absensi.index') . '" class="underline">Lihat siapa saja yang absen hari ini</a>'
