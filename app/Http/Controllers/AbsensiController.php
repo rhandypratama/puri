@@ -277,6 +277,75 @@ class AbsensiController extends Controller
         return view('rekap-absensi', compact('rekap', 'year'));
     }
 
+    public function nominasiAbsensi(Request $request)
+    {
+        $month = $request->month ?? now()->month;
+        $year = $request->year ?? now()->year;
+        
+
+        // $hadirData = DB::table('absensi_warga')
+        //     ->join('absensis', 'absensi_warga.absensi_id', '=', 'absensis.id')
+        //     ->join('wargas', 'absensi_warga.warga_id', '=', 'wargas.id')
+        //     ->select(
+        //         'absensi_warga.warga_id',
+        //         'wargas.blok',
+        //         'wargas.nama',
+        //         'wargas.jadwal_ronda',
+        //         DB::raw('MONTH(absensis.tgl_absensi) as bulan'),
+        //         DB::raw('COUNT(*) as total_hadir')
+        //     )
+        //     ->whereMonth('absensis.tgl_absensi', $month)
+        //     ->whereYear('absensis.tgl_absensi', $year)
+        //     ->groupBy('absensi_warga.warga_id', 'bulan')
+        //     ->groupBy('warga_id')
+        //     ->orderBy('total_hadir', 'desc')
+        //     ->get();
+
+        $hadirData = DB::table('wargas')
+            ->leftJoin('absensi_warga', 'absensi_warga.warga_id', '=', 'wargas.id')
+            ->leftJoin('absensis', function ($join) use ($month, $year) {
+                $join->on('absensis.id', '=', 'absensi_warga.absensi_id')
+                    ->whereMonth('absensis.tgl_absensi', $month)
+                    ->whereYear('absensis.tgl_absensi', $year);
+            })
+            ->select(
+                'wargas.id as warga_id',
+                'wargas.blok',
+                'wargas.nama',
+                'wargas.jadwal_ronda',
+                DB::raw('COUNT(absensis.id) as total_hadir')
+            )
+            ->whereNotNull('wargas.jadwal_ronda')
+            ->groupBy('wargas.id', 'wargas.blok', 'wargas.nama', 'wargas.jadwal_ronda')
+            ->orderBy('total_hadir', 'desc')
+            ->get();
+
+        // ✅ Tambahkan kolom baru 'total_jadwal' hasil perhitungan custom function
+        $hadirData = $hadirData->map(function ($item) use ($month, $year) {
+            $item->total_kewajiban = $this->countJadwalInMonth($item->jadwal_ronda, $month, $year);
+            $item->selisih = $item->total_hadir - $item->total_kewajiban;
+            return $item;
+        });
+
+        $top4 = $hadirData
+            ->filter(fn($item) => $item->total_kewajiban > 0 && $item->total_hadir > 0)
+            ->sortByDesc('total_hadir')
+            ->values();
+        
+        // ✅ Filter: hanya warga yang selisih < 0 (masih kurang hadir)
+        // ✅ Urutkan dari selisih terkecil (paling banyak kekurangan)
+        $hadirKurang = $hadirData
+            ->filter(fn($item) => $item->selisih < 0)
+            ->sortBy('selisih')
+            ->values(); // reset index
+
+        // dd($hadirData);
+        // dd($hadirKurang);
+        // dd($top4);
+
+        return view('nominasi-absensi', compact('hadirData', 'hadirKurang', 'top4'));
+    }
+
     public function getByDate($date)
     {
         // Ambil absensi + relasi warga

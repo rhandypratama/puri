@@ -11,6 +11,7 @@ Route::get('/absensi', [AbsensiController::class, 'create'])->name('absensi.crea
 Route::get('/absensi-manual', [AbsensiController::class, 'createManual'])->name('absensi.create.manual');
 Route::get('/jadwal-ronda', [AbsensiController::class, 'jadwalRonda'])->name('absensi.jadwal-ronda');
 Route::get('/rekap-absensi', [AbsensiController::class, 'rekapAbsensi'])->name('absensi.rekap-absensi');
+Route::get('/nominasi-absensi', [AbsensiController::class, 'nominasiAbsensi'])->name('absensi.nominasi-absensi');
 Route::get('/log-absensi', [AbsensiController::class, 'logAbsensi'])->name('absensi.log');
 Route::get('/absensi/by-date/{date}', [AbsensiController::class, 'getByDate']);
 Route::get('/syarat-ketentuan', [AbsensiController::class, 'syaratKetentuan'])->name('syarat-ketentuan');
