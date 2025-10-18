@@ -126,12 +126,12 @@
                 <div class="container mx-auto px-4">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center gap-2 text-white">
-                        <span class="material-symbols-outlined text-neon-primary text-2xl">home</span>
-                        <h1 class="text-lg text-neon-primary">Puri Kartika</h1>
+                        <span class="material-symbols-outlined text-neon-red text-2xl">home</span>
+                        <h1 class="text-lg">Puri Kartika</h1>
                     </div>
 
-                    <button id="menu-toggle" class="md:hidden text-slate-400 hover:text-neon-blue p-2">
-                        <span class="material-symbols-outlined text-3xl">menu</span>
+                    <button id="menu-toggle" class="md:hidden p-2 transition-transform duration-300">
+                        <span id="menu-icon" class="material-symbols-outlined text-3xl transition-all duration-300 ease-in-out">menu</span>
                     </button>
 
                     <!-- Menu Mobile -->
@@ -142,15 +142,16 @@
                         <a href="{{ route('absensi.rekap-absensi') }}" class="block hover:text-neon-blue transition">Laporan</a>
                     </div> -->
 
-                    <nav id="nav-menu" class="hidden md:flex items-end gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-4 md:pb-0 flex-col md:flex-row text-center">
-                        <a class="block md:hidden text-sm text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
-                        <a class="text-sm text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi</a>
-                        <a class="text-sm text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
-                        <a class="block md:hidden text-sm text-slate-400 hover:text-neon-blue transition-colors" href="#">Jadwal Ronda</a>
-                        <a class="text-sm text-slate-400 hover:text-neon-blue transition-colors" href="#">Syarat dan Ketentuan Ronda</a>
-                        <a class="block md:hidden text-sm text-slate-400 hover:text-neon-blue transition-colors" href="#">Peraturan Kos & Kontrakan</a>
-                        <a class="text-sm text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.rekap-absensi') }}">Rekap Absensi Tahunan</a>
-                        <a class="block md:hidden text-sm text-neon-blue" href="{{ route('absensi.nominasi-absensi') }}">Rekap Absensi Bulanan</a>
+                    <nav id="nav-menu" class="hidden md:flex items-end gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
+                        <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
+                        <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi</a>
+                        <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
+                        <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Jadwal Ronda</a>
+                        <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
+                        <a class="block md:hidden text-neon-blue" href="{{ route('absensi.nominasi-absensi') }}">Rekap Ronda Bulanan</a>
+                        <a class="text-slate-400 hover:text-neon-blue transition-colors" href="#">Syarat dan Ketentuan Ronda</a>
+                        <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Peraturan Kos & Kontrakan</a>
+                        <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Kas & Iuran Bulanan</a>
                     </nav>
                 </div>
                 </div>
@@ -362,18 +363,25 @@
                     }, index * 100);
                 });
 
-                // Toggle mobile menu
-                // document.getElementById('menu-toggle').addEventListener('click', function () {
-                //     document.getElementById('mobileMenu').classList.toggle('hidden');
-                // });
-                
-                // menu mobile toggle
-                const toggle = document.getElementById("menu-toggle");
-                const nav = document.getElementById("nav-menu");
-                toggle.addEventListener("click", () => {
-                    nav.classList.toggle("hidden");
-                    nav.classList.toggle("flex");
-                });
+                const toggleBtn = document.getElementById('menu-toggle')
+                const icon = document.getElementById('menu-icon')
+                const nav = document.getElementById("nav-menu")
+
+                toggleBtn.addEventListener('click', () => {
+                    nav.classList.toggle("hidden")
+                    nav.classList.toggle("flex")
+
+                    // Tambahkan animasi scale untuk efek "klik"
+                    icon.classList.add('scale-75')
+                    setTimeout(() => icon.classList.remove('scale-75'), 150)
+
+                    // Toggle antara "menu" dan "close"
+                    if (icon.textContent.trim() === 'menu') {
+                        icon.textContent = 'close'
+                    } else {
+                        icon.textContent = 'menu'
+                    }
+                })
             });
         </script>
     </body>
