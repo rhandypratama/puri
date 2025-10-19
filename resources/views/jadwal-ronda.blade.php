@@ -1,109 +1,252 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8" />
+        <title>Puri Kartika</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link crossorigin href="https://fonts.gstatic.com/" rel="preconnect" />
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                extend: {
+                    colors: {
+                        primary: "#00E0FF",
+                            "background-light": "#f7f7f7",
+                            // "background-dark": "#092854",
+                            "background-dark": "#2d0e49",
+                        neon: {
+                            blue: "#00E0FF",
+                            purple: "#FF00E0",
+                            green: "#00FF7F",
+                            red: "#fd75d3",
+                            primary: "#a199c5",
+                        },
+                    },
+                    fontFamily: {
+                        display: "Space Grotesk"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        lg: "1rem",
+                        xl: "1.5rem",
+                        full: "9999px",
+                    },
+                },
+                },
+            };
+        </script>
+        <style type="text/tailwindcss">
+            @keyframes neon-pulse-blue {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-blue),
+                    0 0 10px var(--tw-colors-neon-blue),
+                    0 0 20px var(--tw-colors-neon-blue);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-blue),
+                    0 0 20px var(--tw-colors-neon-blue),
+                    0 0 40px var(--tw-colors-neon-blue);
+                }
+            }
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+            @keyframes neon-pulse-green {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-green),
+                    0 0 10px var(--tw-colors-neon-green),
+                    0 0 20px var(--tw-colors-neon-green);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-green),
+                    0 0 20px var(--tw-colors-neon-green),
+                    0 0 40px var(--tw-colors-neon-green);
+                }
+            }
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-        
-        <!-- Lucide CDN -->
-        <script src="https://unpkg.com/lucide@latest"></script>
+            @keyframes neon-pulse-purple {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-purple),
+                    0 0 10px var(--tw-colors-neon-purple),
+                    0 0 20px var(--tw-colors-neon-purple);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-purple),
+                    0 0 20px var(--tw-colors-neon-purple),
+                    0 0 40px var(--tw-colors-neon-purple);
+                }
+            }
 
-        <!-- di dalam <head> -->
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-0 lg:p-0 items-center lg:justify-center min-h-screen flex-col">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
-            @if (Route::has('login'))
-                <nav class="flex items-center justify-end gap-4">
-                    @auth
-                        <a
-                            href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
-                        >
-                            Dashboard
-                        </a>
-                    @else
-                        <a
-                            href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
-                        >
-                            Log in
-                        </a>
+            @keyframes activity-pulse {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
+            }
 
-                        @if (Route::has('register'))
-                            <a
-                                href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                                Register
-                            </a>
-                        @endif
-                    @endauth
-                </nav>
-            @endif
-        </header>
-        <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-            <main class="flex lg:max-w-6xl max-w-full w-full flex-col-reverse lg:flex-row">
+            .neon-glow-blue {
+                animation: neon-pulse-blue 2s infinite alternate;
+            }
+            .neon-glow-green {
+                animation: neon-pulse-green 2s infinite alternate;
+            }
+            .neon-glow-purple {
+                animation: neon-pulse-purple 2s infinite alternate;
+            }
+
+            .activity-line {
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    rgba(0, 224, 255, 0.2) 20%,
+                    transparent 50%,
+                    rgba(0, 224, 255, 0.2) 80%,
+                    transparent 100%
+                );
+                background-size: 200% 100%;
+                animation: activity-pulse 7s linear infinite;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+            .activity-line.active {
+                opacity: 1;
+            }
+            .neon-glow {
+                box-shadow: 0 0 0px #a78bfa, 0 0 5px #a78bfa, 0 0 15px #a78bfa, 0 0 20px #a78bfa, 0 0 25px #a78bfa;
+            }
+            .neon-circle {
+                /* warna dasar ungu tua */
+                background-color: #2d0e49;
                 
-                <div class="text-[13px] leading-[20px] flex-1 p-4 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
-                    <div class="flex items-center mb-4 md:w-full">
-                        <span class="font-normal pe-4" onclick="window.location='{{ route('absensi.index') }}'"><i data-lucide="arrow-left"></i></span>
-                        <h1 class="font-bold text-lg">Jadwal Ronda Warga</h1>
-                        <!-- <span id="realtime-clock1" class="font-normal ps-2">23d3</span> -->
+                /* gradasi lembut — ungu di tengah, pink samar di pinggir */
+                background-image:
+                    radial-gradient(
+                        circle at center,
+                        rgba(45, 14, 73, 1) 0%,
+                        rgba(68, 26, 98, 0.3) 35%,
+                        rgba(123, 54, 126, 0.4) 60%,
+                        /* rgba(253, 117, 211, 0.25) 85%, */
+                        rgba(253, 117, 211, 0.03) 100%
+                    );
+
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+
+                /* lembutkan cahaya */
+                box-shadow:
+                    0 0 10px rgba(253, 117, 211, 0.1),
+                    0 0 25px rgba(45, 14, 73, 0.25);
+
+                transition: transform 0.6s ease, box-shadow 0.6s ease;
+            }
+        </style>
+    </head>
+
+    <body class="neon-circle text-white font-display">
+        <div class="flex flex-col min-h-screen">
+            <!-- Header -->
+            <header class="bg-background-dark/50 backdrop-blur-sm sticky top-0 z-50 border-b border-neon-blue/10">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center gap-2 text-white">
+                            <span class="material-symbols-outlined text-neon-red text-2xl">home</span>
+                            <h1 class="text-lg">Puri Kartika</h1>
+                        </div>
+
+                        <button id="menu-toggle" class="md:hidden p-2 transition-transform duration-300">
+                            <span id="menu-icon" class="material-symbols-outlined text-3xl transition-all duration-300 ease-in-out">menu</span>
+                        </button>
+
+                        <nav id="nav-menu" class="hidden md:flex items-end gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
+                            <a class="hover:text-neon-blue text-neon-blue" href="{{ route('absensi.jadwal-ronda') }}">Jadwal Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.nominasi-absensi') }}">Rekap Ronda Bulanan</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="#">Syarat dan Ketentuan Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Peraturan Kos & Kontrakan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Kas & Iuran Bulanan</a>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main -->
+            <main class="flex-grow container mx-auto px-4 py-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-10 mt-4 px-8">
+                        <h2 class="text-2xl md:text-4xl font-normal">Jadwal Ronda Warga 🔥</h2>
+                        <!-- <p class="mt-2 text-slate-400 text-sm md:text-base">Monitoring key personnel and real-time activity stream.</p> -->
                     </div>
 
-                    @php
-                        // Mapping English -> Indonesia
-                        $days = [
-                            'sunday'    => 'Minggu',
-                            'monday'    => 'Senin',
-                            'tuesday'   => 'Selasa',
-                            'wednesday' => 'Rabu',
-                            'thursday'  => 'Kamis',
-                            'friday'    => 'Jumat',
-                            'saturday'  => 'Sabtu',
-                        ];
-                    @endphp
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full rounded-md overflow-hidden border border-gray-300">
-                            <thead class="bg-black dark:bg-[#303738] text-white">
-                                <tr>
-                                    @foreach ($days as $hari)
-                                        <th class="px-2 py-1 border border-gray-300 whitespace-nowrap">{{ $hari }}</th>
+                    <!-- Table -->
+                    <div class="bg-background-dark neon-glow rounded-lg shadow-lg overflow-hidden m-2 mb-8">
+                        @php
+                            // Mapping English -> Indonesia
+                            $days = [
+                                'sunday'    => 'Minggu',
+                                'monday'    => 'Senin',
+                                'tuesday'   => 'Selasa',
+                                'wednesday' => 'Rabu',
+                                'thursday'  => 'Kamis',
+                                'friday'    => 'Jumat',
+                                'saturday'  => 'Sabtu',
+                            ];
+                        @endphp
+                        <div class="overflow-x-auto max-h-[80vh]">
+                            @foreach ($days as $eng => $hari)
+                                <div class="flex items-center bg-neon-blue/20 activity-line">
+                                    <h3 class="text-xl md:text-lg font-medium px-4 py-2">
+                                        {{ $hari }}
+                                    </h3>
+                                </div>
+                                @if(isset($wargas[$eng]))
+                                    @foreach($wargas[$eng] as $warga)
+                                        <div class="flex items-center px-8 my-3">({{ $warga->blok }}) {{ $warga->nama }}</div>
                                     @endforeach
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    @foreach ($days as $eng => $indo)
-                                        <td class="px-4 py-2 border border-gray-300 bg-gray-50 dark:text-black align-top whitespace-nowrap">
-                                            @if(isset($wargas[$eng]))
-                                                @foreach($wargas[$eng] as $warga)
-                                                    <div>({{ $warga->blok }}) {{ $warga->nama }}</div>
-                                                @endforeach
-                                            @else
-                                                <span class="text-muted">-</span>
-                                            @endif
-                                        </td>
-                                    @endforeach
-                                </tr>
-                            </tbody>
-                        </table>
+                                @else
+                                    <span class="text-muted">-</span>
+                                @endif
+                            @endforeach
+                        </div>
                         
                     </div>
+
                 </div>
             </main>
         </div>
 
-        @if (Route::has('login'))
-            <div class="h-14.5 hidden lg:block"></div>
-        @endif
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const activityRows = document.querySelectorAll(".activity-line");
+                activityRows.forEach((row, index) => {
+                    setTimeout(() => {
+                        row.classList.add("active");
+                    }, index * 100);
+                });
+                
+                const toggleBtn = document.getElementById('menu-toggle')
+                const icon = document.getElementById('menu-icon')
+                const nav = document.getElementById("nav-menu")
+
+                toggleBtn.addEventListener('click', () => {
+                    nav.classList.toggle("hidden")
+                    nav.classList.toggle("flex")
+
+                    // Tambahkan animasi scale untuk efek "klik"
+                    icon.classList.add('scale-75')
+                    setTimeout(() => icon.classList.remove('scale-75'), 150)
+
+                    // Toggle antara "menu" dan "close"
+                    if (icon.textContent.trim() === 'menu') {
+                        icon.textContent = 'close'
+                    } else {
+                        icon.textContent = 'menu'
+                    }
+                })
+            });
+        </script>
     </body>
-    <script>
-        lucide.createIcons();
-    </script>
 </html>
