@@ -1,204 +1,336 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8" />
+        <title>Puri Kartika</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link crossorigin href="https://fonts.gstatic.com/" rel="preconnect" />
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                extend: {
+                    colors: {
+                        primary: "#00E0FF",
+                            "background-light": "#f7f7f7",
+                            // "background-dark": "#092854",
+                            "background-dark": "#2d0e49",
+                        neon: {
+                            blue: "#00E0FF",
+                            purple: "#FF00E0",
+                            green: "#00FF7F",
+                            red: "#fd75d3",
+                            primary: "#a199c5",
+                        },
+                    },
+                    fontFamily: {
+                        display: "Space Grotesk"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        lg: "1rem",
+                        xl: "1.5rem",
+                        full: "9999px",
+                    },
+                },
+                },
+            };
+        </script>
+        <style type="text/tailwindcss">
+            @keyframes spinSmooth {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            .custom-spin {
+                animation: spinSmooth 0.8s linear infinite;
+            }
+            @keyframes neon-pulse-blue {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-blue),
+                    0 0 10px var(--tw-colors-neon-blue),
+                    0 0 20px var(--tw-colors-neon-blue);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-blue),
+                    0 0 20px var(--tw-colors-neon-blue),
+                    0 0 40px var(--tw-colors-neon-blue);
+                }
+            }
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+            @keyframes neon-pulse-green {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-green),
+                    0 0 10px var(--tw-colors-neon-green),
+                    0 0 20px var(--tw-colors-neon-green);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-green),
+                    0 0 20px var(--tw-colors-neon-green),
+                    0 0 40px var(--tw-colors-neon-green);
+                }
+            }
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+            @keyframes neon-pulse-purple {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-purple),
+                    0 0 10px var(--tw-colors-neon-purple),
+                    0 0 20px var(--tw-colors-neon-purple);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-purple),
+                    0 0 20px var(--tw-colors-neon-purple),
+                    0 0 40px var(--tw-colors-neon-purple);
+                }
+            }
 
-        <style>
+            @keyframes activity-pulse {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
+            }
+
+            .neon-glow-blue {
+                animation: neon-pulse-blue 2s infinite alternate;
+            }
+            .neon-glow-green {
+                animation: neon-pulse-green 2s infinite alternate;
+            }
+            .neon-glow-purple {
+                animation: neon-pulse-purple 2s infinite alternate;
+            }
+
+            .activity-line {
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    rgba(0, 224, 255, 0.2) 20%,
+                    transparent 50%,
+                    rgba(0, 224, 255, 0.2) 80%,
+                    transparent 100%
+                );
+                background-size: 200% 100%;
+                animation: activity-pulse 7s linear infinite;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+            .activity-line.active {
+                opacity: 1;
+            }
+            .neon-glow {
+                box-shadow: 0 0 0px #a78bfa, 0 0 5px #a78bfa, 0 0 15px #a78bfa, 0 0 20px #a78bfa, 0 0 25px #a78bfa;
+            }
+            .fc-toolbar-title {
+                font-size: 1.15rem !important;
+                font-weight: normal;
+            }
             .fc-daygrid-day.selected-date {
                 background-color: #96fbff1a !important; /* kuning soft */
                 border: 2px solid #68cddc !important; /* orange border */
             }
-        </style>
-        
-        <!-- Lucide CDN -->
-        <script src="https://unpkg.com/lucide@latest"></script>
-
-        <!-- di dalam <head> -->
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-0 lg:p-0 items-center lg:justify-center min-h-screen flex-col">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
-            @if (Route::has('login'))
-                <nav class="flex items-center justify-end gap-4">
-                    @auth
-                        <a
-                            href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
-                        >
-                            Dashboard
-                        </a>
-                    @else
-                        <a
-                            href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
-                        >
-                            Log in
-                        </a>
-
-                        @if (Route::has('register'))
-                            <a
-                                href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                                Register
-                            </a>
-                        @endif
-                    @endauth
-                </nav>
-            @endif
-        </header>
-        <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-            <main class="flex lg:max-w-3xl max-w-full w-full flex-col-reverse lg:flex-row">
+            th, .fc-theme-standard .fc-scrollgrid, .fc-theme-standard td, .fc-theme-standard th {
+                border: 1px solid #5f4576 !important; /* orange border */
+            }
+            .neon-circle {
+                /* warna dasar ungu tua */
+                background-color: #2d0e49;
                 
-                <div class="text-[13px] leading-[20px] flex-1 p-4 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
-                    <div class="flex items-center mb-4 md:w-full">
-                        <span class="font-normal pe-4" onclick="window.location='{{ route('absensi.index') }}'"><i data-lucide="arrow-left"></i></span>
-                        <h1 class="font-bold text-lg">Daftar Hadir Ronda</h1>
-                    </div>
+                /* gradasi lembut — ungu di tengah, pink samar di pinggir */
+                background-image:
+                    radial-gradient(
+                        circle at center,
+                        rgba(45, 14, 73, 1) 5%,
+                        rgba(68, 26, 98, 0.9) 35%,
+                        /* rgba(123, 54, 126, 0.6) 60%, */
+                        /* rgba(253, 117, 211, 0.25) 85%, */
+                        rgba(253, 117, 211, 0.1) 100%
+                    );
 
-                    <div class="max-w-6xl mx-auto p-0">
-                        <!-- Calendar -->
-                        <div id="calendar"></div>
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
 
-                        <!-- Spinner -->
-                        <div id="loading" class="flex items-center justify-center my-6 hidden">
-                            <div class="w-6 h-6 border-4 border-black dark:border-white border-t-transparent dark:border-t-transparent rounded-full animate-spin"></div>
-                            <!-- <span class="ml-2 text-gray-600 dark:text-gray-400 text-sm">Sedang memuat data ...</span> -->
+                /* lembutkan cahaya */
+                box-shadow:
+                    0 0 10px rgba(253, 117, 211, 0.1),
+                    0 0 25px rgba(45, 14, 73, 0.25);
+
+                transition: transform 0.6s ease, box-shadow 0.6s ease;
+            }
+        </style>
+    </head>
+
+    <body class="neon-circle text-white font-display">
+        <div class="flex flex-col min-h-screen">
+            <!-- Header -->
+            <header class="bg-background-dark/50 backdrop-blur-sm sticky top-0 z-50 border-b border-neon-blue/10">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center gap-2 text-white">
+                            <span class="material-symbols-outlined text-neon-red text-2xl">home</span>
+                            <h1 class="text-lg">Puri Kartika</h1>
                         </div>
 
-                        <!-- Detail Absensi -->
-                        <div id="absensiDetail" class="mt-6">
-                            <h2 class="mb-2 font-semibold text-[16px]"><span id="selectedDate"></span></h2>
-                            <!-- <ul id="absensiList" class="list-disc list-inside text-gray-700"></ul> -->
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full rounded-lg text-sm text-left border-gray-300 overflow-hidden">
-                                    <thead class="bg-gray-100 dark:bg-gray-700">
-                                        <tr>
-                                            <th class="px-2 py-1 border-gray-300">Blok</th>
-                                            <th class="px-2 py-1 border-gray-300">Nama</th>
-                                            <th class="px-2 py-1 border-gray-300">Keterangan</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="absensiList">
-                                        <tr>
-                                            <td colspan="3" class="px-2 py-2 text-center border-gray-300">
-                                                Pilih tanggal pada kalender untuk melihat detail absensi
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <button id="menu-toggle" class="md:hidden p-2 transition-transform duration-300">
+                            <span id="menu-icon" class="material-symbols-outlined text-3xl transition-all duration-300 ease-in-out">menu</span>
+                        </button>
+
+                        <nav id="nav-menu" class="hidden md:flex items-end gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi</a>
+                            <a class="text-neon-blue" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.jadwal-ronda') }}">Jadwal Ronda</a>
+                            <a class="hover:text-neon-blue text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.nominasi-absensi') }}">Rekap Ronda Bulanan</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="#">Syarat dan Ketentuan Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Peraturan Kos & Kontrakan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Kas & Iuran Bulanan</a>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main -->
+            <main class="flex-grow container mx-auto px-6 py-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center my-4 mb-10 px-8">
+                        <h2 class="text-2xl md:text-4xl font-light">Daftar hadir ronda 🔥</h2>
+                        <!-- <p class="mt-2 text-sm">Monitoring key personnel and real-time activity stream.</p> -->
+                    </div>
+
+                    <!-- Calendar -->
+                    <div id="calendar" class="bg-background-dark neon-glow rounded-md p-4"></div>
+
+                    <div id="loading" class="flex items-center justify-center my-6 hidden">
+                        <div class="w-6 h-6 border-4 border-neon-blue/40 border-t-neon-blue rounded-full custom-spin"></div>
+                    </div>
+
+                    <!-- Detail Absensi -->
+                    <!-- <div id="absensiDetail" class="mt-6"> -->
+                    <div id="absensiDetail" class="bg-background-dark neon-glow rounded-md overflow-hidden my-8 activity-line">
+                        <h2 class="px-5 py-2 font-normal text-sm"><span id="selectedDate"></span></h2>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full text-sm text-center overflow-hidden">
+                                <thead>
+                                    <tr>
+                                        <th class="px-2 py-2 font-normal border border-neon-blue/30">Blok</th>
+                                        <th class="px-2 py-2 text-start font-normal border border-neon-blue/30">Nama Warga</th>
+                                        <th class="px-2 py-2 text-start font-normal border border-neon-blue/30">Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="absensiList">
+                                    <tr>
+                                        <td colspan="3" class="px-2 py-3 text-center border border-neon-blue/30 text-xs">
+                                            <span class="text-slate-400">Pilih tanggal pada kalender untuk melihat detail absensi</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    
+
                 </div>
             </main>
         </div>
 
-        @if (Route::has('login'))
-            <div class="h-14.5 hidden lg:block"></div>
-        @endif
-    </body>
-    <!-- FullCalendar -->
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+        <!-- FullCalendar -->
+        <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 
-    <script>
-        lucide.createIcons();
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            let selectedCell = null;
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                dateClick: function(info) {
-                    // fetch(`/absensi/by-date/${info.dateStr}`)
-                    //     .then(res => res.json())
-                    //     .then(data => {
-                    //         let list = document.getElementById('absensiList');
-                    //         list.innerHTML = '';
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const activityRows = document.querySelectorAll(".activity-line");
+                activityRows.forEach((row, index) => {
+                    setTimeout(() => {
+                        row.classList.add("active");
+                    }, index * 100);
+                });
+                
+                const toggleBtn = document.getElementById('menu-toggle')
+                const icon = document.getElementById('menu-icon')
+                const nav = document.getElementById("nav-menu")
 
-                    //         document.getElementById('selectedDate').textContent = `(${info.dateStr})`;
+                toggleBtn.addEventListener('click', () => {
+                    nav.classList.toggle("hidden")
+                    nav.classList.toggle("flex")
 
-                    //         if (data.length === 0) {
-                    //             list.innerHTML = '<li class="list-none text-red-500">Tidak ada absensi ronda di tanggal ini</li>';
-                    //         } else {
-                    //             data.forEach(absensi => {
-                    //                 absensi.warga.forEach(nama => {
-                    //                     let li = document.createElement('li');
-                    //                     li.textContent = nama;
-                    //                     list.appendChild(li);
-                    //                 });
-                    //             });
-                    //         }
+                    // Tambahkan animasi scale untuk efek "klik"
+                    icon.classList.add('scale-75')
+                    setTimeout(() => icon.classList.remove('scale-75'), 150)
 
-                    //         document.getElementById('absensiDetail').classList.remove('hidden');
-                    //     })
-                    //     .catch(err => console.error(err));
-
-
-                    // Hapus highlight sebelumnya
-                    if (selectedCell) {
-                        selectedCell.classList.remove('selected-date');
+                    // Toggle antara "menu" dan "close"
+                    if (icon.textContent.trim() === 'menu') {
+                        icon.textContent = 'close'
+                    } else {
+                        icon.textContent = 'menu'
                     }
+                })
 
-                    // Tambah highlight di cell baru
-                    selectedCell = info.dayEl;
-                    selectedCell.classList.add('selected-date');
-                    const date = info.dateStr;
-                    
-                    const loading = document.getElementById('loading');
-                    // tampilkan spinner
-                    loading.classList.remove('hidden');
+                var calendarEl = document.getElementById('calendar');
+                let selectedCell = null;
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    dateClick: function(info) {
+                        
+                        // Hapus highlight sebelumnya
+                        if (selectedCell) {
+                            selectedCell.classList.remove('selected-date');
+                        }
 
-                    fetch(`/absensi/by-date/${date}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            // sembunyikan spinner
-                            loading.classList.add('hidden');
+                        // Tambah highlight di cell baru
+                        selectedCell = info.dayEl;
+                        selectedCell.classList.add('selected-date');
+                        const date = info.dateStr;
+                        
+                        const loading = document.getElementById('loading');
+                        // tampilkan spinner
+                        loading.classList.remove('hidden');
 
-                            const options = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
-                            const formattedDate = new Intl.DateTimeFormat('id-ID', options).format(new Date(date));
+                        fetch(`/absensi/by-date/${date}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                // sembunyikan spinner
+                                loading.classList.add('hidden');
 
-                            let count = 0;
-                            data.forEach(absensi => count += absensi.warga.length);
+                                const options = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
+                                const formattedDate = new Intl.DateTimeFormat('id-ID', options).format(new Date(date));
 
-                            document.getElementById('selectedDate').textContent = `${formattedDate} (${count} Orang)`;
+                                let count = 0;
+                                data.forEach(absensi => count += absensi.warga.length);
 
-                            const tbody = document.getElementById('absensiList');
-                            tbody.innerHTML = '';
+                                document.getElementById('selectedDate').textContent = `${formattedDate} (${count} Orang)`;
 
-                            if (count > 0) {
-                                data.forEach(absensi => {
-                                    absensi.warga.forEach(warga => {
-                                        const tr = document.createElement('tr');
-                                        tr.innerHTML = `
-                                            <td class="px-2 py-0 border-gray-300">${warga.blok}</td>
-                                            <td class="px-2 py-0 border-gray-300">${warga.nama}</td>
-                                            <td class="px-2 py-0 border-gray-300">${absensi.keterangan ?? '-'}</td>
-                                        `;
-                                        tbody.appendChild(tr);
+                                const tbody = document.getElementById('absensiList');
+                                tbody.innerHTML = '';
+
+                                if (count > 0) {
+                                    data.forEach(absensi => {
+                                        absensi.warga.forEach(warga => {
+                                            const tr = document.createElement('tr');
+                                            tr.innerHTML = `
+                                                <td class="px-2 py-2 bg-neon-green/10 border-t border-neon-blue/20">${warga.blok}</td>
+                                                <td class="px-2 py-2 text-start bg-neon-green/10 border-t border-neon-blue/20">${warga.nama}</td>
+                                                <td class="px-2 py-2 text-start bg-neon-green/10 border-t border-neon-blue/20">${absensi.keterangan ?? '-'}</td>
+                                            `;
+                                            tbody.appendChild(tr);
+                                        });
                                     });
-                                });
-                            } else {
-                                tbody.innerHTML = `
-                                    <tr>
-                                        <td colspan="3" class="px-3 py-3 text-center border-gray-300 text-red-500 dark:text-red-400">
-                                            Tidak ada absensi ronda di tanggal ini
-                                        </td>
-                                    </tr>
-                                `;
-                            }
-                        });
-                }
-            });
+                                } else {
+                                    tbody.innerHTML = `
+                                        <tr>
+                                            <td colspan="3" class="px-2 py-3 text-center border border-neon-blue/30 text-neon-red">
+                                                Tidak ada absensi ronda di tanggal ini
+                                            </td>
+                                        </tr>
+                                    `;
+                                }
+                            });
+                    }
+                });
 
-            calendar.render();
-        });
-    </script>
+                calendar.render();
+            });
+        </script>
+    </body>
 </html>

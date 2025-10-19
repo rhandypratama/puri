@@ -114,10 +114,36 @@
             .neon-glow {
                 box-shadow: 0 0 0px #a78bfa, 0 0 5px #a78bfa, 0 0 15px #a78bfa, 0 0 20px #a78bfa, 0 0 25px #a78bfa;
             }
+            .neon-circle {
+                /* warna dasar ungu tua */
+                background-color: #2d0e49;
+                
+                /* gradasi lembut — ungu di tengah, pink samar di pinggir */
+                background-image:
+                    radial-gradient(
+                        circle at center,
+                        rgba(45, 14, 73, 1) 5%,
+                        rgba(68, 26, 98, 0.9) 35%,
+                        /* rgba(123, 54, 126, 0.6) 60%, */
+                        /* rgba(253, 117, 211, 0.25) 85%, */
+                        rgba(253, 117, 211, 0.1) 100%
+                    );
+
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+
+                /* lembutkan cahaya */
+                box-shadow:
+                    0 0 10px rgba(253, 117, 211, 0.1),
+                    0 0 25px rgba(45, 14, 73, 0.25);
+
+                transition: transform 0.6s ease, box-shadow 0.6s ease;
+            }
         </style>
     </head>
 
-    <body class="bg-background-dark text-white font-display">
+    <body class="neon-circle text-white font-display">
         <div class="flex flex-col min-h-screen">
             <!-- Header -->
             <header class="bg-background-dark/50 backdrop-blur-sm sticky top-0 z-50 border-b border-neon-blue/10">
@@ -136,7 +162,7 @@
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
                             <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi</a>
                             <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
-                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Jadwal Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.jadwal-ronda') }}">Jadwal Ronda</a>
                             <a class="hover:text-neon-blue text-neon-blue" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.nominasi-absensi') }}">Rekap Ronda Bulanan</a>
                             <a class="text-slate-400 hover:text-neon-blue transition-colors" href="#">Syarat dan Ketentuan Ronda</a>
@@ -164,7 +190,7 @@
                             <span class="material-symbols-outlined text-xl text-neon-green p-4">arrow_upward</span>
                         </div>
                         <div class="overflow-x-auto max-h-[80vh]">
-                            <table class="w-full text-sm  text-slate-400">
+                            <table class="w-full text-sm text-slate-400">
                                 <thead class="text-white">
                                     <tr>
                                         <th class="sticky top-0 left-[-1px] z-40 bg-neon-primary px-2 py-1 whitespace-nowrap">Blok</th>

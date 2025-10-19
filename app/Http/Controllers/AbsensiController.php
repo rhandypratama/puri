@@ -80,7 +80,7 @@ class AbsensiController extends Controller
                 'keterangan'  => 'nullable|string',
             ],
             [
-                'warga_ids.required' => '🚨 Wajib mengisi minimal satu warga untuk absensi.',
+                'warga_ids.required' => '🚨 Wajib mengisi minimal satu warga untuk absensi ronda',
                 'warga_ids.array'    => 'Format data warga tidak valid.',
                 'warga_ids.min'      => 'Minimal pilih satu warga untuk absensi.',
                 'keterangan.string'  => 'Keterangan harus berupa teks.',
@@ -140,7 +140,7 @@ class AbsensiController extends Controller
         // return redirect()->back()->with('success', 'Absensi berhasil disimpan.');
         return redirect()->back()->with(
             'success',
-            '✅ Absensi berhasil disimpan. <a href="' . route('absensi.index') . '" class="underline">Lihat siapa saja yang absen hari ini</a>'
+            '✅ Absensi ronda berhasil disimpan.<br><a href="' . route('absensi.index') . '" class="underline">Lihat siapa saja yang sudah absen hari ini</a>'
         );
     }
 
@@ -152,7 +152,7 @@ class AbsensiController extends Controller
                 'keterangan'  => 'nullable|string',
             ],
             [
-                'warga_ids.required' => '🚨 Wajib mengisi minimal satu warga untuk absensi.',
+                'warga_ids.required' => '🚨 Wajib mengisi minimal satu warga untuk melakukan absensi ronda',
                 'warga_ids.array'    => 'Format data warga tidak valid.',
                 'warga_ids.min'      => 'Minimal pilih satu warga untuk absensi.',
                 'keterangan.string'  => 'Keterangan harus berupa teks.',
@@ -193,7 +193,7 @@ class AbsensiController extends Controller
         $absensi->wargas()->attach($request->warga_ids);
         return redirect()->back()->with(
             'success',
-            '✅ Absensi berhasil disimpan. <a href="' . route('absensi.index') . '" class="underline">Lihat siapa saja yang absen hari ini</a>'
+            '✅ Absensi ronda berhasil disimpan.<br><a href="' . route('absensi.index') . '" class="underline">Lihat siapa saja yang sudah absen hari ini</a>'
         );
     }
 
