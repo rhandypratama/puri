@@ -152,7 +152,7 @@
                     <div class="flex items-center justify-between h-16">
                         <div class="flex items-center gap-2">
                             <span class="material-symbols-outlined text-2xl">home</span>
-                            <h1 class="text-lg">Puri Kartika</h1>
+                            <h1 class="text-lg"><a href="{{ route('absensi.index') }}">Puri Kartika</a></h1>
                         </div>
 
                         <button id="menu-toggle" class="md:hidden p-2 transition-transform duration-300">
