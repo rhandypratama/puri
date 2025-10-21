@@ -167,25 +167,25 @@
             <header class="bg-background-dark/50 backdrop-blur-sm sticky top-0 z-50 border-b border-neon-blue/10">
                 <div class="container mx-auto px-4">
                     <div class="flex items-center justify-between h-16">
-                        <div class="flex items-center gap-2 text-white">
-                            <span class="material-symbols-outlined text-neon-red text-2xl">home</span>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-2xl">home</span>
                             <h1 class="text-lg">Puri Kartika</h1>
                         </div>
 
                         <button id="menu-toggle" class="md:hidden p-2 transition-transform duration-300">
-                            <span id="menu-icon" class="material-symbols-outlined text-3xl transition-all duration-300 ease-in-out">menu</span>
+                            <span id="menu-icon" class="material-symbols-outlined text-2xl transition-all duration-300 ease-in-out">menu</span>
                         </button>
 
-                        <nav id="nav-menu" class="hidden md:flex items-end gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
+                        <nav id="nav-menu" class="hidden md:flex items-end text-lg gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
                             <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi</a>
                             <a class="text-neon-blue" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.jadwal-ronda') }}">Jadwal Ronda</a>
                             <a class="hover:text-neon-blue text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.nominasi-absensi') }}">Rekap Ronda Bulanan</a>
-                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="#">Syarat dan Ketentuan Ronda</a>
-                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Peraturan Kos & Kontrakan</a>
-                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Kas & Iuran Bulanan</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('syarat-ketentuan') }}">Syarat dan Ketentuan Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('peraturan-kos') }}">Peraturan Kos & Kontrakan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank">Kas & Iuran Bulanan</a>
                         </nav>
                     </div>
                 </div>
@@ -194,9 +194,9 @@
             <!-- Main -->
             <main class="flex-grow container mx-auto px-6 py-4">
                 <div class="max-w-4xl mx-auto">
-                    <div class="text-center my-4 mb-10 px-8">
-                        <h2 class="text-2xl md:text-4xl font-light">Daftar hadir ronda 🔥</h2>
-                        <!-- <p class="mt-2 text-sm">Monitoring key personnel and real-time activity stream.</p> -->
+                    <div class="text-center my-4 mb-10 px-2">
+                        <h2 class="text-3xl md:text-4xl font-light">Daftar hadir ronda 🔥</h2>
+                        <p class="mt-2 text-slate-300">Catatan kehadiran ronda warga, semuanya tersimpan rapi di sini! Mau cek siapa aja yang udah ronda? Pilih tanggal pada kalender di bawah ini.</p>
                     </div>
 
                     <!-- Calendar -->
@@ -208,20 +208,20 @@
 
                     <!-- Detail Absensi -->
                     <!-- <div id="absensiDetail" class="mt-6"> -->
-                    <div id="absensiDetail" class="bg-background-dark neon-glow rounded-md overflow-hidden my-8 activity-line">
-                        <h2 class="px-5 py-2 font-normal text-sm"><span id="selectedDate"></span></h2>
+                    <div id="absensiDetail" class="bg-background-dark neon-glow rounded-md overflow-hidden my-8">
+                        <h2 class="px-5 py-4 font-normal text-md flex items-center justify-items-center"><span class="material-symbols-outlined text-neon-blue/80 text-[20px] pe-2">calendar_clock</span> <span id="selectedDate"></span></h2>
                         <div class="overflow-x-auto">
                             <table class="min-w-full text-sm text-center overflow-hidden">
                                 <thead>
                                     <tr>
-                                        <th class="px-2 py-2 font-normal border border-neon-blue/30">Blok</th>
-                                        <th class="px-2 py-2 text-start font-normal border border-neon-blue/30">Nama Warga</th>
-                                        <th class="px-2 py-2 text-start font-normal border border-neon-blue/30">Keterangan</th>
+                                        <th class="px-2 py-2 font-normal bg-neon-green/10 transition-colors">Blok</th>
+                                        <th class="px-2 py-2 text-start font-normal bg-neon-green/10 transition-colors">Nama Warga</th>
+                                        <th class="px-2 py-2 text-start font-normal bg-neon-green/10 transition-colors">Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody id="absensiList">
                                     <tr>
-                                        <td colspan="3" class="px-2 py-3 text-center border border-neon-blue/30 text-xs">
+                                        <td colspan="3" class="px-2 py-4 text-center border border-neon-blue/30">
                                             <span class="text-slate-400">Pilih tanggal pada kalender untuk melihat detail absensi</span>
                                         </td>
                                     </tr>
@@ -299,7 +299,11 @@
                                 let count = 0;
                                 data.forEach(absensi => count += absensi.warga.length);
 
-                                document.getElementById('selectedDate').textContent = `${formattedDate} (${count} Orang)`;
+                                if (count > 0) {
+                                    document.getElementById('selectedDate').textContent = `${formattedDate} (${count} Orang)`;
+                                } else {
+                                    document.getElementById('selectedDate').textContent = `${formattedDate}`;
+                                }
 
                                 const tbody = document.getElementById('absensiList');
                                 tbody.innerHTML = '';
@@ -309,9 +313,9 @@
                                         absensi.warga.forEach(warga => {
                                             const tr = document.createElement('tr');
                                             tr.innerHTML = `
-                                                <td class="px-2 py-2 bg-neon-green/10 border-t border-neon-blue/20">${warga.blok}</td>
-                                                <td class="px-2 py-2 text-start bg-neon-green/10 border-t border-neon-blue/20">${warga.nama}</td>
-                                                <td class="px-2 py-2 text-start bg-neon-green/10 border-t border-neon-blue/20">${absensi.keterangan ?? '-'}</td>
+                                                <td class="px-2 py-2 text-slate-300 bg-neon-green/10 border-t border-neon-blue/20">${warga.blok}</td>
+                                                <td class="px-2 py-2 text-slate-300 text-start bg-neon-green/10 border-t border-neon-blue/20">${warga.nama}</td>
+                                                <td class="px-2 py-2 text-slate-300 text-start bg-neon-green/10 border-t border-neon-blue/20">${absensi.keterangan ?? '-'}</td>
                                             `;
                                             tbody.appendChild(tr);
                                         });
@@ -319,7 +323,7 @@
                                 } else {
                                     tbody.innerHTML = `
                                         <tr>
-                                            <td colspan="3" class="px-2 py-3 text-center border border-neon-blue/30 text-neon-red">
+                                            <td colspan="3" class="px-2 py-4 text-center border border-neon-blue/30 text-neon-red">
                                                 Tidak ada absensi ronda di tanggal ini
                                             </td>
                                         </tr>

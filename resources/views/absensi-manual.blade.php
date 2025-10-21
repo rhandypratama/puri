@@ -165,21 +165,21 @@
             <header class="bg-background-dark/50 backdrop-blur-sm sticky top-0 z-50 border-b border-neon-blue/10">
                 <div class="container mx-auto px-4">
                     <div class="flex items-center justify-between h-16">
-                        <div class="flex items-center gap-2 text-white">
-                            <span class="material-symbols-outlined text-neon-red text-2xl">home</span>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-2xl">home</span>
                             <h1 class="text-lg">Puri Kartika</h1>
                         </div>
 
                         <button id="menu-toggle" class="md:hidden p-2 transition-transform duration-300">
-                            <span id="menu-icon" class="material-symbols-outlined text-3xl transition-all duration-300 ease-in-out">menu</span>
+                            <span id="menu-icon" class="material-symbols-outlined text-2xl transition-all duration-300 ease-in-out">menu</span>
                         </button>
 
-                        <nav id="nav-menu" class="hidden md:flex items-end gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
+                        <nav id="nav-menu" class="hidden md:flex items-end text-lg gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
-                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi Ronda</a>
                             <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.jadwal-ronda') }}">Jadwal Ronda</a>
-                            <a class="hover:text-neon-blue text-neon-blue" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.nominasi-absensi') }}">Rekap Ronda Bulanan</a>
                             <a class="text-slate-400 hover:text-neon-blue transition-colors" href="#">Syarat dan Ketentuan Ronda</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Peraturan Kos & Kontrakan</a>

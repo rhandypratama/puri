@@ -9,6 +9,7 @@ use App\Http\Controllers\AbsensiController;
 Route::get('/', [AbsensiController::class, 'index'])->name('absensi.index');
 Route::get('/absensi', [AbsensiController::class, 'create'])->name('absensi.create');
 Route::get('/absensi-manual', [AbsensiController::class, 'createManual'])->name('absensi.create.manual');
+Route::get('/absensi/success', [AbsensiController::class, 'success'])->name('absensi.success');
 Route::get('/jadwal-ronda', [AbsensiController::class, 'jadwalRonda'])->name('absensi.jadwal-ronda');
 Route::get('/rekap-absensi', [AbsensiController::class, 'rekapAbsensi'])->name('absensi.rekap-absensi');
 Route::get('/nominasi-absensi', [AbsensiController::class, 'nominasiAbsensi'])->name('absensi.nominasi-absensi');

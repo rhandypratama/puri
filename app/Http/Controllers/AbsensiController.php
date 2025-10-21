@@ -67,20 +67,12 @@ class AbsensiController extends Controller
     public function store(Request $request)
     {
         $request->validate(
-            // [
-            //     // 'warga' => 'required|array|min:1',
-            //     // 'warga.*' => 'string|max:100',
-            //     // 'tgl_absensi' => 'required|date',
-            //     // 'hari' => 'required|string',
-            //     'warga_ids' => 'required|array|min:1',
-            //     'keterangan' => 'nullable|string',
-            // ]
             [
                 'warga_ids'   => 'required|array|min:1',
                 'keterangan'  => 'nullable|string',
             ],
             [
-                'warga_ids.required' => '🚨 Wajib mengisi minimal satu warga untuk absensi ronda',
+                'warga_ids.required' => '🚨 Wajib pilih minimal satu warga untuk absensi ronda',
                 'warga_ids.array'    => 'Format data warga tidak valid.',
                 'warga_ids.min'      => 'Minimal pilih satu warga untuk absensi.',
                 'keterangan.string'  => 'Keterangan harus berupa teks.',
@@ -137,11 +129,21 @@ class AbsensiController extends Controller
         ]);
 
         $absensi->wargas()->attach($request->warga_ids);
-        // return redirect()->back()->with('success', 'Absensi berhasil disimpan.');
-        return redirect()->back()->with(
-            'success',
-            '✅ Absensi ronda berhasil disimpan.<br><a href="' . route('absensi.index') . '" class="underline">Lihat siapa saja yang sudah absen hari ini</a>'
-        );
+        // ✅ redirect ke halaman sukses
+        return redirect()->route('absensi.success')->with('success', true);
+        // return redirect()->back()->with(
+        //     'success',
+        //     '✅ Absensi ronda berhasil disimpan.<br><a href="' . route('absensi.index') . '" class="underline">Lihat siapa saja yang sudah absen hari ini</a>'
+        // );
+    }
+
+    public function success()
+    {
+        if (!session('success')) {
+            return redirect()->route('absensi.index');
+        }
+
+        return view('absensi-success');
     }
 
     public function storeManual(Request $request)

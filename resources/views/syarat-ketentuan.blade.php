@@ -1,165 +1,283 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8" />
+        <title>Puri Kartika</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link crossorigin href="https://fonts.gstatic.com/" rel="preconnect" />
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                extend: {
+                    colors: {
+                        primary: "#00E0FF",
+                            "background-light": "#f7f7f7",
+                            // "background-dark": "#092854",
+                            "background-dark": "#2d0e49",
+                        neon: {
+                            blue: "#00E0FF",
+                            purple: "#FF00E0",
+                            green: "#00FF7F",
+                            red: "#fd75d3",
+                            primary: "#a199c5",
+                        },
+                    },
+                    fontFamily: {
+                        display: "Space Grotesk"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        lg: "1rem",
+                        xl: "1.5rem",
+                        full: "9999px",
+                    },
+                },
+                },
+            };
+        </script>
+        <style type="text/tailwindcss">
+            @keyframes neon-pulse-blue {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-blue),
+                    0 0 10px var(--tw-colors-neon-blue),
+                    0 0 20px var(--tw-colors-neon-blue);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-blue),
+                    0 0 20px var(--tw-colors-neon-blue),
+                    0 0 40px var(--tw-colors-neon-blue);
+                }
+            }
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+            @keyframes neon-pulse-green {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-green),
+                    0 0 10px var(--tw-colors-neon-green),
+                    0 0 20px var(--tw-colors-neon-green);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-green),
+                    0 0 20px var(--tw-colors-neon-green),
+                    0 0 40px var(--tw-colors-neon-green);
+                }
+            }
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+            @keyframes neon-pulse-purple {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-purple),
+                    0 0 10px var(--tw-colors-neon-purple),
+                    0 0 20px var(--tw-colors-neon-purple);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-purple),
+                    0 0 20px var(--tw-colors-neon-purple),
+                    0 0 40px var(--tw-colors-neon-purple);
+                }
+            }
 
-        <!-- Lucide CDN -->
-        <script src="https://unpkg.com/lucide@latest"></script>
+            @keyframes activity-pulse {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
+            }
 
-        <!-- di dalam <head> -->
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-0 lg:p-0 items-center lg:justify-center min-h-screen flex-col">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
-            @if (Route::has('login'))
-                <nav class="flex items-center justify-end gap-4">
-                    @auth
-                        <a
-                            href="{{ route('absensi.index') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
-                        >
-                            Dashboard
-                        </a>
-                    @else
-                        <a
-                            href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
-                        >
-                            Log in
-                        </a>
+            .neon-glow-blue {
+                animation: neon-pulse-blue 2s infinite alternate;
+            }
+            .neon-glow-green {
+                animation: neon-pulse-green 2s infinite alternate;
+            }
+            .neon-glow-purple {
+                animation: neon-pulse-purple 2s infinite alternate;
+            }
 
-                        @if (Route::has('register'))
-                            <a
-                                href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                                Register
-                            </a>
-                        @endif
-                    @endauth
-                </nav>
-            @endif
-        </header>
-        <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-            <main class="flex max-w-full w-full flex-col-reverse lg:max-w-3xl lg:flex-row">
+            .activity-line {
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    rgba(0, 224, 255, 0.2) 20%,
+                    transparent 50%,
+                    rgba(0, 224, 255, 0.2) 80%,
+                    transparent 100%
+                );
+                background-size: 200% 100%;
+                animation: activity-pulse 7s linear infinite;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+            .activity-line.active {
+                opacity: 1;
+            }
+            .neon-glow {
+                box-shadow: 0 0 0px #a78bfa, 0 0 5px #a78bfa, 0 0 15px #a78bfa, 0 0 20px #a78bfa, 0 0 25px #a78bfa;
+            }
+            .neon-circle {
+                /* warna dasar ungu tua */
+                background-color: #2d0e49;
                 
-                <div class="text-[16px] leading-[20px] flex-1 p-4 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
-                    <div class="flex items-center mb-4 md:w-full">
-                        <span class="font-normal pe-4" onclick="window.location='{{ route('absensi.index') }}'"><i data-lucide="arrow-left"></i></span>
-                        <h1 class="font-bold text-lg">Syarat & Ketentuan Ronda</h1>
-                    </div>
+                /* gradasi lembut — ungu di tengah, pink samar di pinggir */
+                background-image:
+                    radial-gradient(
+                        circle at center,
+                        rgba(45, 14, 73, 1) 0%,
+                        rgba(68, 26, 98, 0.3) 35%,
+                        rgba(123, 54, 126, 0.4) 60%,
+                        /* rgba(253, 117, 211, 0.25) 85%, */
+                        rgba(253, 117, 211, 0.03) 100%
+                    );
 
-                    <div class="max-w-3xl mx-auto px-0 py-6">
-                        <!-- Judul -->
-                        <h1 class="text-xl font-bold text-center mb-6">🛡️ Syarat & Ketentuan Ronda</h1>
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
 
-                        <!-- Deskripsi pembuka -->
-                        <p class="text-gray-600 dark:text-[#b3b2ab] text-center mb-4">
-                            Selamat datang di lingkungan kita yang guyub dan aman!  
-                            Sebelum ikut serta dalam ronda, yuk pahami dulu syarat & ketentuannya biar semua nyaman:
-                        </p>
+                /* lembutkan cahaya */
+                box-shadow:
+                    0 0 10px rgba(253, 117, 211, 0.1),
+                    0 0 25px rgba(45, 14, 73, 0.25);
 
-                        <!-- Card -->
-                        <div class="space-y-4">
-                            <!-- 1 -->
-                            <!-- <div class="p-5 bg-white rounded-lg shadow border border-gray-200">
-                                <h2 class="font-semibold text-lg mb-2">🔑 1. Jadwal Ronda</h2>
-                                <ul class="list-disc pl-6 text-gray-700 space-y-1">
-                                    <li>Setiap warga <strong>wajib ikut ronda sesuai jadwal</strong> yang sudah dibagi.</li>
-                                    <li>Kalau berhalangan, <strong>tolong konfirmasi</strong> dan cari pengganti.</li>
-                                </ul>
-                            </div> -->
+                transition: transform 0.6s ease, box-shadow 0.6s ease;
+            }
+        </style>
+    </head>
 
-                            <!-- 2 -->
-                            <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
-                                <h2 class="font-semibold text-lg mb-2">⏰ 1. Jadwal & Waktu Ronda</h2>
-                                <ul class="list-disc pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
-                                    <li>Setiap warga <strong>wajib ikut ronda sesuai jadwal</strong> yang sudah dibagi.</li>
-                                    <li>Ronda berlangsung mulai pukul <strong>22.00 – 01.00 WIB</strong>. Datang tepat waktu ya, jangan sampai warga yang lain nungguin 😊</li>
-                                </ul>
-                            </div>
-
-                            <!-- 3 -->
-                            <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
-                                <h2 class="font-semibold text-lg mb-2">👥 2. Kehadiran & Absensi</h2>
-                                <ul class="list-disc pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
-                                    <li>Setiap yang hadir <strong>wajib absen lewat sistem</strong>, jadi tidak perlu dicatat / diketik manual dan di kirim ke WA group lagi. 
-                                    Inget ya! <strong>Ngisi absen hanya bisa di jam 22.00 - 23.00 WIB</strong>.</li>
-                                    <li>Buat warga yang <strong>datang telat namun bisa dipastikan hadir</strong>, konfirmasi aja ke tim rondanya <strong>sebelum jam 23.00 WIB</strong>, jadi absennya tetap aman.</li>
-                                    <li>Untuk melakukan absensi ronda, bisa diwakilkan ke 1 orang saja, biar gak ribet.</li>
-                                    <li><strong>Penting !!</strong> Cek kembali apakah namamu sudah ada di daftar hadir ronda. <a href="{{ route('absensi.log') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Lihat disini</a></li>
-                                    <li>Tidak hadir = dianggap <span class="text-red-500 font-medium">tidak ronda 🚫</span></li>
-                                </ul>
-                            </div>
-
-                            <!-- 4 -->
-                            <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
-                                <h2 class="font-semibold text-lg mb-2">🔔 3. Tugas Saat Ronda</h2>
-                                <ul class="list-disc pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
-                                    <li>Pukul 23.00 WIB, setiap warga yang ronda <strong>wajib mengunci gerbang 🔒</strong>.</li>
-                                    <li><strong>Selalu jaga kebersihan</strong> pos rondanya ya! terutama saat pulang nge-ronda 🧹.</li>
-                                    <li>Laporkan bila ada hal mencurigakan, jangan bertindak sendiri.</li>
-                                    <li>Jagalah sikap, <em>ngobrol boleh, ketawa boleh, berisik jangan</em> 😄 🤫</li>
-                                </ul>
-                            </div>
-
-                            <!-- 5 -->
-                            <!-- <div class="p-5 bg-white rounded-lg shadow border border-gray-200">
-                                <h2 class="font-semibold text-lg mb-2">💰 5. Iuran & Kas</h2>
-                                <p class="text-gray-700">Setiap warga mendukung keamanan dengan iuran bulanan.  
-                                Dana ini dipakai untuk kebutuhan ronda: <em>senter, HT, konsumsi, hingga kas cadangan</em>.</p>
-                            </div> -->
-
-                            <!-- 6 -->
-                            <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
-                                <h2 class="font-semibold text-lg mb-2">🤝 4. Etika & Kebersamaan</h2>
-                                <p class="text-gray-700 dark:text-[#b3b2ab]">Hormati sesama warga ronda, jangan baper kalau diingatkan.  
-                                Ronda juga ajang kumpul + silaturahmi ✨</p>
-                            </div>
-
-                            <!-- 7 -->
-                            <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
-                                <h2 class="font-semibold text-lg mb-2">⚖️ 5. Denda</h2>
-                                <p class="text-gray-700 dark:text-[#b3b2ab] mb-4">Warga yang tidak hadir akan kena sanksi sesuai keputusan bersama, misalnya <strong>denda atau konsumsi</strong>.</p>
-                                <ul class="list-disc pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
-                                    <!-- <li><strong>Keliling lingkungan</strong> sesuai rute yang ditentukan.</li> -->
-                                    <li>Kekurangan absensi ronda bisa diganti maksimal di bulan berikutnya.</li>
-                                    <li>Rekap absensi & denda dilakukan setiap 2 bulan sekali, yaitu <strong>(Februari, April, Juni, Agustus, Oktober, Desember)</strong>. 
-                                        Apabila sampai dengan akhir bulan yang disebutkan masih terdapat kekurangan absensi, maka tidak bisa diganti di bulan berikutnya dan akan dianggap <span class="text-red-500 font-medium">tidak ronda 🚫</span>.</li>
-                                    <li>Masing - masing warga bisa cek sendiri rekap & laporannya di menu <a href="{{ route('absensi.rekap-absensi') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Rekap & Denda Ronda.</a></li>
-                                </ul>
-                                <p class="text-gray-700 dark:text-[#b3b2ab] mt-4">Masih bingung? kita ngobrol bareng sambil ngopi ☕ di pos ronda aja yuk!.</p>
-                            </div>
+    <body class="neon-circle text-white font-display">
+        <div class="flex flex-col min-h-screen">
+            <!-- Header -->
+            <header class="bg-background-dark/50 backdrop-blur-sm sticky top-0 z-50 border-b border-neon-blue/10">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-2xl">home</span>
+                            <h1 class="text-lg">Puri Kartika</h1>
                         </div>
 
-                        <!-- Penutup -->
-                        <div class="mt-4 p-5 bg-yellow-50 border-l-4 border-yellow-400 rounded">
-                            <h3 class="font-semibold text-lg text-gray-700 mb-2">🚀 Penutup</h3>
-                            <p class="text-gray-700">Ronda bukan sekadar kewajiban, tapi bentuk <strong>kebersamaan kita menjaga lingkungan</strong>.  
-                            Dengan ikut ronda, kita menciptakan suasana aman, nyaman, dan penuh kekeluargaan.</p>
-                            <blockquote class="mt-3 italic text-yellow-800 font-medium">
-                                “Lingkungan aman, hati pun tenang. Yuk, jaga bareng-bareng!”
-                            </blockquote>
-                        </div>
+                        <button id="menu-toggle" class="md:hidden p-2 transition-transform duration-300">
+                            <span id="menu-icon" class="material-symbols-outlined text-2xl transition-all duration-300 ease-in-out">menu</span>
+                        </button>
+
+                        <nav id="nav-menu" class="hidden md:flex items-end text-lg gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.jadwal-ronda') }}">Jadwal Ronda</a>
+                            <a class=" text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.nominasi-absensi') }}">Rekap Ronda Bulanan</a>
+                            <a class="hover:text-neon-blue text-neon-blue" href="{{ route('syarat-ketentuan') }}">Syarat dan Ketentuan Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('peraturan-kos') }}">Peraturan Kos & Kontrakan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank">Kas & Iuran Bulanan</a>
+                        </nav>
                     </div>
-                    
+                </div>
+            </header>
+
+            <!-- Main -->
+            <main class="flex-grow container mx-auto px-4 py-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-10 mt-4 px-4">
+                        <h2 class="text-2xl md:text-4xl font-normal">Syarat & Ketentuan Ronda</h2>
+                        <p class="mt-2 text-slate-300">Selamat datang di lingkungan kita yang guyub dan aman!  
+                            Sebelum ikut serta dalam ronda, yuk pahami dulu syarat & ketentuannya biar semua nyaman:</p>
+                    </div>
+
+                    <div class="bg-background-dark neon-glow rounded-lg shadow-lg overflow-hidden m-2 mb-8">
+                        <div class="justify-between flex items-center border-b border-neon-blue/20 activity-line">
+                            <h3 class="text-lg md:text-lg font-normal p-4">
+                                ⏰ Jadwal & Waktu Ronda
+                            </h3>
+                        </div>
+                        <ul class="flex flex-col space-y-1">
+                            <li class="list-disc mx-8 py-2">Setiap warga <span class="text-neon-red font-bold">wajib ikut ronda sesuai jadwal</span> yang sudah dibagi.</li>
+                            <li class="list-disc mx-8 py-2">Ronda berlangsung mulai pukul <span class="text-neon-red font-bold">22.00 – 01.00 WIB</span>. Datang tepat waktu ya, jangan sampai warga yang lain nungguin 😊</li>
+                        </ul>
+                    </div>
+                    <div class="bg-background-dark neon-glow rounded-lg shadow-lg overflow-hidden m-2 mb-8">
+                        <div class="justify-between flex items-center border-b border-neon-blue/20 activity-line">
+                            <h3 class="text-lg md:text-lg font-normal p-4">
+                                👥 Kehadiran & Absensi
+                            </h3>
+                        </div>
+                        <ul class="flex flex-col space-y-1">
+                            <li class="list-disc mx-8 py-2">Setiap yang hadir wajib absen <a href="{{ route('absensi.create') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">di sini</a>, jadi tidak perlu dicatat / diketik manual dan di kirim ke WA group lagi. 
+                            Inget ya! <span class="text-neon-red font-bold">Ngisi absen hanya bisa di jam 22.00 - 23.00 WIB</span>.</li>
+                            <li class="list-disc mx-8 py-2">Buat warga yang <span class="text-neon-red font-bold">datang telat namun bisa dipastikan hadir</span>, konfirmasi aja ke tim rondanya <span class="text-neon-red font-bold">sebelum jam 23.00 WIB</span>, jadi absennya tetap aman.</li>
+                            <li class="list-disc mx-8 py-2">Untuk melakukan absensi ronda, bisa diwakilkan ke 1 orang saja, biar gak ribet.</li>
+                            <li class="list-disc mx-8 py-2"><strong>Penting !!</strong> Cek kembali apakah namamu sudah ada di daftar hadir ronda. <a href="{{ route('absensi.log') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Lihat disini</a></li>
+                            <li class="list-disc mx-8 py-2">Tidak hadir = dianggap <span class="text-neon-red font-bold">tidak ronda 🚫</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-background-dark neon-glow rounded-lg shadow-lg overflow-hidden m-2 mb-8">
+                        <div class="justify-between flex items-center border-b border-neon-blue/20 activity-line">
+                            <h3 class="text-lg md:text-lg font-normal p-4">
+                                🔔 Tugas Saat Ronda
+                            </h3>
+                        </div>
+                        <ul class="flex flex-col space-y-1">
+                            <li class="list-disc mx-8 py-2">Pukul 23.00 WIB, setiap warga yang ronda <span class="text-neon-red font-bold">wajib mengunci gerbang 🔒</span></li>
+                            <li class="list-disc mx-8 py-2"><span class="text-neon-red font-bold">Selalu jaga kebersihan</span> pos rondanya ya! terutama saat pulang nge-ronda 🧹</li>
+                            <li class="list-disc mx-8 py-2">Laporkan bila ada hal mencurigakan, jangan bertindak sendiri!</li>
+                            <li class="list-disc mx-8 py-2">Jagalah sikap, <em>ngobrol boleh, ketawa boleh, berisik jangan</em> 😄 🤫</li>
+                        </ul>
+                    </div>
+                    <div class="bg-background-dark neon-glow rounded-lg shadow-lg overflow-hidden m-2 mb-8">
+                        <div class="justify-between flex items-center border-b border-neon-blue/20 activity-line">
+                            <h3 class="text-lg md:text-lg font-normal p-4">
+                                🤝 Etika & Kebersamaan
+                            </h3>
+                        </div>
+                        <p class="p-4">Hormati sesama warga ronda, jangan baper kalau diingatkan. Ronda juga ajang kumpul + silaturahmi ✨</p>
+                    </div>
+                    <div class="bg-background-dark neon-glow rounded-lg shadow-lg overflow-hidden m-2 mb-8">
+                        <div class="justify-between flex items-center border-b border-neon-blue/20 activity-line">
+                            <h3 class="text-lg md:text-lg font-normal p-4">
+                                ⚖️ Denda & Sanksi
+                            </h3>
+                        </div>
+                        <p class="p-4">Warga yang tidak hadir akan kena sanksi sesuai keputusan bersama, misalnya denda atau konsumsi.</p>
+                        <ul class="flex flex-col space-y-1">
+                            <li class="list-disc mx-8 py-2">Kekurangan absensi ronda bisa diganti maksimal di bulan berikutnya.</li>
+                            <li class="list-disc mx-8 py-2">Rekap absensi & penagihan denda dilakukan setiap 2 bulan sekali, yaitu <span class="text-neon-red font-bold">(Februari, April, Juni, Agustus, Oktober, Desember)</span>. 
+                                Apabila sampai dengan akhir bulan yang disebutkan masih terdapat kekurangan absensi, maka tidak bisa diganti di bulan berikutnya dan akan dianggap <span class="text-neon-red font-bold">tidak ronda 🚫</span>.</li>
+                            <li class="list-disc mx-8 py-2">Semua transparan, masing - masing warga bisa cek sendiri rekap & laporannya di sini <a href="{{ route('absensi.rekap-absensi') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Rekap & Denda Ronda</a></li>
+                        </ul>
+                    </div>
+
+                    <p class="p-4 mb-10 text-center text-slate-300">Ronda bukan sekadar kewajiban, tapi <span class="text-neon-green font-bold">bentuk kebersamaan kita menjaga lingkungan</span>. Dengan ikut ronda, kita menciptakan suasana aman, nyaman, dan penuh kekeluargaan. “Lingkungan aman, hati pun tenang. Yuk, jaga bareng-bareng!”</p>
                 </div>
             </main>
         </div>
 
-        @if (Route::has('login'))
-            <div class="h-14.5 hidden lg:block"></div>
-        @endif
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const activityRows = document.querySelectorAll(".activity-line");
+                activityRows.forEach((row, index) => {
+                    setTimeout(() => {
+                        row.classList.add("active");
+                    }, index * 100);
+                });
+                
+                const toggleBtn = document.getElementById('menu-toggle')
+                const icon = document.getElementById('menu-icon')
+                const nav = document.getElementById("nav-menu")
+
+                toggleBtn.addEventListener('click', () => {
+                    nav.classList.toggle("hidden")
+                    nav.classList.toggle("flex")
+
+                    // Tambahkan animasi scale untuk efek "klik"
+                    icon.classList.add('scale-75')
+                    setTimeout(() => icon.classList.remove('scale-75'), 150)
+
+                    // Toggle antara "menu" dan "close"
+                    if (icon.textContent.trim() === 'menu') {
+                        icon.textContent = 'close'
+                    } else {
+                        icon.textContent = 'menu'
+                    }
+                })
+            });
+        </script>
     </body>
-    
-    <script>
-        lucide.createIcons();
-        
-    </script>
 </html>

@@ -24,6 +24,7 @@
                             green: "#00FF7F",
                             red: "#fd75d3",
                             primary: "#a199c5",
+                            dark: "#2d0e49",
                         },
                     },
                     fontFamily: {
@@ -149,25 +150,25 @@
             <header class="bg-background-dark/50 backdrop-blur-sm sticky top-0 z-50 border-b border-neon-blue/10">
                 <div class="container mx-auto px-4">
                     <div class="flex items-center justify-between h-16">
-                        <div class="flex items-center gap-2 text-white">
-                            <span class="material-symbols-outlined text-neon-red text-2xl">home</span>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-2xl">home</span>
                             <h1 class="text-lg">Puri Kartika</h1>
                         </div>
 
                         <button id="menu-toggle" class="md:hidden p-2 transition-transform duration-300">
-                            <span id="menu-icon" class="material-symbols-outlined text-3xl transition-all duration-300 ease-in-out">menu</span>
+                            <span id="menu-icon" class="material-symbols-outlined text-2xl transition-all duration-300 ease-in-out">menu</span>
                         </button>
 
-                        <nav id="nav-menu" class="hidden md:flex items-end gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
+                        <nav id="nav-menu" class="hidden md:flex items-end text-lg gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
-                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi Ronda</a>
                             <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.jadwal-ronda') }}">Jadwal Ronda</a>
                             <a class="hover:text-neon-blue text-neon-blue" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.nominasi-absensi') }}">Rekap Ronda Bulanan</a>
-                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="#">Syarat dan Ketentuan Ronda</a>
-                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Peraturan Kos & Kontrakan</a>
-                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Kas & Iuran Bulanan</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('syarat-ketentuan') }}">Syarat dan Ketentuan Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('peraturan-kos') }}">Peraturan Kos & Kontrakan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank">Kas & Iuran Bulanan</a>
                         </nav>
                     </div>
                 </div>
@@ -176,31 +177,36 @@
             <!-- Main -->
             <main class="flex-grow container mx-auto px-4 py-4">
                 <div class="max-w-4xl mx-auto">
-                    <div class="text-center mb-10 px-8">
-                        <h2 class="text-xl md:text-4xl font-light">Rekap absensi ronda tahun {{ $year }} 🔥</h2>
+                    <div class="text-center mb-10 px-4 py-2">
+                        <h2 class="text-2xl md:text-4xl font-light">Rekap Absensi Ronda<br>Tahun {{ $year }} 🔥</h2>
                         <!-- <p class="mt-2 text-slate-400 text-sm md:text-base">Monitoring key personnel and real-time activity stream.</p> -->
                     </div>
 
                     <!-- Table -->
                     <div class="bg-background-dark neon-glow rounded-lg shadow-lg overflow-hidden m-2">
                         <div class="justify-between flex items-center border-b border-neon-blue/20">
-                            <h3 class="text-md md:text-lg font-normal text-neon-primary p-4">
-                                
-                            </h3>
-                            <span class="material-symbols-outlined text-xl text-neon-green p-4">arrow_upward</span>
+                            <!-- <h3 class="text-md md:text-lg font-normal text-neon-primary p-4">
+                                Keterangan
+                            </h3> -->
+                            <ul class="flex flex-col mx-4 my-4 text-slate-400 text-sm">
+                                <li class="list-none">W = Wajib Hadir (Jumlah hari ronda dalam 1 bulan)</li>
+                                <li class="list-none">H = Hadir (Berdasarkan absensi ronda)</li>
+                                <li class="list-none">S = Selisih (H-W)</li>
+                            </ul>
+                            <!-- <span class="material-symbols-outlined text-xl text-neon-green p-4">arrow_upward</span> -->
                         </div>
                         <div class="overflow-x-auto max-h-[80vh]">
-                            <table class="w-full text-sm text-slate-400">
-                                <thead class="text-white">
+                            <table class="w-full text-sm">
+                                <thead class="">
                                     <tr>
-                                        <th class="sticky top-0 left-[-1px] z-40 bg-neon-primary px-2 py-1 whitespace-nowrap">Blok</th>
-                                        <th class="sticky top-0 z-30 px-2 py-1 bg-neon-primary text-start whitespace-nowrap">Nama Warga</th>
-                                        <th class="sticky top-0 z-30 px-2 py-1 bg-neon-primary text-start">Jadwal</th>
+                                        <th class="sticky top-0 left-[-1px] z-40 bg-neon-dark px-2 py-1 whitespace-nowrap">Blok</th>
+                                        <th class="sticky top-0 z-30 px-2 py-1 bg-neon-dark text-start whitespace-nowrap">Nama Warga</th>
+                                        <th class="sticky top-0 z-30 px-2 py-1 bg-neon-dark text-start">Jadwal</th>
                                         @for ($month = 1; $month <= 12; $month++)
                                             <th @class([
                                                 'sticky top-0 z-30 px-2 py-1 whitespace-nowrap',
                                                 'bg-yellow-600' => in_array($month, [2, 4, 6, 8, 10, 12]),
-                                                'bg-neon-primary' => !in_array($month, [2, 4, 6, 8, 10, 12]),
+                                                'bg-neon-dark' => !in_array($month, [2, 4, 6, 8, 10, 12]),
                                             ])>
                                                 {{ \Carbon\Carbon::create()->month($month)->translatedFormat('M') }}
                                             </th>
@@ -222,16 +228,16 @@
                                         ];
                                     @endphp
                                     @foreach ($rekap as $row)
-                                        <tr class="border-b border-neon-blue/10 hover:bg-neon-green/5 bg-neon-green/10 transition-colors">
+                                        <tr class="border border-neon-blue/30 hover:bg-neon-green/5 bg-neon-green/10 transition-colors">
                                             <td class="sticky left-[-1px] top-0 z-20 text-center items-center py-1 bg-background-dark align-center whitespace-nowrap">{{ $row['blok'] }}</td>
-                                            <td class="px-2 py-1 align-center whitespace-nowrap">{{ $row['nama'] }}</td>
-                                            <td class="px-2 py-1 align-center whitespace-nowrap">{{  $days[$row['jadwal']] }}</td>
+                                            <td class="px-2 py-1 align-center whitespace-nowrap text-slate-300 border border-neon-blue/30">{{ $row['nama'] }}</td>
+                                            <td class="px-2 py-1 align-center whitespace-nowrap text-slate-300 border border-neon-blue/30">{{  $days[$row['jadwal']] }}</td>
                                             @foreach ($row['bulan'] as $data)
                                                 <td @class([
-                                                    'text-center py-1 align-top whitespace-nowrap',
+                                                    'text-center py-1 align-top whitespace-nowrap border border-neon-blue/30',
                                                     'text-neon-red' => $data['S'] < 0,
                                                     'text-neon-green' => $data['S'] > 0 && $data['W'] > 0,
-                                                    '' => $data['S'] == 0,
+                                                    'text-slate-300' => $data['S'] == 0,
                                                 ])>W: {{ $data['W'] }}<br> H: {{ $data['H'] }}<br> S: {{ $data['S'] }}</td>
                                             @endforeach
                                         </tr>

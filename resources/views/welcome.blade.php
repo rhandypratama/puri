@@ -116,7 +116,7 @@
                 box-shadow: 0 0 0px #a78bfa, 0 0 5px #a78bfa, 0 0 15px #a78bfa, 0 0 20px #a78bfa, 0 0 25px #a78bfa;
             }
             .neon-glow-input {
-                box-shadow: 0 0 10px #a78bfa, 0 0 10px #a78bfa, 0 0 0px #a78bfa, 0 0 0px #a78bfa, 0 0 10px #a78bfa;
+                box-shadow: 0 0 0px #a78bfa, 0 0 0px #a78bfa, 0 0 0px #a78bfa, 0 0 40px #a78bfa, 0 0 60px #a78bfa;
             }
             .neon-glow-error {
                 box-shadow: 0 0 0px red, 0 0 0px red, 0 0 0px red, 0 0 0px red, 0 0 25px red;
@@ -165,9 +165,9 @@
                 background-image:
                     radial-gradient(
                         circle at center,
-                        rgba(45, 14, 73, 1) 5%,
-                        rgba(68, 26, 98, 0.9) 35%,
-                        /* rgba(123, 54, 126, 0.6) 60%, */
+                        rgba(45, 14, 73, 1) 20%,
+                        rgba(68, 26, 98, 0.9) 55%,
+                        rgba(123, 54, 126, 0.4) 80%,
                         /* rgba(253, 117, 211, 0.25) 85%, */
                         rgba(253, 117, 211, 0.1) 100%
                     );
@@ -192,25 +192,25 @@
             <header class="bg-background-dark/50 backdrop-blur-sm sticky top-0 z-50 border-b border-neon-blue/10">
                 <div class="container mx-auto px-4">
                     <div class="flex items-center justify-between h-16">
-                        <div class="flex items-center gap-2 text-white">
-                            <span class="material-symbols-outlined text-neon-red text-2xl">home</span>
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-2xl">home</span>
                             <h1 class="text-lg">Puri Kartika</h1>
                         </div>
 
                         <button id="menu-toggle" class="md:hidden p-2 transition-transform duration-300">
-                            <span id="menu-icon" class="material-symbols-outlined text-3xl transition-all duration-300 ease-in-out">menu</span>
+                            <span id="menu-icon" class="material-symbols-outlined text-2xl transition-all duration-300 ease-in-out">menu</span>
                         </button>
 
-                        <nav id="nav-menu" class="hidden md:flex items-end gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
+                        <nav id="nav-menu" class="hidden md:flex items-end text-lg gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
-                            <a class="hover:text-neon-blue text-neon-blue" href="{{ route('absensi.create') }}">Isi Absensi</a>
+                            <a class="hover:text-neon-blue text-neon-blue" href="{{ route('absensi.create') }}">Isi Absensi Ronda</a>
                             <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.jadwal-ronda') }}">Jadwal Ronda</a>
                             <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.nominasi-absensi') }}">Rekap Ronda Bulanan</a>
-                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="#">Syarat dan Ketentuan Ronda</a>
-                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Peraturan Kos & Kontrakan</a>
-                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Kas & Iuran Bulanan</a>
+                            <a class=" text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('syarat-ketentuan') }}">Syarat dan Ketentuan Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('peraturan-kos') }}">Peraturan Kos & Kontrakan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank">Kas & Iuran Bulanan</a>
                         </nav>
                     </div>
                 </div>
@@ -220,8 +220,8 @@
             <main class="flex-grow container mx-auto px-4 py-4">
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-10 mt-4 px-8">
-                        <h2 class="text-4xl md:text-4xl font-normalm m-0">Absensi Ronda</h2>
-                        <p class="mt-2 text-slate-200 md:text-base text-lg m-0"><span id="realtime-clock" class="font-light"></span></p>
+                        <h2 class="text-4xl md:text-4xl font-normal m-0">Absensi Ronda</h2>
+                        <p class="mt-2 text-slate-200 md:text-base text-xl font-normal m-0"><span id="realtime-clock"></span></p>
                     </div>
 
                     @if(session('success'))
@@ -241,8 +241,9 @@
 
                     <form action="{{ route('absensi.store') }}" method="POST" class="mt-10">
                         @csrf
-                        <div class="neon-glow-input mx-2 my-6">
-                            <select id="warga" name="warga_ids[]" multiple placeholder="Ketik blok atau nama warga ..." class="w-full">
+                        <div class="neon-glow-input mx-2 my-4 rounded-md">
+                            <select id="warga" name="warga_ids[]" multiple placeholder="Pilih dengan cara ketik blok atau nama warga" aria-label="Pilih dengan cara ketik blok atau nama warga" class="w-full bg-background-dark border border-neon-blue/80 rounded-md px-1 py-2 text-white 
+                                        focus:border-neon-blue focus:ring focus:ring-neon-blue/30 transition-all appearance-none">>
                                 @foreach($wargas as $w)
                                     <option value="{{ $w->id }}" {{ (collect(old('warga_ids'))->contains($w->id)) ? 'selected' : '' }}>
                                         ({{ $w->blok }}) {{ $w->nama }}
@@ -250,8 +251,8 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="bg-background-dark neon-glow-input rounded-md mx-2 my-4 overflow-hidden">
-                            <textarea name="keterangan" rows="2" placeholder="Keterangan (opsional)" class="w-full bg-background-dark text-white border-none focus:border-none">{{ old('keterangan') }}</textarea>
+                        <div class="bg-background-dark neon-glow-input rounded-md mx-2 my-2 overflow-hidden">
+                            <textarea name="keterangan" rows="2" placeholder="Keterangan (opsional)" class="w-full bg-background-dark border-none focus:border-none active:border-none">{{ old('keterangan') }}</textarea>
                         </div>
                         @error('keterangan')
                             <div class="text-red-500 mt-1">
@@ -259,9 +260,12 @@
                             </div>
                         @enderror
                         <div class="flex justify-end items-center my-10 px-2">
-                            <button type="submit"
+                            <!-- <button type="submit"
                                 class="sm:w-auto bg-neon-blue/20 hover:bg-neon-blue/30 text-neon-blue font-medium
                                     px-4 py-2 rounded-md border border-neon-blue/40 transition-all text-center">
+                                Submit
+                            </button> -->
+                            <button type="submit" class="sm:w-auto text-md bg-neon-blue/30 hover:bg-neon-blue/50 px-4 py-2 rounded-md transition-all text-center">
                                 Submit
                             </button>
                         </div>

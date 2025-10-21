@@ -1,129 +1,251 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8" />
+        <title>Puri Kartika</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link crossorigin href="https://fonts.gstatic.com/" rel="preconnect" />
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                extend: {
+                    colors: {
+                        primary: "#00E0FF",
+                            "background-light": "#f7f7f7",
+                            // "background-dark": "#092854",
+                            "background-dark": "#2d0e49",
+                        neon: {
+                            blue: "#00E0FF",
+                            purple: "#FF00E0",
+                            green: "#00FF7F",
+                            red: "#fd75d3",
+                            primary: "#a199c5",
+                        },
+                    },
+                    fontFamily: {
+                        display: "Space Grotesk"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        lg: "1rem",
+                        xl: "1.5rem",
+                        full: "9999px",
+                    },
+                },
+                },
+            };
+        </script>
+        <style type="text/tailwindcss">
+            @keyframes neon-pulse-blue {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-blue),
+                    0 0 10px var(--tw-colors-neon-blue),
+                    0 0 20px var(--tw-colors-neon-blue);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-blue),
+                    0 0 20px var(--tw-colors-neon-blue),
+                    0 0 40px var(--tw-colors-neon-blue);
+                }
+            }
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+            @keyframes neon-pulse-green {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-green),
+                    0 0 10px var(--tw-colors-neon-green),
+                    0 0 20px var(--tw-colors-neon-green);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-green),
+                    0 0 20px var(--tw-colors-neon-green),
+                    0 0 40px var(--tw-colors-neon-green);
+                }
+            }
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+            @keyframes neon-pulse-purple {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-purple),
+                    0 0 10px var(--tw-colors-neon-purple),
+                    0 0 20px var(--tw-colors-neon-purple);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-purple),
+                    0 0 20px var(--tw-colors-neon-purple),
+                    0 0 40px var(--tw-colors-neon-purple);
+                }
+            }
 
-        <!-- Lucide CDN -->
-        <script src="https://unpkg.com/lucide@latest"></script>
+            @keyframes activity-pulse {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
+            }
 
-        <!-- di dalam <head> -->
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-0 lg:p-0 items-center lg:justify-center min-h-screen flex-col">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
-            @if (Route::has('login'))
-                <nav class="flex items-center justify-end gap-4">
-                    @auth
-                        <a
-                            href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
-                        >
-                            Dashboard
-                        </a>
-                    @else
-                        <a
-                            href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
-                        >
-                            Log in
-                        </a>
+            .neon-glow-blue {
+                animation: neon-pulse-blue 2s infinite alternate;
+            }
+            .neon-glow-green {
+                animation: neon-pulse-green 2s infinite alternate;
+            }
+            .neon-glow-purple {
+                animation: neon-pulse-purple 2s infinite alternate;
+            }
 
-                        @if (Route::has('register'))
-                            <a
-                                href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                                Register
-                            </a>
-                        @endif
-                    @endauth
-                </nav>
-            @endif
-        </header>
-        <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-            <main class="flex max-w-full w-full flex-col-reverse lg:max-w-3xl lg:flex-row">
+            .activity-line {
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    rgba(0, 224, 255, 0.2) 20%,
+                    transparent 50%,
+                    rgba(0, 224, 255, 0.2) 80%,
+                    transparent 100%
+                );
+                background-size: 200% 100%;
+                animation: activity-pulse 7s linear infinite;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+            .activity-line.active {
+                opacity: 1;
+            }
+            .neon-glow {
+                box-shadow: 0 0 0px #a78bfa, 0 0 5px #a78bfa, 0 0 15px #a78bfa, 0 0 20px #a78bfa, 0 0 25px #a78bfa;
+            }
+            .neon-circle {
+                /* warna dasar ungu tua */
+                background-color: #2d0e49;
                 
-                <div class="text-[16px] leading-[20px] flex-1 p-4 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
-                    <div class="flex items-center mb-4 md:w-full">
-                        <span class="font-normal pe-4" onclick="window.location='{{ route('absensi.index') }}'"><i data-lucide="arrow-left"></i></span>
-                        <h1 class="font-bold text-lg">Peraturan</h1>
-                    </div>
+                /* gradasi lembut — ungu di tengah, pink samar di pinggir */
+                background-image:
+                    radial-gradient(
+                        circle at center,
+                        rgba(45, 14, 73, 1) 0%,
+                        rgba(68, 26, 98, 0.3) 35%,
+                        rgba(123, 54, 126, 0.4) 60%,
+                        /* rgba(253, 117, 211, 0.25) 85%, */
+                        rgba(253, 117, 211, 0.03) 100%
+                    );
 
-                    <div class="max-w-3xl mx-auto px-0 py-6">
-                        
-                        <!-- Deskripsi pembuka -->
-                        <p class="text-gray-600 dark:text-[#b3b2ab] text-center mb-4">
-                            Halo teman-teman penghuni kos atau kontrakan, demi kenyamanan bersama, yuk sama-sama ikuti aturan ini:
-                        </p>
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
 
-                        <!-- Card -->
-                        <div class="space-y-4">
-                            <!-- 1 -->
-                            <!-- <div class="p-5 bg-white rounded-lg shadow border border-gray-200">
-                                <h2 class="font-semibold text-lg mb-2">🔑 1. Jadwal Ronda</h2>
-                                <ul class="list-disc pl-6 text-gray-700 space-y-1">
-                                    <li>Setiap warga <strong>wajib ikut ronda sesuai jadwal</strong> yang sudah dibagi.</li>
-                                    <li>Kalau berhalangan, <strong>tolong konfirmasi</strong> dan cari pengganti.</li>
-                                </ul>
-                            </div> -->
+                /* lembutkan cahaya */
+                box-shadow:
+                    0 0 10px rgba(253, 117, 211, 0.1),
+                    0 0 25px rgba(45, 14, 73, 0.25);
 
-                            <!-- 2 -->
-                            <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
-                                <h2 class="font-semibold text-lg mb-2">🛡️ Peraturan untuk warga kos atau kontrakan</h2>
-                                <!-- <h2 class="font-semibold text-lg mb-2">⏰ 1. Jadwal & Waktu Ronda</h2> -->
-                                <ol class="list-decimal pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
-                                    <li>Jaga ketertiban, kenyamanan, dan kebersihan kos/kontrakan bareng-bareng.</li>
-                                    <li>Jangan bawa atau simpan barang terlarang ya (narkoba, senjata tajam, barang ilegal, dll) 🚫.</li>
-                                    <li>Hindari kegiatan yang melanggar hukum atau norma kesopanan.</li>
-                                    <li>Tamu boleh berkunjung sampai jam 23.00 WIB.</li>
-                                    <li>Dihimbau untuk <strong>tidak keluar masuk komplek perumahan lewat dari jam 23.00 WIB</strong>.</li>
-                                    <li>Tamu lawan jenis hanya boleh sampai ruang tamu, nggak boleh masuk kamar.</li>
-                                    <li>Tidak boleh menginapkan teman lawan jenis yang belum menikah, <strong>dalam kondisi apapun</strong>. Kalau aturan ini dilanggar, konsekuensinya bisa langsung diminta keluar tanpa pengembalian uang sewa.</li>
-                                    <li>Jaga nama baik kos/kontrakan dan lingkungan sekitar ya.</li>
-                                    <li>Setiap penghuni bertanggung jawab menjaga kebersihan area sekitar.</li>
-                                    <li>Buang sampah di tempat sampah yang sudah disediakan.</li>
-                                    <li>Jangan bikin berisik (musik keras, teriak-teriak, knalpot brong, dll), apalagi di jam istirahat siang dan malam.</li>
-                                    <li>Penghuni kos atau kontrakan <strong>wajib membayar iuran bulanan</strong>. 📌</li>
-                                </ol>
-                            </div>
+                transition: transform 0.6s ease, box-shadow 0.6s ease;
+            }
+        </style>
+    </head>
 
-                            <div class="p-5 bg-white dark:bg-[#161615] rounded-lg shadow border border-gray-200 dark:border-gray-500">
-                                <h2 class="font-semibold text-lg mb-2">⚖️ Kalau ada pelanggaran, sanksinya bisa berupa:</h2>
-                                <ol class="list-decimal pl-6 text-gray-700 dark:text-[#b3b2ab] space-y-1">
-                                    <li>Peringatan (lisan atau tertulis)</li>
-                                    <li>Denda sesuai jenis pelanggaran</li>
-                                    <li>Pemutusan kontrak/sewa sepihak oleh pemilik kos/kontrakan</li>
-                                    <li>Dikeluarkan dari kos/kontrakan tanpa pengembalian uang sewa (untuk pelanggaran berat seperti narkoba, miras, atau menginapkan lawan jenis)</li>
-                                </ol>
-                            </div>
+    <body class="neon-circle text-white font-display">
+        <div class="flex flex-col min-h-screen">
+            <!-- Header -->
+            <header class="bg-background-dark/50 backdrop-blur-sm sticky top-0 z-50 border-b border-neon-blue/10">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-2xl">home</span>
+                            <h1 class="text-lg">Puri Kartika</h1>
                         </div>
 
-                        <!-- Penutup -->
-                        <div class="mt-4 p-5 bg-yellow-50 border-l-4 border-yellow-400 rounded">
-                            <p class="text-gray-700">Aturan ini dibuat supaya suasana kos/kontrakan di lingkungan kita tetap aman, nyaman, dan enak ditinggali bareng-bareng. Yuk kita sama-sama saling menghargai 😊</p>
-                            <blockquote class="mt-3 italic text-yellow-800 font-medium">
-                                “Lingkungan aman, hati pun tenang. Yuk, jaga bareng-bareng!”
-                            </blockquote>
-                        </div>
+                        <button id="menu-toggle" class="md:hidden p-2 transition-transform duration-300">
+                            <span id="menu-icon" class="material-symbols-outlined text-2xl transition-all duration-300 ease-in-out">menu</span>
+                        </button>
+
+                        <nav id="nav-menu" class="hidden md:flex items-end text-lg gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.jadwal-ronda') }}">Jadwal Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.nominasi-absensi') }}">Rekap Ronda Bulanan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('syarat-ketentuan') }}">Syarat dan Ketentuan Ronda</a>
+                            <a class="block md:hidden hover:text-neon-blue text-neon-blue" href="{{ route('peraturan-kos') }}">Peraturan Kos & Kontrakan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank">Kas & Iuran Bulanan</a>
+                        </nav>
                     </div>
-                    
+                </div>
+            </header>
+
+            <!-- Main -->
+            <main class="flex-grow container mx-auto px-4 py-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-10 mt-4 px-4">
+                        <h2 class="text-2xl md:text-4xl font-normal">🛡️ Peraturan Kos & Kontrakan</h2>
+                        <p class="mt-2 text-slate-300">Halo teman-teman penghuni kos atau kontrakan, demi kenyamanan bersama, yuk sama-sama ikuti aturan ini:</p>
+                    </div>
+
+                    <div class="bg-background-dark neon-glow rounded-lg shadow-lg overflow-hidden m-2 mb-8">
+                        <ul class="flex flex-col mx-10 my-6">
+                            <li class="list-decimal py-1">Jaga ketertiban, kenyamanan, dan kebersihan kos/kontrakan bareng-bareng.</li>
+                            <li class="list-decimal py-1">Jangan bawa atau simpan barang terlarang ya (narkoba, senjata tajam, barang ilegal, dll) 🚫.</li>
+                            <li class="list-decimal py-1">Hindari kegiatan yang melanggar hukum atau norma kesopanan.</li>
+                            <li class="list-decimal py-1">Tamu boleh berkunjung sampai jam 23.00 WIB.</li>
+                            <li class="list-decimal py-1">Dihimbau untuk <span class="text-neon-red font-bold">tidak keluar masuk komplek perumahan lewat dari jam 23.00 WIB</span>.</li>
+                            <li class="list-decimal py-1">Tamu lawan jenis hanya boleh sampai ruang tamu, nggak boleh masuk kamar.</li>
+                            <li class="list-decimal py-1"><span class="text-neon-red font-bold">Tidak boleh menginapkan teman lawan jenis yang belum menikah, dalam kondisi apapun</span>. Kalau aturan ini dilanggar, konsekuensinya bisa langsung diminta keluar tanpa pengembalian uang sewa.</li>
+                            <li class="list-decimal py-1">Jaga nama baik kos/kontrakan dan lingkungan sekitar ya.</li>
+                            <li class="list-decimal py-1">Setiap penghuni bertanggung jawab menjaga kebersihan area sekitar.</li>
+                            <li class="list-decimal py-1">Buang sampah di tempat sampah yang sudah disediakan.</li>
+                            <li class="list-decimal py-1">Jangan bikin berisik (musik keras, teriak-teriak, knalpot brong, dll), apalagi di jam istirahat siang dan malam.</li>
+                            <li class="list-decimal py-1">Penghuni kos atau kontrakan <span class="text-neon-red font-bold">wajib membayar iuran bulanan</span>. 📌</li>
+                        </ul>
+                    </div>
+                    <div class="bg-background-dark neon-glow rounded-lg shadow-lg overflow-hidden m-2 mb-8">
+                        <div class="justify-between flex items-center border-b border-neon-blue/20 activity-line">
+                            <h3 class="text-lg md:text-lg font-normal p-4">
+                                ⚖️ Denda & Sanksi
+                            </h3>
+                        </div>
+                        <p class="pt-4 pb-0 px-4">Jika ada pelanggaran, sanksinya bisa berupa:</p>
+                        <ul class="flex flex-col mx-10 my-2">
+                            <li class="list-disc py-1">Peringatan (lisan atau tertulis)</li>
+                            <li class="list-disc py-1">Denda sesuai jenis pelanggaran</li>
+                            <li class="list-disc py-1">Pemutusan kontrak/sewa sepihak oleh pemilik kos/kontrakan</li>
+                            <li class="list-disc py-1">Dikeluarkan dari kos/kontrakan tanpa pengembalian uang sewa (untuk pelanggaran berat seperti narkoba, miras, atau menginapkan lawan jenis)</li>
+                        </ul>
+                    </div>
+
+                    <p class="p-4 mb-10 text-center text-slate-300">Aturan ini dibuat supaya suasana kos/kontrakan di lingkungan kita tetap aman, nyaman, dan enak ditinggali bareng-bareng. Yuk kita sama-sama saling menghargai 😊</p>
                 </div>
             </main>
         </div>
 
-        @if (Route::has('login'))
-            <div class="h-14.5 hidden lg:block"></div>
-        @endif
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const activityRows = document.querySelectorAll(".activity-line");
+                activityRows.forEach((row, index) => {
+                    setTimeout(() => {
+                        row.classList.add("active");
+                    }, index * 100);
+                });
+                
+                const toggleBtn = document.getElementById('menu-toggle')
+                const icon = document.getElementById('menu-icon')
+                const nav = document.getElementById("nav-menu")
+
+                toggleBtn.addEventListener('click', () => {
+                    nav.classList.toggle("hidden")
+                    nav.classList.toggle("flex")
+
+                    // Tambahkan animasi scale untuk efek "klik"
+                    icon.classList.add('scale-75')
+                    setTimeout(() => icon.classList.remove('scale-75'), 150)
+
+                    // Toggle antara "menu" dan "close"
+                    if (icon.textContent.trim() === 'menu') {
+                        icon.textContent = 'close'
+                    } else {
+                        icon.textContent = 'menu'
+                    }
+                })
+            });
+        </script>
     </body>
-    
-    <script>
-        lucide.createIcons();
-        
-    </script>
 </html>

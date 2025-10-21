@@ -1,296 +1,263 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8" />
+        <title>Puri Kartika</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link crossorigin href="https://fonts.gstatic.com/" rel="preconnect" />
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                extend: {
+                    colors: {
+                        primary: "#00E0FF",
+                            "background-light": "#f7f7f7",
+                            // "background-dark": "#092854",
+                            "background-dark": "#2d0e49",
+                        neon: {
+                            blue: "#00E0FF",
+                            purple: "#FF00E0",
+                            green: "#00FF7F",
+                            red: "#fd75d3",
+                            primary: "#a199c5",
+                        },
+                    },
+                    fontFamily: {
+                        display: "Space Grotesk"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        lg: "1rem",
+                        xl: "1.5rem",
+                        full: "9999px",
+                    },
+                },
+                },
+            };
+        </script>
+        <style type="text/tailwindcss">
+            @keyframes neon-pulse-blue {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-blue),
+                    0 0 10px var(--tw-colors-neon-blue),
+                    0 0 20px var(--tw-colors-neon-blue);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-blue),
+                    0 0 20px var(--tw-colors-neon-blue),
+                    0 0 40px var(--tw-colors-neon-blue);
+                }
+            }
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+            @keyframes neon-pulse-green {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-green),
+                    0 0 10px var(--tw-colors-neon-green),
+                    0 0 20px var(--tw-colors-neon-green);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-green),
+                    0 0 20px var(--tw-colors-neon-green),
+                    0 0 40px var(--tw-colors-neon-green);
+                }
+            }
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+            @keyframes neon-pulse-purple {
+                0%, 100% {
+                box-shadow: 0 0 5px var(--tw-colors-neon-purple),
+                    0 0 10px var(--tw-colors-neon-purple),
+                    0 0 20px var(--tw-colors-neon-purple);
+                }
+                50% {
+                box-shadow: 0 0 10px var(--tw-colors-neon-purple),
+                    0 0 20px var(--tw-colors-neon-purple),
+                    0 0 40px var(--tw-colors-neon-purple);
+                }
+            }
 
-        <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+            @keyframes activity-pulse {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
+            }
 
-        <!-- Styles / Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-0 lg:p-0 items-center lg:justify-center min-h-screen flex-col">
-        <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-            <main class="flex max-w-full w-full flex-col-reverse lg:max-w-full lg:flex-row">
+            .neon-glow-blue {
+                animation: neon-pulse-blue 2s infinite alternate;
+            }
+            .neon-glow-green {
+                animation: neon-pulse-green 2s infinite alternate;
+            }
+            .neon-glow-purple {
+                animation: neon-pulse-purple 2s infinite alternate;
+            }
+
+            .activity-line {
+                background: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    rgba(0, 224, 255, 0.2) 20%,
+                    transparent 50%,
+                    rgba(0, 224, 255, 0.2) 80%,
+                    transparent 100%
+                );
+                background-size: 200% 100%;
+                animation: activity-pulse 7s linear infinite;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+            .activity-line.active {
+                opacity: 1;
+            }
+            .neon-glow {
+                box-shadow: 0 0 0px #a78bfa, 0 0 5px #a78bfa, 0 0 15px #a78bfa, 0 0 20px #a78bfa, 0 0 25px #a78bfa;
+            }
+            .neon-circle {
+                /* warna dasar ungu tua */
+                background-color: #2d0e49;
                 
-                <!-- INFORMASI KAS -->
-                <div class="text-[16px] leading-[20px] flex-1 p-6 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_1px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_-1px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-bl-none rounded-br-none lg:rounded-tl-none lg:rounded-br-none">
-                    <h1 class="mb-1 font-bold text-lg">Informasi Kas dan Iuran Bulanan Warga</h1>
-                    <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">🌱 Mari jaga kas kita bersama! Iuran ini dipakai untuk kebersihan lingkungan, penerangan jalan, kegiatan bersama, dll.</p>
-                    <ul class="flex flex-col mb-4 lg:mb-6">
-                        <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:top-1/2 before:bottom-0 before:left-[0.4rem] before:absolute">
-                            <span class="relative py-1 bg-white dark:bg-[#161615]">
-                                <span class="flex items-center justify-center rounded-full bg-[#FDFDFC] dark:bg-[#161615] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] w-3.5 h-3.5 border dark:border-[#3E3E3A] border-[#e3e3e0]">
-                                    <span class="rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A] w-1.5 h-1.5"></span>
-                                </span>
-                            </span>
-                            <span>
-                                <a href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">
-                                    <span>Buku Kas & Iuran Bulanan Warga</span>
-                                    <svg
-                                        width="10"
-                                        height="11"
-                                        viewBox="0 0 10 11"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="w-2.5 h-2.5"
-                                    >
-                                        <path
-                                            d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001"
-                                            stroke="currentColor"
-                                            stroke-linecap="square"
-                                        />
-                                    </svg>
-                                </a>
-                            </span>
-                        </li>
-                        <!-- <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:bottom-1/2 before:top-0 before:left-[0.4rem] before:absolute">
-                            <span class="relative py-1 bg-white dark:bg-[#161615]">
-                                <span class="flex items-center justify-center rounded-full bg-[#FDFDFC] dark:bg-[#161615] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] w-3.5 h-3.5 border dark:border-[#3E3E3A] border-[#e3e3e0]">
-                                    <span class="rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A] w-1.5 h-1.5"></span>
-                                </span>
-                            </span>
-                            <span>
-                                Baca
-                                <a href="{{ route('peraturan-kos') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">
-                                    <span>Peraturan Kos dan Kontrakan</span>
-                                    <svg
-                                        width="10"
-                                        height="11"
-                                        viewBox="0 0 10 11"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="w-2.5 h-2.5"
-                                    >
-                                        <path
-                                            d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001"
-                                            stroke="currentColor"
-                                            stroke-linecap="square"
-                                        />
-                                    </svg>
-                                </a>
-                            </span>
-                        </li> -->
-                    </ul>
-                </div>
+                /* gradasi lembut — ungu di tengah, pink samar di pinggir */
+                background-image:
+                    radial-gradient(
+                        circle at center,
+                        rgba(45, 14, 73, 1) 20%,
+                        rgba(68, 26, 98, 0.9) 55%,
+                        rgba(123, 54, 126, 0.4) 80%,
+                        /* rgba(253, 117, 211, 0.25) 85%, */
+                        rgba(253, 117, 211, 0.1) 100%
+                    );
 
-                <!-- INFORMASI RONDA -->
-                <div class="text-[16px] leading-[20px] flex-1 p-6 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_1px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_-1px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
-                    <h1 class="mb-1 font-bold text-lg">Informasi Ronda Warga</h1>
-                    <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">🌙✨ Saatnya ronda! Yuk, kita jaga lingkungan tetap aman dan nyaman bersama-sama. 💪 Kita kuat karena kita kompak!</p>
-                    <ul class="flex flex-col lg:mb-6">
-                        <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:top-1/2 before:bottom-0 before:left-[0.4rem] before:absolute">
-                            <span class="relative py-1 bg-white dark:bg-[#161615]">
-                                <span class="flex items-center justify-center rounded-full bg-[#FDFDFC] dark:bg-[#161615] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] w-3.5 h-3.5 border dark:border-[#3E3E3A] border-[#e3e3e0]">
-                                    <span class="rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A] w-1.5 h-1.5"></span>
-                                </span>
-                            </span>
-                            <span>
-                                Lihat
-                                <a href="{{ route('absensi.jadwal-ronda') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] ml-1">
-                                    <span>Jadwal Ronda</span>
-                                    <svg
-                                        width="10"
-                                        height="11"
-                                        viewBox="0 0 10 11"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="w-2.5 h-2.5"
-                                    >
-                                        <path
-                                            d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001"
-                                            stroke="currentColor"
-                                            stroke-linecap="square"
-                                        />
-                                    </svg>
-                                </a>
-                            </span>
-                        </li>
-                        <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:top-1/2 before:bottom-0 before:left-[0.4rem] before:absolute">
-                            <span class="relative py-1 bg-white dark:bg-[#161615]">
-                                <span class="flex items-center justify-center rounded-full bg-[#FDFDFC] dark:bg-[#161615] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] w-3.5 h-3.5 border dark:border-[#3E3E3A] border-[#e3e3e0]">
-                                    <span class="rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A] w-1.5 h-1.5"></span>
-                                </span>
-                            </span>
-                            <span>
-                                Lihat
-                                <a href="{{ route('absensi.log') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] ml-1">
-                                    <span>Daftar Hadir Ronda</span>
-                                    <svg
-                                        width="10"
-                                        height="11"
-                                        viewBox="0 0 10 11"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="w-2.5 h-2.5"
-                                    >
-                                        <path
-                                            d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001"
-                                            stroke="currentColor"
-                                            stroke-linecap="square"
-                                        />
-                                    </svg>
-                                </a>
-                            </span>
-                        </li>
-                        <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:bottom-1/2 before:top-0 before:left-[0.4rem] before:absolute">
-                            <span class="relative py-1 bg-white dark:bg-[#161615]">
-                                <span class="flex items-center justify-center rounded-full bg-[#FDFDFC] dark:bg-[#161615] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] w-3.5 h-3.5 border dark:border-[#3E3E3A] border-[#e3e3e0]">
-                                    <span class="rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A] w-1.5 h-1.5"></span>
-                                </span>
-                            </span>
-                            <span>
-                                Lihat
-                                <a href="{{ route('absensi.rekap-absensi') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] ml-1">
-                                    <span>Rekap dan Denda Ronda</span>
-                                    <svg
-                                        width="10"
-                                        height="11"
-                                        viewBox="0 0 10 11"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="w-2.5 h-2.5"
-                                    >
-                                        <path
-                                            d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001"
-                                            stroke="currentColor"
-                                            stroke-linecap="square"
-                                        />
-                                    </svg>
-                                </a>
-                            </span>
-                        </li>
-                        <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:bottom-1/2 before:top-0 before:left-[0.4rem] before:absolute">
-                            <span class="relative py-1 bg-white dark:bg-[#161615]">
-                                <span class="flex items-center justify-center rounded-full bg-[#FDFDFC] dark:bg-[#161615] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] w-3.5 h-3.5 border dark:border-[#3E3E3A] border-[#e3e3e0]">
-                                    <span class="rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A] w-1.5 h-1.5"></span>
-                                </span>
-                            </span>
-                            <span>
-                                Baca <a href="{{ route('syarat-ketentuan') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] ml-1">
-                                    <span>Syarat dan Ketentuan Ronda</span>
-                                    <svg
-                                        width="10"
-                                        height="11"
-                                        viewBox="0 0 10 11"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="w-2.5 h-2.5"
-                                    >
-                                        <path
-                                            d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001"
-                                            stroke="currentColor"
-                                            stroke-linecap="square"
-                                        />
-                                    </svg>
-                                </a>
-                            </span>
-                        </li>
-                        <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:bottom-1/2 before:top-0 before:left-[0.4rem] before:absolute">
-                            <span class="relative py-1 bg-white dark:bg-[#161615]">
-                                <span class="flex items-center justify-center rounded-full bg-[#FDFDFC] dark:bg-[#161615] shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] w-3.5 h-3.5 border dark:border-[#3E3E3A] border-[#e3e3e0]">
-                                    <span class="rounded-full bg-[#dbdbd7] dark:bg-[#3E3E3A] w-1.5 h-1.5"></span>
-                                </span>
-                            </span>
-                            <span>
-                                Baca <a href="{{ route('peraturan-kos') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3] ml-1">
-                                    <span>Peraturan Kos dan Kontrakan</span>
-                                    <svg
-                                        width="10"
-                                        height="11"
-                                        viewBox="0 0 10 11"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="w-2.5 h-2.5"
-                                    >
-                                        <path
-                                            d="M7.70833 6.95834V2.79167H3.54167M2.5 8L7.5 3.00001"
-                                            stroke="currentColor"
-                                            stroke-linecap="square"
-                                        />
-                                    </svg>
-                                </a>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
 
-                <!-- ABSENSI -->
-                <div class="text-[16px] leading-[20px] flex-1 p-6 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] lg:shadow-[inset_0px_0px_0px_0px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
-                    @php
-                        // Mapping English -> Indonesia
-                        $days = [
-                            'sunday'    => 'Minggu',
-                            'monday'    => 'Senin',
-                            'tuesday'   => 'Selasa',
-                            'wednesday' => 'Rabu',
-                            'thursday'  => 'Kamis',
-                            'friday'    => 'Jumat',
-                            'saturday'  => 'Sabtu',
-                        ];
-                    @endphp
-                    <div class="flex mb-6 items-center justify-between">
-                        <h1 class="font-bold text-lg">Riwayat Absensi Ronda</h1>
+                /* lembutkan cahaya */
+                box-shadow:
+                    0 0 10px rgba(253, 117, 211, 0.1),
+                    0 0 25px rgba(45, 14, 73, 0.25);
+
+                transition: transform 0.6s ease, box-shadow 0.6s ease;
+            }
+        </style>
+    </head>
+
+    <body class="neon-circle text-white font-display">
+        <div class="flex flex-col min-h-screen">
+            <!-- Header -->
+            <header class="bg-background-dark/50 backdrop-blur-sm sticky top-0 z-50 border-b border-neon-blue/10">
+                <div class="container mx-auto px-4">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-2xl">home</span>
+                            <h1 class="text-lg">Puri Kartika</h1>
+                        </div>
+
+                        <button id="menu-toggle" class="md:hidden p-2 transition-transform duration-300">
+                            <span id="menu-icon" class="material-symbols-outlined text-2xl transition-all duration-300 ease-in-out">menu</span>
+                        </button>
+
+                        <nav id="nav-menu" class="hidden md:flex items-end text-lg gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
+                            <a class="block md:hidden hover:text-neon-blue text-neon-blue" href="{{ route('absensi.index') }}">Beranda</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi Ronda</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.jadwal-ronda') }}">Jadwal Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.nominasi-absensi') }}">Rekap Ronda Bulanan</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('syarat-ketentuan') }}">Syarat dan Ketentuan Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('peraturan-kos') }}">Peraturan Kos & Kontrakan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank">Kas & Iuran Bulanan</a>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main -->
+            <main class="flex-grow container mx-auto px-4 py-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-10 mt-4 px-4">
+                        <h2 class="text-2xl md:text-4xl font-normal">Riwayat Absensi Ronda 🔥</h2>
+                        <p class="mt-2 text-slate-300">Pernah ronda, lupa tanggalnya? Tenang, datanya masih aman di sini <a href="{{ route('absensi.log') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Daftar Hadir Ronda</a></li></p>
                     </div>
 
-                    @foreach ($absensi as $tanggal => $items)
-                        <p class="text-[15px] font-semibold dark:text-[#A1A09A] mt-4">
-                            📅 {{ $days[strtolower(\Carbon\Carbon::parse($tanggal)->translatedFormat('l'))] ?? '-' }}, {{ \Carbon\Carbon::parse($tanggal)->translatedFormat('d/m/Y') }}
-                        </p>
-                        <div class="border border-[#68cddc] dark:border-[#3E3E3A] rounded-md py-2 px-4 my-2 bg-[#96fbff1a] dark:bg-[#96fbff6b]">
-                            @if ($items->isEmpty())
-                                <p class="text-[15px] px-2 py-1">🙈 Belum ada absensi ronda di tanggal ini. Jangan lupa absen ya! demi keamanan kita bersama.</p>
-                            @else
-                                <ul class="flex flex-col">
-                                    @foreach ($items as $row)
-                                        <li class="list-disc px-1 ms-6 text-[14px] dark:text-[#d7d7d4]">({{ $row->blok }}) {{ $row->nama }}</li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </div>
-                    @endforeach
+                    <!-- Table -->
+                    <div class="bg-background-dark neon-glow rounded-lg shadow-lg overflow-hidden m-2 mb-8">
+                        @php
+                            // Mapping English -> Indonesia
+                            $days = [
+                                'sunday'    => 'Minggu',
+                                'monday'    => 'Senin',
+                                'tuesday'   => 'Selasa',
+                                'wednesday' => 'Rabu',
+                                'thursday'  => 'Kamis',
+                                'friday'    => 'Jumat',
+                                'saturday'  => 'Sabtu',
+                            ];
+                        @endphp
+                        @foreach ($absensi as $tanggal => $items)
+                            <div class="justify-between flex items-center border-b border-neon-blue/20 activity-line">
+                                <h3 class="text-lg md:text-lg font-normal p-4">
+                                    📅 {{ $days[strtolower(\Carbon\Carbon::parse($tanggal)->translatedFormat('l'))] ?? '-' }}, {{ \Carbon\Carbon::parse($tanggal)->translatedFormat('d/m/Y') }}
+                                </h3>
+                                <!-- <span class="material-symbols-outlined text-xl text-neon-green p-4">arrow_upward</span> -->
+                                <span class="text-md text-neon-blue/70 p-4">{{ count($items) <= 0 ? "" : count($items) . " Orang" }}</span>
+                            </div>
+                            
+                            <div class="py-2 px-4 my-2">
+                                @if ($items->isEmpty())
+                                    <p class="text-md px-2 py-1 text-neon-blue/80">🙈 Belum ada absensi ronda di tanggal ini. Jangan lupa absen ya! demi keamanan kita bersama.</p>
+                                @else
+                                    <ul class="flex flex-col">
+                                        @foreach ($items as $row)
+                                            <li class="list-disc px-1 ms-6 text-md text-slate-300">({{ $row->blok }}) {{ $row->nama }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </div>
+                        @endforeach
+                        
+                    </div>
 
-                    <a href="{{ route('absensi.create') }}" class="dark:bg-[#eeeeec] dark:border-[#eeeeec] dark:text-[#1C1C1A] dark:hover:bg-white dark:hover:border-white hover:bg-black hover:border-black px-5 py-1.5 bg-[#1b1b18] rounded-sm border border-black text-white text-sm leading-normal mt-2 inline-block">
-                        Isi Absensi Ronda
-                    </a>
+                    <div class="text-center mt-12">
+                        <a href="{{ route('absensi.create') }}" class="inline-block text-md bg-neon-blue/30 hover:bg-neon-blue/50 px-5 py-2 rounded-md transition-all text-center">
+                            Isi Absensi Ronda
+                        </a>
+                    </div>
+
                 </div>
             </main>
         </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const activityRows = document.querySelectorAll(".activity-line");
+                activityRows.forEach((row, index) => {
+                    setTimeout(() => {
+                        row.classList.add("active");
+                    }, index * 100);
+                });
+                
+                const toggleBtn = document.getElementById('menu-toggle')
+                const icon = document.getElementById('menu-icon')
+                const nav = document.getElementById("nav-menu")
+
+                toggleBtn.addEventListener('click', () => {
+                    nav.classList.toggle("hidden")
+                    nav.classList.toggle("flex")
+
+                    // Tambahkan animasi scale untuk efek "klik"
+                    icon.classList.add('scale-75')
+                    setTimeout(() => icon.classList.remove('scale-75'), 150)
+
+                    // Toggle antara "menu" dan "close"
+                    if (icon.textContent.trim() === 'menu') {
+                        icon.textContent = 'close'
+                    } else {
+                        icon.textContent = 'menu'
+                    }
+                })
+            });
+        </script>
     </body>
-    <style type="text/css">
-        .chat-footer {
-            display: none;
-        }
-    </style>
-    <script>
-        window.ChatWidgetConfig = {
-            webhook: { 
-                url: 'https://n8n.srv526869.hstgr.cloud/webhook/2d7378df-71cd-4c58-ad12-8643b5674fbf/chat', 
-                route: 'general'
-            },
-            branding: { 
-                logo: 'https://icon0.com/free/static2/preview2/stock-photo-teen-girl-woman-avatar-people-icon-character-cartoon-33284.jpg', 
-                name: 'Kartika', 
-                welcomeText: 'Halo warga puri 👋 ada yang bisa dibantu hari ini?', 
-                responseTimeText: ''
-            },
-            style: { 
-                primaryColor: '#80d3e0',
-                secondaryColor: '#545354',
-                backgroundColor: '#FDFDFC',
-                fontColor: '#1b1b18', 
-                position: 'right'
-            },
-        };
-        const script = document.createElement('script');
-        script.src = "https://cdn.jsdelivr.net/gh/WayneSimpson/n8n-chatbot-template@ba944c3/chat-widget.js";
-        document.head.appendChild(script);
-    </script>
 </html>
