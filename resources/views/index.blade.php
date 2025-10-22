@@ -176,9 +176,16 @@
             <!-- Main -->
             <main class="flex-grow container mx-auto px-4 py-4">
                 <div class="max-w-4xl mx-auto">
-                    <div class="text-center mb-10 mt-4 px-4">
+                    <div class="text-center mb-4 mt-4 px-4">
                         <h2 class="text-2xl md:text-4xl font-normal">Riwayat Absensi Ronda 🔥</h2>
-                        <p class="mt-2 text-slate-300">Pernah ronda, lupa tanggalnya? Tenang, datanya masih aman di sini <a href="{{ route('absensi.log') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Daftar Hadir Ronda</a></li></p>
+                        <!-- <p class="mt-2 text-slate-300">Pernah ronda, lupa tanggalnya? Tenang, datanya masih aman di sini</p> -->
+                        <p class="mt-2 text-slate-300">Pernah ronda, lupa tanggalnya? Tenang, datanya masih aman di sini <a href="{{ route('absensi.log') }}" class="space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Lihat Semua Absensi Ronda</a></p>
+                    </div>
+                    <div class="flex justify-center my-8 px-2">
+                        <a href="{{ route('absensi.create') }}" class="inline-block text-md bg-neon-blue/30 hover:bg-neon-blue/50 px-5 py-2 rounded-md transition-all text-center">
+                            Isi Absensi Ronda
+                        </a>
+                        <!-- <a href="{{ route('absensi.log') }}" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#00a9c3]">Semua Absensi Ronda</a> -->
                     </div>
 
                     <!-- Table -->
@@ -237,11 +244,11 @@
                         
                     </div>
 
-                    <div class="text-center my-10">
+                    <!-- <div class="text-center my-10">
                         <a href="{{ route('absensi.create') }}" class="inline-block text-md bg-neon-blue/30 hover:bg-neon-blue/50 px-5 py-2 rounded-md transition-all text-center">
                             Isi Absensi Ronda
                         </a>
-                    </div>
+                    </div> -->
 
                 </div>
             </main>
