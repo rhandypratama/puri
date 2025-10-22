@@ -130,7 +130,9 @@
                 border: 2px solid #68cddc !important; /* orange border */
             }
             th, .fc-theme-standard .fc-scrollgrid, .fc-theme-standard td, .fc-theme-standard th {
-                border: 1px solid #5f4576 !important; /* orange border */
+                border: .95px solid #8861ab !important; /* orange border */
+                background-color: #2d0e49 !important; /* dark purple */
+                font-weight: normal !important;
             }
             .neon-circle {
                 /* warna dasar ungu tua */
@@ -157,6 +159,9 @@
                     0 0 25px rgba(45, 14, 73, 0.25);
 
                 transition: transform 0.6s ease, box-shadow 0.6s ease;
+            }
+            .fc table {
+                font-size: 0.875rem;
             }
         </style>
     </head>
@@ -271,6 +276,7 @@
                 let selectedCell = null;
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'dayGridMonth',
+                    height: 'auto',
                     dateClick: function(info) {
                         
                         // Hapus highlight sebelumnya
