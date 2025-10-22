@@ -259,13 +259,16 @@
                                 {{ $message }}
                             </div>
                         @enderror
-                        <div class="flex justify-end items-center my-10 px-2">
+                        <div class="flex justify-end items-center my-10 px-2 gap-2">
                             <!-- <button type="submit"
                                 class="sm:w-auto bg-neon-blue/20 hover:bg-neon-blue/30 text-neon-blue font-medium
                                     px-4 py-2 rounded-md border border-neon-blue/40 transition-all text-center">
                                 Submit
                             </button> -->
-                            <button type="submit" class="sm:w-auto text-md bg-neon-blue/30 hover:bg-neon-blue/50 px-4 py-2 rounded-md transition-all text-center">
+                            <button type="button" onclick="window.location.href = '{{ route('absensi.index') }}';" class="sm:w-auto text-md border border-neon-blue/60 bg-neon-blue/10 hover:bg-neon-blue/50 px-4 py-2 rounded-md transition-all text-center items-center inline-flex">
+                                <span class="material-symbols-outlined text-md">arrow_left_alt</span> &nbsp; Kembali
+                            </button>
+                            <button type="submit" class="sm:w-auto text-md border border-neon-blue/60 bg-neon-blue/30 hover:bg-neon-blue/50 px-4 py-2 rounded-md transition-all text-center">
                                 Submit
                             </button>
                         </div>
