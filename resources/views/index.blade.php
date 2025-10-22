@@ -201,18 +201,36 @@
                                     📅 {{ $days[strtolower(\Carbon\Carbon::parse($tanggal)->translatedFormat('l'))] ?? '-' }}, {{ \Carbon\Carbon::parse($tanggal)->translatedFormat('d/m/Y') }}
                                 </h3>
                                 <!-- <span class="material-symbols-outlined text-xl text-neon-green p-4">arrow_upward</span> -->
-                                <span class="text-md text-neon-blue/70 p-4">{{ count($items) <= 0 ? "" : count($items) . " Orang" }}</span>
+                                <span class="text-md text-neon-green/70 p-4">{{ count($items) <= 0 ? "" : count($items) . " Orang" }}</span>
                             </div>
                             
-                            <div class="py-2 px-4 my-2">
+                            <div class="my-0">
                                 @if ($items->isEmpty())
-                                    <p class="text-md px-2 py-1 text-neon-blue/80">🙈 Belum ada absensi ronda di tanggal ini. Jangan lupa absen ya! demi keamanan kita bersama.</p>
+                                    <p class="text-md px-4 py-2 text-slate-400">🙈 Belum ada absensi ronda di tanggal ini. Jangan lupa absen ya! demi keamanan kita bersama.</p>
                                 @else
-                                    <ul class="flex flex-col">
-                                        @foreach ($items as $row)
-                                            <li class="list-disc px-1 ms-6 text-md text-slate-300">({{ $row->blok }}) {{ $row->nama }}</li>
-                                        @endforeach
-                                    </ul>
+                                    <div class="justify-between flex items-center border-b border-neon-blue/20 bg-amber-200">
+                                        <h3 class="md:text-lg font-bold text-slate-800 px-4">
+                                            Warga
+                                        </h3>
+                                        <span class="px-4 py-2 text-slate-800 font-bold">Keterangan</span>
+                                    </div>
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-left">
+                                            <tbody>
+                                                @foreach ($items as $row)
+                                                <tr class="border-b border-neon-blue/30 hover:bg-neon-green/5 transition-colors">
+                                                    <td class="px-0 py-2">
+                                                        <div class="flex flex-col sm:flex-row sm:justify-between md:justify-start md:gap-10">
+                                                            <span class="font-medium text-slate-300 px-4">({{ $row->blok }})</span>
+                                                            <span class="text-slate-300 px-4 text-md whitespace-nowrap">{{ $row->nama }}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-4 text-right text-slate-400 text-sm leading-none">{{ $row->keterangan ?? '-' }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 @endif
                             </div>
                         @endforeach

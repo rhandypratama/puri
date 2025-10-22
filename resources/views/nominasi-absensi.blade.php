@@ -341,8 +341,6 @@
                                     @endif
                                 </tbody>
                             </table>
-
-                            
                         </div>
                     </div>
 
