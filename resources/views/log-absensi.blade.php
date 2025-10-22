@@ -130,7 +130,7 @@
                 border: 2px solid #68cddc !important; /* orange border */
             }
             th, .fc-theme-standard .fc-scrollgrid, .fc-theme-standard td, .fc-theme-standard th {
-                border: .95px solid #8861ab !important; /* orange border */
+                border: .95px solid #8861ab !important;
                 background-color: #2d0e49 !important; /* dark purple */
                 font-weight: normal !important;
             }
@@ -162,6 +162,9 @@
             }
             .fc table {
                 font-size: 0.875rem;
+                /* border-collapse: separate; */
+                border-radius: 0.6rem;
+                overflow: hidden;
             }
         </style>
     </head>
