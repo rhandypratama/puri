@@ -209,7 +209,7 @@
                                     <p class="text-md px-4 py-2 text-slate-400 tetx-md">🙈 Belum ada absensi ronda di tanggal ini. Jangan lupa absen ya! demi keamanan kita bersama.</p>
                                 @else
                                     <div class="justify-between flex items-center border-b border-neon-blue/20 bg-amber-200">
-                                        <h3 class="md:text-lg font-bold text-slate-800 px-4">
+                                        <h3 class="md:text-lg font-bold text-slate-800 ps-4">
                                             Warga
                                         </h3>
                                         <span class="px-4 py-2 text-slate-800 font-bold">Keterangan</span>
@@ -218,11 +218,11 @@
                                         <table class="w-full text-left">
                                             <tbody>
                                                 @foreach ($items as $row)
-                                                <tr class="border border-neon-blue/20 hover:bg-neon-green/5 bg-neon-green/20 transition-colors">
+                                                <tr class="border border-neon-blue/20 hover:bg-neon-green/5 transition-colors">
                                                     <td class="px-0 py-2">
                                                         <div class="flex flex-col sm:flex-row sm:justify-between md:justify-start md:gap-10">
-                                                            <span class="font-medium text-slate-300 text-sm px-4">({{ $row->blok }})</span>
-                                                            <span class="text-slate-300 px-4 text-md whitespace-nowrap">{{ $row->nama }}</span>
+                                                            <span class="font-medium text-slate-300 text-sm ps-4">({{ $row->blok }})</span>
+                                                            <span class="text-slate-300 ps-4 text-md whitespace-nowrap">{{ $row->nama }}</span>
                                                         </div>
                                                     </td>
                                                     <td class="px-4 text-right text-slate-400 text-sm leading-none">{{ $row->keterangan ?? '-' }}</td>
