@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Absensi;
+use App\Models\Kritik;
 use App\Models\Warga;
 use Carbon\Carbon;
 
@@ -396,5 +397,38 @@ class AbsensiController extends Controller
     public function peraturanKos()
     {
         return view('peraturan-kos');
+    }
+
+    public function indexKritikSaran()
+    {
+        return view('kritik-saran');
+    }
+
+    public function storeKritikSaran(Request $request)
+    {
+        $request->validate(
+            [
+                'keterangan'  => 'required|string',
+            ],
+            [
+                'keterangan.required'  => 'Isi kritik dan saran tidak boleh kosong, silahkan isi terlebih dahulu di bawah ini.',
+            ]
+        );
+        $absensi = Kritik::create([
+            'isi' => $request->keterangan,
+            'ip_address' => $request->ip(),
+        ]);
+
+        // ✅ redirect ke halaman sukses
+        return redirect()->route('kritik-saran.success')->with('success', true);
+    }
+
+    public function successKritikSaran()
+    {
+        // if (!session('success')) {
+        //     return redirect()->route('absensi.index');
+        // }
+
+        return view('kritik-saran-success');
     }
 }

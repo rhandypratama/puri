@@ -168,6 +168,7 @@
                             <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('syarat-ketentuan') }}">Syarat dan Ketentuan Ronda</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('peraturan-kos') }}">Peraturan Kos & Kontrakan</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank">Kas & Iuran Bulanan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('kritik-saran.index') }}">Kritik & Saran</a>
                         </nav>
                     </div>
                 </div>
@@ -213,7 +214,7 @@
                             
                             <div class="my-0">
                                 @if ($items->isEmpty())
-                                    <p class="text-md px-4 py-2 text-slate-400 tetx-md">🙈 Belum ada absensi ronda di tanggal ini. Jangan lupa absen ya! demi keamanan kita bersama.</p>
+                                    <p class="text-md px-4 py-4 text-slate-400 text-center">🙈 Belum ada absensi ronda di tanggal ini. Jangan lupa absen ya! demi keamanan kita bersama.</p>
                                 @else
                                     <div class="justify-between flex items-center border-b border-neon-blue/20 bg-amber-200">
                                         <h3 class="md:text-lg font-bold text-slate-800 ps-4">

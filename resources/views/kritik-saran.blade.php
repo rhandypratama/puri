@@ -39,6 +39,7 @@
                 },
             };
         </script>
+        <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
         <style type="text/tailwindcss">
             @keyframes neon-pulse-blue {
                 0%, 100% {
@@ -114,6 +115,48 @@
             .neon-glow {
                 box-shadow: 0 0 0px #a78bfa, 0 0 5px #a78bfa, 0 0 15px #a78bfa, 0 0 20px #a78bfa, 0 0 25px #a78bfa;
             }
+            .neon-glow-input {
+                box-shadow: 0 0 0px #a78bfa, 0 0 0px #a78bfa, 0 0 0px #a78bfa, 0 0 40px #a78bfa, 0 0 60px #a78bfa;
+            }
+            .neon-glow-error {
+                box-shadow: 0 0 0px red, 0 0 0px red, 0 0 0px red, 0 0 0px red, 0 0 25px red;
+            }
+            .neon-glow-success {
+                box-shadow: 0 0 0px green, 0 0 0px green, 0 0 0px green, 0 0 0px green, 0 0 25px green;
+            }
+            .ts-control {
+                background-color: #2d0e49 !important;
+                box-shadow: none !important;
+                outline: none !important;
+                color: white !important;
+                border: none !important;
+                /* padding: 8px 12px !important; */
+                /* border-radius: 1rem !important; */
+                /* overflow: hidden !important; */
+            }
+            .ts-wrapper.multi.has-items .ts-control {
+                padding: 12px !important;
+            }
+            .ts-dropdown {
+                background-color: #2d0e49 !important;
+                border: none !important;
+                box-shadow: 0 0 10px #a78bfa !important;
+            }
+            .ts-dropdown, .ts-control, .ts-control input {
+                font-family: 'Space Grotesk', sans-serif !important;
+                font-size: .9rem !important;
+                color: white !important;
+            }
+            .ts-wrapper.multi .ts-control > div {
+                cursor: pointer;
+                margin: 0 6px 6px 0;
+                padding: 4px 10px;
+                background: #f2f2f2e8;
+                border-radius: 4px;
+                /* color: #303030; */
+                /* border: 0 solid #d0d0d0; */
+            }
+
             .neon-circle {
                 /* warna dasar ungu tua */
                 background-color: #2d0e49;
@@ -122,11 +165,11 @@
                 background-image:
                     radial-gradient(
                         circle at center,
-                        rgba(45, 14, 73, 1) 0%,
-                        rgba(68, 26, 98, 0.3) 35%,
-                        rgba(123, 54, 126, 0.4) 60%,
+                        rgba(45, 14, 73, 1) 20%,
+                        rgba(68, 26, 98, 0.9) 55%,
+                        rgba(123, 54, 126, 0.4) 80%,
                         /* rgba(253, 117, 211, 0.25) 85%, */
-                        rgba(253, 117, 211, 0.03) 100%
+                        rgba(253, 117, 211, 0.1) 100%
                     );
 
                 background-repeat: no-repeat;
@@ -159,16 +202,16 @@
                         </button>
 
                         <nav id="nav-menu" class="hidden md:flex items-end text-lg gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
-                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
-                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi Ronda</a>
                             <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
-                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.jadwal-ronda') }}">Jadwal Ronda</a>
-                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.jadwal-ronda') }}">Jadwal Ronda</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.nominasi-absensi') }}">Rekap Ronda Bulanan</a>
-                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('syarat-ketentuan') }}">Syarat dan Ketentuan Ronda</a>
-                            <a class="block md:hidden hover:text-neon-blue text-neon-blue" href="{{ route('peraturan-kos') }}">Peraturan Kos & Kontrakan</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('syarat-ketentuan') }}">Syarat dan Ketentuan Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('peraturan-kos') }}">Peraturan Kos & Kontrakan</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank">Kas & Iuran Bulanan</a>
-                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('kritik-saran.index') }}">Kritik & Saran</a>
+                            <a class="hover:text-neon-blue text-neon-blue" href="{{ route('kritik-saran.index') }}">Kritik & Saran</a>
                         </nav>
                     </div>
                 </div>
@@ -177,55 +220,51 @@
             <!-- Main -->
             <main class="flex-grow container mx-auto px-4 py-4">
                 <div class="max-w-4xl mx-auto">
-                    <div class="text-center mb-10 mt-4 px-4">
-                        <h2 class="text-2xl md:text-4xl font-normal">🛡️ Peraturan Kos & Kontrakan</h2>
-                        <p class="mt-2 text-slate-300">Halo teman-teman penghuni kos atau kontrakan, demi kenyamanan bersama, yuk sama-sama ikuti aturan ini:</p>
+                    <div class="text-center mb-10 mt-4 px-2">
+                        <h2 class="text-3xl md:text-4xl font-normal m-0">Kritik & Saran 📝</h2>
+                        <p class="mt-2 text-slate-400 md:text-base text-md font-normal m-0">Ada masukan biar lingkungan kita tambah lebih baik?
+                            <span class="text-neon-red font-bold">Kritik & saran kamu = kemajuan perumahan kita</span> 💪.
+                            Punya uneg-uneg, ide jenius, atau keluhan apapun yang pengen disampaikan?
+                            Jangan dipendam, nanti jerawatan 😜</p>
                     </div>
 
-                    <div class="bg-background-dark neon-glow rounded-lg shadow-lg overflow-hidden m-2 mb-8">
-                        <ul class="flex flex-col mx-10 my-6">
-                            <li class="list-decimal py-1">Jaga ketertiban, kenyamanan, dan kebersihan kos/kontrakan bareng-bareng.</li>
-                            <li class="list-decimal py-1">Jangan bawa atau simpan barang terlarang ya (narkoba, senjata tajam, barang ilegal, dll) 🚫.</li>
-                            <li class="list-decimal py-1">Hindari kegiatan yang melanggar hukum atau norma kesopanan.</li>
-                            <li class="list-decimal py-1">Tamu boleh berkunjung sampai jam 23.00 WIB.</li>
-                            <li class="list-decimal py-1">Dihimbau untuk <span class="text-neon-red font-bold">tidak keluar masuk komplek perumahan lewat dari jam 23.00 WIB</span>.</li>
-                            <li class="list-decimal py-1">Tamu lawan jenis hanya boleh sampai ruang tamu, nggak boleh masuk kamar.</li>
-                            <li class="list-decimal py-1"><span class="text-neon-red font-bold">Tidak boleh menginapkan teman lawan jenis yang belum menikah, dalam kondisi apapun</span>. Kalau aturan ini dilanggar, konsekuensinya bisa langsung diminta keluar tanpa pengembalian uang sewa.</li>
-                            <li class="list-decimal py-1">Jaga nama baik kos/kontrakan dan lingkungan sekitar ya.</li>
-                            <li class="list-decimal py-1">Setiap penghuni bertanggung jawab menjaga kebersihan area sekitar.</li>
-                            <li class="list-decimal py-1">Buang sampah di tempat sampah yang sudah disediakan.</li>
-                            <li class="list-decimal py-1">Jangan bikin berisik (musik keras, teriak-teriak, knalpot brong, dll), apalagi di jam istirahat siang dan malam.</li>
-                            <li class="list-decimal py-1">Penghuni kos atau kontrakan <span class="text-neon-red font-bold">wajib membayar iuran bulanan</span>. 📌</li>
-                        </ul>
-                    </div>
-                    <div class="bg-background-dark neon-glow rounded-lg shadow-lg overflow-hidden m-2 mb-8">
-                        <div class="justify-between flex items-center border-b border-neon-blue/20 activity-line">
-                            <h3 class="text-lg md:text-lg font-normal p-4">
-                                ⚖️ Denda & Sanksi
-                            </h3>
+                    @if ($errors->any())
+                        <div class="p-2 mb-4 mx-2 text-red-100 bg-red-600 rounded-md neon-glow-error">
+                            <ul class="list-none ps-1">
+                                @foreach ($errors->all() as $error)
+                                    <li>{!! nl2br(e($error)) !!}</li>
+                                @endforeach
+                            </ul>
                         </div>
-                        <p class="pt-4 pb-0 px-4">Jika ada pelanggaran, sanksinya bisa berupa:</p>
-                        <ul class="flex flex-col mx-10 my-2">
-                            <li class="list-disc py-1">Peringatan (lisan atau tertulis)</li>
-                            <li class="list-disc py-1">Denda sesuai jenis pelanggaran</li>
-                            <li class="list-disc py-1">Pemutusan kontrak/sewa sepihak oleh pemilik kos/kontrakan</li>
-                            <li class="list-disc py-1">Dikeluarkan dari kos/kontrakan tanpa pengembalian uang sewa (untuk pelanggaran berat seperti narkoba, miras, atau menginapkan lawan jenis)</li>
-                        </ul>
-                    </div>
+                    @endif
 
-                    <p class="p-4 mb-10 text-center text-slate-300">Aturan ini dibuat supaya suasana kos/kontrakan di lingkungan kita tetap aman, nyaman, dan enak ditinggali bareng-bareng. Yuk kita sama-sama saling menghargai 😊</p>
+                    <form action="{{ route('kritik-saran.store') }}" method="POST" class="mt-10">
+                        @csrf
+                        <div class="bg-background-dark neon-glow-input rounded-md mx-2 my-2 overflow-hidden">
+                            <textarea name="keterangan" rows="10" placeholder="Tulis kritik dan saranmu di sini karena akan sangat membantu kemajuan lingkungan perumahan kita (informasi yang kamu tulis di sini akan kami jaga kerahasiaannya)" class="w-full bg-background-dark border-none focus:border-none active:border-none">{{ old('keterangan') }}</textarea>
+                        </div>
+                        <!-- @error('keterangan')
+                            <div class="text-red-500 mt-1">
+                                {{ $message }}
+                            </div>
+                        @enderror -->
+                        <div class="flex justify-end items-center my-10 px-2 gap-2">
+                            <button type="button" onclick="window.location.href = '{{ route('absensi.index') }}';" class="sm:w-auto text-md border border-neon-blue/60 bg-neon-blue/10 hover:bg-neon-blue/50 px-4 py-2 rounded-md transition-all text-center items-center inline-flex">
+                                <span class="material-symbols-outlined text-md">arrow_left_alt</span> &nbsp; Kembali
+                            </button>
+                            <button type="submit" class="sm:w-auto text-md border border-neon-blue/60 bg-neon-blue/30 hover:bg-neon-blue/50 px-4 py-2 rounded-md transition-all text-center">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </main>
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                const activityRows = document.querySelectorAll(".activity-line");
-                activityRows.forEach((row, index) => {
-                    setTimeout(() => {
-                        row.classList.add("active");
-                    }, index * 100);
-                });
                 
                 const toggleBtn = document.getElementById('menu-toggle')
                 const icon = document.getElementById('menu-icon')
