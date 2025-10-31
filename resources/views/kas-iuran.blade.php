@@ -250,7 +250,7 @@
                             <p class="text-slate-200 text-sm mb-2">
                                 Scan QRIS di bawah untuk melakukan pembayaran iuran bulanan dengan mudah 👇
                             </p>
-                            <img src="/qris.jpeg" alt="QRIS Pembayaran" class="w-full rounded-md" />
+                            <img src="{{ asset('qris.jpeg') }}" alt="QRIS Pembayaran" class="w-full rounded-md" />
                         </div>
                         </div>
 
