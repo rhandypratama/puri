@@ -431,4 +431,9 @@ class AbsensiController extends Controller
 
         return view('kritik-saran-success');
     }
+
+    public function kasIuran()
+    {
+        return view('kas-iuran');
+    }
 }

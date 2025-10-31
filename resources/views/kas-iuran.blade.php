@@ -116,7 +116,7 @@
                 box-shadow: 0 0 0px #a78bfa, 0 0 5px #a78bfa, 0 0 15px #a78bfa, 0 0 20px #a78bfa, 0 0 25px #a78bfa;
             }
             .neon-glow-input {
-                box-shadow: 0 0 10px #a78bfa, 0 0 10px #a78bfa, 0 0 0px #a78bfa, 0 0 0px #a78bfa, 0 0 10px #a78bfa;
+                box-shadow: 0 0 0px #a78bfa, 0 0 0px #a78bfa, 0 0 0px #a78bfa, 0 0 40px #a78bfa, 0 0 60px #a78bfa;
             }
             .neon-glow-error {
                 box-shadow: 0 0 0px red, 0 0 0px red, 0 0 0px red, 0 0 0px red, 0 0 25px red;
@@ -156,10 +156,37 @@
                 /* color: #303030; */
                 /* border: 0 solid #d0d0d0; */
             }
+
+            .neon-circle {
+                /* warna dasar ungu tua */
+                background-color: #2d0e49;
+                
+                /* gradasi lembut — ungu di tengah, pink samar di pinggir */
+                background-image:
+                    radial-gradient(
+                        circle at center,
+                        rgba(45, 14, 73, 1) 20%,
+                        rgba(68, 26, 98, 0.9) 55%,
+                        rgba(123, 54, 126, 0.4) 80%,
+                        /* rgba(253, 117, 211, 0.25) 85%, */
+                        rgba(253, 117, 211, 0.1) 100%
+                    );
+
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+
+                /* lembutkan cahaya */
+                box-shadow:
+                    0 0 10px rgba(253, 117, 211, 0.1),
+                    0 0 25px rgba(45, 14, 73, 0.25);
+
+                transition: transform 0.6s ease, box-shadow 0.6s ease;
+            }
         </style>
     </head>
 
-    <body class="bg-background-dark text-white font-display">
+    <body class="neon-circle text-white font-display">
         <div class="flex flex-col min-h-screen">
             <!-- Header -->
             <header class="bg-background-dark/50 backdrop-blur-sm sticky top-0 z-50 border-b border-neon-blue/10">
@@ -176,14 +203,16 @@
 
                         <nav id="nav-menu" class="hidden md:flex items-end text-lg gap-6 px-8 fixed md:static top-16 left-0 w-full md:w-auto bg-background-dark/90 backdrop-blur-sm md:bg-transparent border md:border-none border-neon-blue/20 md:pt-0 pt-4 pb-8 md:pb-0 flex-col md:flex-row text-center">
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.index') }}">Beranda</a>
-                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.create') }}">Isi Absensi Ronda</a>
                             <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.log') }}">Daftar Hadir Ronda</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.jadwal-ronda') }}">Jadwal Ronda</a>
                             <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.rekap-absensi') }}">Rekap Ronda Tahunan</a>
                             <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('absensi.nominasi-absensi') }}">Rekap Ronda Bulanan</a>
-                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="#">Syarat dan Ketentuan Ronda</a>
-                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="#">Peraturan Kos & Kontrakan</a>
-                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('kas-iuran') }}">Kas & Iuran Bulanan</a>
+                            <a class="text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('syarat-ketentuan') }}">Syarat dan Ketentuan Ronda</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('peraturan-kos') }}">Peraturan Kos & Kontrakan</a>
+                            <!-- <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank">Kas & Iuran Bulanan</a> -->
+                            <a class="hover:text-neon-blue text-neon-blue" href="{{ route('kas-iuran') }}">Kas & Iuran Bulanan</a>
+                            <a class="block md:hidden text-slate-400 hover:text-neon-blue transition-colors" href="{{ route('kritik-saran.index') }}">Kritik & Saran</a>
                         </nav>
                     </div>
                 </div>
@@ -192,57 +221,61 @@
             <!-- Main -->
             <main class="flex-grow container mx-auto px-4 py-4">
                 <div class="max-w-4xl mx-auto">
-                    <div class="text-center mb-10 px-8">
-                        <h2 class="text-2xl md:text-4xl font-light">Absensi ronda manual 🔥</h2>
-                        <!-- <p class="mt-2 text-slate-400 text-sm md:text-base">Monitoring key personnel and real-time activity stream.</p> -->
+                    <div class="mb-4 mt-4 px-2">
+                        <h2 class="text-3xl md:text-4xl font-normal m-0">Kas & Iuran Bulanan</h2>
+                        <p class="mt-2 mb-4 text-slate-400 md:text-base text-md font-normal m-0">Lingkungan nyaman dimulai dari kepedulian kita semua 💪
+                            <span class="text-neon-green font-bold">Bantu jaga kebersamaan dengan rutin membayar iuran bulanan</span>.
+                            Uang yang terkumpul akan digunakan untuk kepentingan bersama — dari kebutuhan pos ronda, musholla, penerangan jalan, kebersihan lingkungan, sampai dengan kegiatan bersama warga. 🌱 Mari jaga kas kita bersama!</p>
+                        <a href="https://docs.google.com/spreadsheets/d/1WfiJ8z-tIJrsINdoQoyiDzMmFUVX9kJ3Y3vLzqdN8No/edit?usp=sharing" target="_blank" class="w-full px-5 py-3 rounded-md bg-sky-700 hover:bg-sky-500">Lihat Rekap Kas & Iuran Bulanan di sini</a>
                     </div>
 
-                    @if(session('success'))
-                        <div class="p-2 mb-4 mx-2 text-green-100 bg-green-600 rounded-md neon-glow-success">
-                            {!! session('success') !!}
-                        </div>
-                    @endif
-                    @if ($errors->any())
-                        <div class="p-2 mb-4 mx-2 text-red-100 bg-red-600 rounded-md neon-glow-error">
-                            <ul class="list-none ps-1">
-                                @foreach ($errors->all() as $error)
-                                    <li>{!! nl2br(e($error)) !!}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                    <div class="mb-4 mt-10 px-2">
+                        <h2 class="text-3xl md:text-4xl font-normal m-0">Cara Bayar</h2>
+                        <p class="mt-2 text-slate-400 md:text-base text-md font-normal m-0">Bayarnya bisa langsung ke <span class="text-neon-green font-bold">koordinator masing-masing</span>, atau kalau mau cepat tinggal bayar via <span class="text-neon-green font-bold">QRIS atau Transfer Bank</span>.</p>
+                    </div>
 
-                    <form action="{{ route('absensi.store.manual') }}" method="POST" class="mt-10">
-                        @csrf
-                        <span class="font-semibold px-2 my-2">Tanggal absensi</span>
-                        <div class="bg-background-dark neon-glow-input rounded-md mx-2 my-4 overflow-hidden">
-                            <input type="date" name="tgl_absensi" required class="w-full px-3 bg-background-dark text-white border-none" />
+                    <!-- Accordion -->
+                    <div class="space-y-3 px-2">
+                        <!-- QRIS -->
+                        <div class="rounded-md overflow-hidden">
+                        <button 
+                            onclick="document.getElementById('qris-panel').classList.toggle('hidden')"
+                            class="w-full flex justify-between items-center align-middle px-5 py-3 text-left bg-sky-700 hover:bg-sky-500 transition">
+                            <span class="font-semibold text-white">Bayar via QRIS</span>
+                            <svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div id="qris-panel" class="hidden bg-sky-600 px-5 py-4">
+                            <p class="text-slate-200 text-sm mb-2">
+                                Scan QRIS di bawah untuk melakukan pembayaran iuran bulanan dengan mudah 👇
+                            </p>
+                            <img src="/qris.jpeg" alt="QRIS Pembayaran" class="w-full rounded-md" />
                         </div>
-                        <div class="neon-glow-input mx-2 my-6">
-                            <select id="warga" name="warga_ids[]" multiple placeholder="Ketik blok atau nama warga ..." class="w-full">
-                                @foreach($wargas as $w)
-                                    <option value="{{ $w->id }}" {{ (collect(old('warga_ids'))->contains($w->id)) ? 'selected' : '' }}>
-                                        ({{ $w->blok }}) {{ $w->nama }}
-                                    </option>
-                                @endforeach
-                            </select>
                         </div>
-                        <div class="bg-background-dark neon-glow-input rounded-md mx-2 my-4 overflow-hidden">
-                            <textarea name="keterangan" rows="2" placeholder="Keterangan (opsional)" class="w-full bg-background-dark text-white border-none focus:border-none">{{ old('keterangan') }}</textarea>
+
+                        <!-- Transfer Bank -->
+                        <div class="rounded-md overflow-hidden">
+                        <button 
+                            onclick="document.getElementById('transfer-panel').classList.toggle('hidden')"
+                            class="w-full flex justify-between items-center px-5 py-3 text-left bg-sky-700 hover:bg-sky-500 transition">
+                            <span class="font-semibold text-white">Transfer Bank</span>
+                            <svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div id="transfer-panel" class="hidden bg-sky-600 px-5 py-4">
+                            <ul class="text-slate-200 text-sm space-y-0">
+                                <li><span class="font-semibold">Bank :</span> SUPERBANK</li>
+                                <li><span class="font-semibold">No. Rek :</span> 000063943070</li>
+                                <li><span class="font-semibold">a/n :</span> Rhandy</li>
+                            </ul>
+                            <p class="text-slate-200 text-xs mt-3">
+                                Setelah transfer, silakan konfirmasi ke Whatsapp ya 🙏
+                            </p>
                         </div>
-                        @error('keterangan')
-                            <div class="text-red-500 mt-1">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                        <div class="flex justify-end items-center my-10 px-2">
-                            <button type="submit"
-                                class="sm:w-auto bg-neon-blue/20 hover:bg-neon-blue/30 text-neon-blue font-medium
-                                    px-4 py-2 rounded-md border border-neon-blue/40 transition-all text-center">
-                                Submit
-                            </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </main>
         </div>
@@ -271,14 +304,6 @@
                         icon.textContent = 'menu'
                     }
                 })
-
-                let ts = new TomSelect("#warga", {
-                    plugins: ['remove_button'],
-                    // persist: true,
-                    maxItems: null,
-                    create: false,
-                    closeAfterSelect: true,
-                });
             });
         </script>
     </body>

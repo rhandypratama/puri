@@ -22,3 +22,4 @@ Route::post('/absensi-manual', [AbsensiController::class, 'storeManual'])->name(
 Route::get('/kriktik-saran', [AbsensiController::class, 'indexKritikSaran'])->name('kritik-saran.index');
 Route::post('/kriktik-saran', [AbsensiController::class, 'storeKritikSaran'])->name('kritik-saran.store');
 Route::get('/kriktik-saran/success', [AbsensiController::class, 'successKritikSaran'])->name('kritik-saran.success');
+Route::get('/kas-iuran', [AbsensiController::class, 'kasIuran'])->name('kas-iuran');
