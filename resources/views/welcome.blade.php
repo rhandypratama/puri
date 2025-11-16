@@ -300,7 +300,7 @@
                         </div>
                     @endif
                     @if ($errors->any())
-                        <div class="p-2 mb-4 mx-2 text-red-100 bg-red-600 rounded-md neon-glow-error">
+                        <div class="p-2 mb-2 mx-2 text-red-100 bg-red-600 rounded-md neon-glow-error">
                             <ul class="list-none ps-1">
                                 @foreach ($errors->all() as $error)
                                     <li>{!! nl2br(e($error)) !!}</li>
@@ -311,9 +311,9 @@
 
                     {{-- <div id="status" class="p-4 mb-2 mx-2 rounded-md text-center hidden"></div> --}}
 
-                    <form action="{{ route('absensi.store') }}" method="POST" class="mt-10">
+                    <form action="{{ route('absensi.store') }}" method="POST" class="mt-6">
                         @csrf
-                        <div class="neon-glow-input mx-2 my-4 rounded-md">
+                        <div class="neon-glow-input mx-2 my-2 rounded-md">
                             <select id="warga" name="warga_ids[]" multiple placeholder="Pilih dengan cara ketik blok atau nama warga" aria-label="Pilih dengan cara ketik blok atau nama warga" class="w-full bg-background-dark border border-neon-blue/80 rounded-md px-1 py-2 text-white 
                                         focus:border-neon-blue focus:ring focus:ring-neon-blue/30 transition-all appearance-none">>
                                 @foreach($wargas as $w)
@@ -323,7 +323,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="bg-background-dark neon-glow-input rounded-md mx-2 my-2 overflow-hidden">
+                        <div class="bg-background-dark neon-glow-input rounded-md mx-2 my-0 overflow-hidden">
                             <textarea name="keterangan" rows="2" placeholder="Keterangan (opsional)" class="w-full bg-background-dark border-none focus:border-none active:border-none">{{ old('keterangan') }}</textarea>
                         </div>
                         @error('keterangan')
@@ -331,7 +331,7 @@
                                 {{ $message }}
                             </div>
                         @enderror
-                        <div class="flex justify-end items-center my-10 px-2 gap-2">
+                        <div class="flex justify-end items-center my-6 px-2 gap-2">
                             <!-- <button type="submit"
                                 class="sm:w-auto bg-neon-blue/20 hover:bg-neon-blue/30 text-neon-blue font-medium
                                     px-4 py-2 rounded-md border border-neon-blue/40 transition-all text-center">
