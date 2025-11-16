@@ -190,7 +190,7 @@
                             <!-- <h3 class="text-md md:text-lg font-normal text-neon-primary p-4">
                                 Keterangan
                             </h3> -->
-                            <ul class="flex flex-col mx-4 my-4 text-slate-400 text-sm">
+                            <ul class="flex flex-col mx-4 my-4 text-slate-400 text-[13px]">
                                 <li class="list-none">W = Wajib Hadir (Jumlah hari ronda dalam 1 bulan)</li>
                                 <li class="list-none">H = Hadir (Berdasarkan absensi ronda)</li>
                                 <li class="list-none">S = Selisih (H-W)</li>

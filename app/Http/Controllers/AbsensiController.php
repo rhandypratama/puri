@@ -65,12 +65,56 @@ class AbsensiController extends Controller
         return view('absensi-manual', compact('wargas'));
     }
 
+    private function distance($lat1, $lng1, $lat2, $lng2)
+    {
+        $earth = 6371000; // meter
+
+        $dLat = deg2rad($lat2 - $lat1);
+        $dLng = deg2rad($lng2 - $lng1);
+
+        $a = sin($dLat/2) ** 2 +
+             cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
+             sin($dLng/2) ** 2;
+
+        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+
+        return round($earth * $c);
+    }
+
+    public function getPosition(Request $request)
+    {
+        $request->validate([
+            'lat' => 'required|numeric',
+            'lng' => 'required|numeric',
+        ]);
+
+        $posRondaLat = env('POS_RONDA_LAT');
+        $posRondaLng = env('POS_RONDA_LONG');
+        $radius = env('ATTENDANCE_RADIUS', 3);
+
+        $distance = $this->distance($posRondaLat, $posRondaLng, $request->lat, $request->lng);
+
+        if ($distance > $radius) {
+            // return redirect()->back()->withErrors(['radius' => 'Kamu berada di luar jarak pos ronda (' . $distance . ' meter).']);
+            return response()->json([
+                'success' => false,
+                'message' => 'Kamu berada di luar radius absensi (' . $distance . ' meter).'
+            ], 422);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Posisi valid untuk absensi ronda',
+            'distance' => $distance
+        ]);
+    }
+
     public function store(Request $request)
     {
         $request->validate(
             [
-                'warga_ids'   => 'required|array|min:1',
-                'keterangan'  => 'nullable|string',
+                'warga_ids' => 'required|array|min:1',
+                'keterangan' => 'nullable|string'
             ],
             [
                 'warga_ids.required' => '🚨 Wajib pilih minimal satu warga untuk absensi ronda',

@@ -17,6 +17,7 @@ Route::get('/log-absensi', [AbsensiController::class, 'logAbsensi'])->name('abse
 Route::get('/absensi/by-date/{date}', [AbsensiController::class, 'getByDate']);
 Route::get('/syarat-ketentuan', [AbsensiController::class, 'syaratKetentuan'])->name('syarat-ketentuan');
 Route::get('/peraturan-kos', [AbsensiController::class, 'peraturanKos'])->name('peraturan-kos');
+Route::post('/cek-lokasi', [AbsensiController::class, 'getPosition'])->name('absensi.cek-lokasi');
 Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.store');
 Route::post('/absensi-manual', [AbsensiController::class, 'storeManual'])->name('absensi.store.manual');
 Route::get('/kriktik-saran', [AbsensiController::class, 'indexKritikSaran'])->name('kritik-saran.index');

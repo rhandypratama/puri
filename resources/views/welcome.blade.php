@@ -40,6 +40,7 @@
             };
         </script>
         <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+        
         <style type="text/tailwindcss">
             @keyframes neon-pulse-blue {
                 0%, 100% {
@@ -183,10 +184,77 @@
 
                 transition: transform 0.6s ease, box-shadow 0.6s ease;
             }
+
+            #map-top-mask {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: -1;
+            }
+
+            #map-background {
+                position: fixed;
+                top: 0px;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -2; /* map berada di paling belakang */
+            }
+
+            #map-blur-overlay {
+                position: fixed;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                backdrop-filter: blur(0px);
+                z-index: -1;
+                /* background: linear-gradient(
+                    135deg,
+                    rgba(148, 0, 211, 0.45),
+                    rgba(88, 0, 140, 0.45),
+                    rgba(48, 0, 90, 0.45) 
+                ); */
+                /* Gradient dari solid ungu → transparan */
+                background: linear-gradient(
+                    to bottom,
+                    rgba(88, 0, 140, 0.85) 0%,    /* solid ungu di atas */
+                    rgba(88, 0, 140, 0.60) 25%,   /* mulai fade */
+                    rgba(88, 0, 140, 0.30) 55%,   /* makin pudar */
+                    rgba(88, 0, 140, 0.00) 100%   /* full transparan di bawah */
+                );
+            }
+
+            /* #map-blur-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                backdrop-filter: blur(8px);
+                background: rgba(0,0,0,0.4);
+                z-index: -1;
+            } */
+
+
+            /* pastikan semua konten tetap di atas */
+            body > * {
+                position: relative;
+                z-index: 10;
+            }
         </style>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     </head>
 
     <body class="neon-circle text-white font-display">
+        <div id="map-background"></div>
+        <div id="map-blur-overlay"></div>
+        <div id="map-top-mask"></div>
+
         <div class="flex flex-col min-h-screen">
             <!-- Header -->
             <header class="bg-background-dark/50 backdrop-blur-sm sticky top-0 z-50 border-b border-neon-blue/10">
@@ -241,6 +309,8 @@
                         </div>
                     @endif
 
+                    {{-- <div id="status" class="p-4 mb-2 mx-2 rounded-md text-center hidden"></div> --}}
+
                     <form action="{{ route('absensi.store') }}" method="POST" class="mt-10">
                         @csrf
                         <div class="neon-glow-input mx-2 my-4 rounded-md">
@@ -267,14 +337,16 @@
                                     px-4 py-2 rounded-md border border-neon-blue/40 transition-all text-center">
                                 Submit
                             </button> -->
-                            <button type="button" onclick="window.location.href = '{{ route('absensi.index') }}';" class="sm:w-auto text-md border border-neon-blue/60 bg-neon-blue/10 hover:bg-neon-blue/50 px-4 py-2 rounded-md transition-all text-center items-center inline-flex">
+                            <button type="button" onclick="window.location.href = '{{ route('absensi.index') }}';" class="sm:w-auto text-md border border-neon-blue/60 bg-neon-blue/50 hover:bg-neon-blue/50 px-4 py-2 rounded-md transition-all text-center items-center inline-flex">
                                 <span class="material-symbols-outlined text-md">arrow_left_alt</span> &nbsp; Kembali
                             </button>
-                            <button type="submit" class="sm:w-auto text-md border border-neon-blue/60 bg-neon-blue/30 hover:bg-neon-blue/50 px-4 py-2 rounded-md transition-all text-center">
+                            <button type="submit" class="sm:w-auto text-md border border-neon-blue/100 bg-neon-blue/50 hover:bg-neon-blue/50 px-4 py-2 rounded-md transition-all text-center">
                                 Submit
                             </button>
                         </div>
                     </form>
+
+                    {{-- <div id="map" style="height: 280px; border-radius: 12px;"></div> --}}
                 </div>
             </main>
         </div>
@@ -336,6 +408,125 @@
 
                 setInterval(updateClock, 1000)
                 updateClock()
+
+                const status = document.getElementById("status");
+
+                // Always show something first (tidak silent)
+                // showStatus("Memeriksa lokasi ...", "info");
+
+                // Jika browser tidak support GPS
+                if (!navigator.geolocation) {
+                    // return showStatus("Browser kamu tidak mendukung GPS", "danger");
+                }
+
+                navigator.geolocation.getCurrentPosition(async (pos) => {
+
+                    // ====== Anti Spoofing Check ======
+                    const acc = pos.coords.accuracy;
+                    const speed = pos.coords.speed;
+                    const ts = pos.timestamp;
+                    const now = Date.now();
+
+                    if (acc > 40) {
+                        // return showStatus("Akurasi GPS rendah atau fake GPS terdeteksi.", "danger");
+                    }
+
+                    if (speed !== null && speed > 10) {
+                        // return showStatus("Pergerakan terlalu cepat. Fake GPS terdeteksi.", "danger");
+                    }
+
+                    if ((now - ts) > 10000) {
+                        // return showStatus("GPS delay terdeteksi. Lokasi mencurigakan.", "danger");
+                    }
+
+                    // Payload ke server
+                    const payload = {
+                        lat: pos.coords.latitude,
+                        lng: pos.coords.longitude,
+                        accuracy: acc,
+                        speed: speed,
+                        timestamp: ts,
+                        _token: "{{ csrf_token() }}"
+                    };
+
+                    const lat = pos.coords.latitude;
+                    const lng = pos.coords.longitude;
+
+                    // Inisialisasi map
+                    const map = L.map('map-background', {
+                        // zoomControl: false,
+                        // scrollWheelZoom: true,
+                        // dragging: true,
+                        // doubleClickZoom: true,
+                        // boxZoom: true,
+                        // paddingTopLeft: [0, 50]
+                    }).setView([lat, lng], 17);
+
+                    // Gunakan tile OpenStreetMap (gratis)
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '© OpenStreetMap'
+                    }).addTo(map);
+
+                    // Tambahkan marker posisi user
+                    L.marker([lat, lng]).addTo(map)
+                        // .bindPopup("Lokasimu<br>Lat: " + lat + "<br>Lng: " + lng)
+                        .openPopup();
+
+                    map.panBy([0, -260]);
+
+                    // ====== Validate ke server ======
+                    try {
+                        // const res = await fetch("{{ route('absensi.cek-lokasi') }}", {
+                        //     method: "POST",
+                        //     headers: { "Content-Type": "application/json" },
+                        //     body: JSON.stringify(payload)
+                        // });
+
+                        // const data = await res.json();
+                        // if (!res.ok) return showStatus(data.message, "danger")
+                        // showStatus(
+                        //     `${data.message} (Jarak: ${data.distance} meter)`,
+                        //     "success"
+                        // )
+                    } catch (e) {
+                        // showStatus("Gagal menghubungi server. Coba lagi.", "danger");
+                    }
+
+                }, (err) => {
+                    // switch (err.code) {
+                    //     case err.PERMISSION_DENIED:
+                    //         showStatus("Izin GPS ditolak. Aktifkan lalu refresh.", "danger");
+                    //         break;
+                    //     case err.POSITION_UNAVAILABLE:
+                    //         showStatus("Lokasi tidak tersedia. Coba aktifkan GPS.", "danger");
+                    //         break;
+                    //     case err.TIMEOUT:
+                    //         showStatus("Timeout mendeteksi lokasi.", "danger");
+                    //         break;
+                    //     default:
+                    //         showStatus("Gagal mendeteksi lokasi.", "danger");
+                    // }
+                }, {
+                    enableHighAccuracy: true,
+                    timeout: 8000,
+                    maximumAge: 0 // PENTING — mencegah last known location
+                });
+
+                // ====== STATUS HANDLER ======
+                // function showStatus(msg, type) {
+                //     status.classList.remove("hidden");
+                //     status.className = "p-2 mb-2 mx-2 rounded-md text-center";
+                //     if (type === "success") {
+                //         status.classList.add("bg-green-600", "text-white", "neon-glow-success");
+                //     } else if (type === "danger") {
+                //         status.classList.add("bg-red-600", "text-white", "neon-glow-danger");
+                //     } else {
+                //         status.classList.add("bg-blue-600", "text-white");
+                //     }
+
+                //     status.innerHTML = msg;
+                // }
             });
         </script>
     </body>
