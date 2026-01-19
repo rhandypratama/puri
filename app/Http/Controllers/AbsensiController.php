@@ -273,6 +273,7 @@ class AbsensiController extends Controller
     public function rekapAbsensi(Request $request)
     {
         $year = $request->year ?? date('Y');
+        // dd($request->year);
 
         // Ambil semua warga
         $wargas = Warga::orderBy('blok')->get();

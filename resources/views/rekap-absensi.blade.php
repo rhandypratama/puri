@@ -176,6 +176,32 @@
                 </div>
             </header>
 
+            <!-- Filter Bulan & Tahun -->
+            <section class="bg-background-dark/60 backdrop-blur-sm border-b border-neon-blue/10">
+                <div class="container mx-auto px-8 py-4">
+                    <form action="{{ route('absensi.rekap-absensi') }}" method="GET" class="flex flex-col sm:flex-row gap-3 sm:gap-4 text-sm justify-center">
+                        <div class="flex flex-wrap gap-2 justify-center">
+                            <div class="flex items-center gap-2">
+                                <label for="year" class="text-slate-300 text-left">Tahun</label>
+                                <select name="year" id="year"
+                                    class="w-24 bg-background-dark border border-neon-blue/20 rounded-md px-3 py-2 text-white focus:border-neon-blue focus:ring focus:ring-neon-blue/30 transition-all">
+                                    @foreach (range(now()->year - 2, now()->year) as $y)
+                                        <option value="{{ $y }}" {{ $y == request('year', now()->year) ? 'selected' : '' }}>
+                                            {{ $y }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <button type="submit"
+                                    class="w-full sm:w-auto bg-neon-blue/20 hover:bg-neon-blue/30 text-neon-blue font-medium
+                                        px-4 py-2 rounded-md border border-neon-blue/40 transition-all text-center">
+                                    Tampilkan
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
             <!-- Main -->
             <main class="flex-grow container mx-auto px-4 py-4">
                 <div class="max-w-4xl mx-auto">
