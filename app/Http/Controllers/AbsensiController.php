@@ -262,6 +262,8 @@ class AbsensiController extends Controller
             'tgl_absensi' => $tglAbsensi,
             'hari' => $tglAbsensi->format('l'),
             'keterangan' => $request->keterangan,
+            'lat' => env('POS_RONDA_LAT'),
+            'lng' => env('POS_RONDA_LONG'),
         ]);
 
         $absensi->wargas()->attach($request->warga_ids);
