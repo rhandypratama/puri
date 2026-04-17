@@ -27,6 +27,8 @@ class AbsensiController extends Controller
                 'absensis.tgl_absensi',
                 'absensis.hari',
                 'absensis.keterangan',
+                'absensis.lat',
+                'absensis.lng',
                 'wargas.id as warga_id',
                 'wargas.nama',
                 'wargas.blok',
@@ -90,7 +92,7 @@ class AbsensiController extends Controller
 
         $posRondaLat = env('POS_RONDA_LAT');
         $posRondaLng = env('POS_RONDA_LONG');
-        $radius = env('ATTENDANCE_RADIUS', 3);
+        $radius = env('ATTENDANCE_RADIUS', 20);
 
         $distance = $this->distance($posRondaLat, $posRondaLng, $request->lat, $request->lng);
 
@@ -114,13 +116,19 @@ class AbsensiController extends Controller
         $request->validate(
             [
                 'warga_ids' => 'required|array|min:1',
-                'keterangan' => 'nullable|string'
+                'keterangan' => 'nullable|string',
+                'lat' => 'required|numeric',
+                'lng' => 'required|numeric',
             ],
             [
                 'warga_ids.required' => '🚨 Wajib pilih minimal satu warga untuk absensi ronda',
-                'warga_ids.array'    => 'Format data warga tidak valid.',
-                'warga_ids.min'      => 'Minimal pilih satu warga untuk absensi.',
-                'keterangan.string'  => 'Keterangan harus berupa teks.',
+                'warga_ids.array' => 'Format data warga tidak valid.',
+                'warga_ids.min' => 'Minimal pilih satu warga untuk absensi.',
+                'keterangan.string' => 'Keterangan harus berupa teks.',
+                'lat.required' => 'Lokasi tidak ditemukan.',
+                'lng.required' => 'Lokasi tidak ditemukan.',
+                'lat.numeric' => 'Koordinat lokasi latitude tidak valid.',
+                'lng.numeric' => 'Koordinat lokasi longitude tidak valid.',
             ]
         );
 
@@ -134,7 +142,24 @@ class AbsensiController extends Controller
         )) {
             return redirect()->back()->withErrors([
                 'waktu' => '⏰ PERHATIAN !! Absensi ronda setiap harinya hanya dapat dilakukan antara pukul 22.00 - 23.00 WIB'
-            ]);
+            ])->withInput();
+        }
+
+        $posRondaLat = env('POS_RONDA_LAT');
+        $posRondaLng = env('POS_RONDA_LONG');
+        $radius = env('ATTENDANCE_RADIUS', 10);
+
+        $distance = $this->distance($posRondaLat, $posRondaLng, $request->lat, $request->lng);
+
+        // Khusus warga id = 34 (Pak Eko) boleh absen di luar radius hanya jika absen sendirian.
+        // Jika bareng warga lain, tetap kena validasi radius.
+        $isBypassRadius = count($request->warga_ids) === 1 && in_array(34, $request->warga_ids);
+
+        if ($distance > $radius && !$isBypassRadius) {
+            return redirect()->back()->withErrors([
+                // 'lat' => "🚨 Kamu berada di luar radius absensi ($distance meter). Maksimal $radius meter dari pos ronda."
+                'lat' => "🚨 Kamu berada di luar radius absensi. Mohon untuk melakukan absensi lebih dekat dengan pos ronda."
+            ])->withInput();
         }
 
         $today = now()->toDateString();
@@ -171,6 +196,8 @@ class AbsensiController extends Controller
             'tgl_absensi' => now(),
             'hari' => now()->format('l'),
             'keterangan' => $request->keterangan,
+            'lat' => $request->lat,
+            'lng' => $request->lng,
         ]);
 
         $absensi->wargas()->attach($request->warga_ids);

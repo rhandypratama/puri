@@ -323,6 +323,8 @@
                                 @endforeach
                             </select>
                         </div>
+                        <input type="text" name="lat" value="{{ old('lat') }}" class="text-black" hidden>
+                        <input type="text" name="lng" value="{{ old('lng') }}" class="text-black" hidden>
                         <div class="bg-background-dark neon-glow-input rounded-md mx-2 my-0 overflow-hidden">
                             <textarea name="keterangan" rows="2" placeholder="Keterangan (opsional)" class="w-full bg-background-dark border-none focus:border-none active:border-none">{{ old('keterangan') }}</textarea>
                         </div>
@@ -416,7 +418,7 @@
 
                 // Jika browser tidak support GPS
                 if (!navigator.geolocation) {
-                    // return showStatus("Browser kamu tidak mendukung GPS", "danger");
+                    return showStatus("Browser kamu tidak mendukung GPS", "danger");
                 }
 
                 navigator.geolocation.getCurrentPosition(async (pos) => {
@@ -428,7 +430,7 @@
                     const now = Date.now();
 
                     if (acc > 40) {
-                        // return showStatus("Akurasi GPS rendah atau fake GPS terdeteksi.", "danger");
+                        // return showStatus("Akurasi GPS rendah atau Fake GPS terdeteksi.", "danger");
                     }
 
                     if (speed !== null && speed > 10) {
@@ -451,6 +453,9 @@
 
                     const lat = pos.coords.latitude;
                     const lng = pos.coords.longitude;
+
+                    document.querySelector('input[name="lat"]').value = lat;
+                    document.querySelector('input[name="lng"]').value = lng;
 
                     // Inisialisasi map
                     const map = L.map('map-background', {

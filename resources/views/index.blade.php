@@ -232,9 +232,10 @@
                                                         <div class="flex flex-col sm:flex-row sm:justify-between md:justify-start md:gap-10">
                                                             <span class="font-medium text-slate-300 text-sm ps-4">({{ $row->blok }})</span>
                                                             <span class="text-slate-300 ps-4 text-md whitespace-nowrap">{{ $row->nama }}</span>
+                                                            <span class="text-slate-400 ps-4 text-xs whitespace-nowrap"><a href="https://maps.google.com/?q={{ $row->lat }},{{ $row->lng }}" target="_blank">Lihat Lokasi</a></span>
                                                         </div>
                                                     </td>
-                                                    <td class="px-4 text-right text-slate-400 text-sm leading-none">{{ $row->keterangan ?? '-' }}</td>
+                                                    <td class="px-4 text-right text-slate-400 text-sm line-clamp-1">{{ $row->keterangan ?? '-' }}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>

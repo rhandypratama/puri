@@ -13,6 +13,8 @@ class Absensi extends Model
         'tgl_absensi',
         'hari',
         'keterangan',
+        'lat',
+        'lng',
     ];
 
     public function wargas()
