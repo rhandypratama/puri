@@ -132,22 +132,10 @@ class AbsensiController extends Controller
             ]
         );
 
-        // Ambil waktu sekarang di zona Asia/Jakarta
-        $now = Carbon::now('Asia/Jakarta');
-
-        // Validasi jam antara 22.00 - 23.00 WIB
-        if (! $now->between(
-            $now->copy()->setTime(22, 0, 0), // 22:00:00
-            $now->copy()->setTime(23, 0, 0) // 23:59:59
-        )) {
-            return redirect()->back()->withErrors([
-                'waktu' => '⏰ PERHATIAN !! Absensi ronda setiap harinya hanya dapat dilakukan antara pukul 22.00 - 23.00 WIB'
-            ])->withInput();
-        }
-
+        // VALIDASI RADIUS
         $posRondaLat = env('POS_RONDA_LAT');
         $posRondaLng = env('POS_RONDA_LONG');
-        $radius = env('ATTENDANCE_RADIUS', 10);
+        $radius = env('ATTENDANCE_RADIUS', 40);
 
         $distance = $this->distance($posRondaLat, $posRondaLng, $request->lat, $request->lng);
 
@@ -157,8 +145,21 @@ class AbsensiController extends Controller
 
         if ($distance > $radius && !$isBypassRadius) {
             return redirect()->back()->withErrors([
-                // 'lat' => "🚨 Kamu berada di luar radius absensi ($distance meter). Maksimal $radius meter dari pos ronda."
-                'lat' => "🚨 Kamu berada di luar radius absensi. Mohon untuk melakukan absensi lebih dekat dengan pos ronda."
+                'lat' => "🚨 Kamu berada di luar radius absensi ($distance meter). Maksimal $radius meter dari pos ronda."
+                // 'lat' => "🚨 Kamu berada di luar radius absensi. Mohon untuk melakukan absensi lebih dekat dengan pos ronda."
+            ])->withInput();
+        }
+
+        // VALIDASI WAKTU
+        $now = Carbon::now('Asia/Jakarta');
+
+        // Validasi jam antara 22.00 - 23.00 WIB
+        if (! $now->between(
+            $now->copy()->setTime(22, 0, 0), // 22:00:00
+            $now->copy()->setTime(23, 0, 0) // 23:59:59
+        )) {
+            return redirect()->back()->withErrors([
+                'waktu' => '⏰ PERHATIAN !! Absensi ronda setiap harinya hanya dapat dilakukan antara pukul 22.00 - 23.00 WIB'
             ])->withInput();
         }
 
